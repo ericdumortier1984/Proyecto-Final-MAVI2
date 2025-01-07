@@ -7,6 +7,77 @@ using namespace sf;
 
 enum GameState { MENU, LEVEL1, LEVEL2, LEVEL3, EXIT };
 
+void RunLevel1(RenderWindow& window) 
+{
+
+	CircleShape player(50);
+	player.setFillColor(Color::Cyan);
+
+	while (window.isOpen())
+	{
+		Event event;
+		while (window.pollEvent(event)) 
+		{
+			if (event.type == Event::Closed) 
+			{
+				window.close();
+			}
+			// Logica
+		}
+
+		window.clear();
+		window.draw(player);
+		window.display();
+	}
+};
+
+void RunLevel2(RenderWindow& window) 
+{
+
+	RectangleShape player(Vector2f(50.f, 50.f));
+	player.setFillColor(Color::Magenta);
+
+	while (window.isOpen())
+	{
+		Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == Event::Closed)
+			{
+				window.close();
+			}
+			// Logica
+		}
+
+		window.clear();
+		window.draw(player);
+		window.display();
+	}
+};
+void RunLevel3(RenderWindow& window) 
+{
+	
+	CircleShape player(50);
+	player.setFillColor(Color::Yellow);
+
+	while (window.isOpen())
+	{
+		Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == Event::Closed)
+			{
+				window.close();
+			}
+			// Logica
+		}
+
+		window.clear();
+		window.draw(player);
+		window.display();
+	}
+};
+
 int main(int argc, char* argv[])
 {
 
@@ -66,15 +137,15 @@ int main(int argc, char* argv[])
 		}
 		else if (state == LEVEL1)
 		{
-			// codigo level 1
+			RunLevel1(window);
 		}
 		else if (state == LEVEL2)
 		{
-			// codigo level 2
+			RunLevel2(window);
 		}
 		else if (state == LEVEL3)
 		{
-			// codigo level 3
+			RunLevel3(window);
 		}
 		else if (state == EXIT)
 		{
