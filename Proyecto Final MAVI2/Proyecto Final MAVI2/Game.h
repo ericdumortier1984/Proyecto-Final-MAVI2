@@ -22,12 +22,12 @@ public:
 	
 private:
 
-	RenderWindow mWindow;
-	Font mFont;
-	Text mTitle;
-	Text mPlay;
-	Text mExit;
-	Clock mClock;
+	RenderWindow* mWindow;
+	Font* mFont;
+	Text* mTitle;
+	Text* mPlay;
+	Text* mExit;
+	Clock* mClock;
 
 	enum GameState { MENU, LEVEL1, LEVEL2, LEVEL3, EXIT };
 	GameState mState;
