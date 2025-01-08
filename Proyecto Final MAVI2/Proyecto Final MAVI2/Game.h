@@ -1,10 +1,5 @@
-#pragma once
-#include<box2d/box2d.h>
-#include<SFML/Graphics.hpp>
-#include<iostream>
-
-using namespace std;
-using namespace sf;
+#include "Avatar.h"
+#include "Ragdoll.h"
 
 class Game
 {

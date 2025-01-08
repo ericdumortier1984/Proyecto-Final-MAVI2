@@ -130,11 +130,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Ragdoll.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Avatar.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Ragdoll.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
