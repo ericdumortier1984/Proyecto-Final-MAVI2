@@ -8,6 +8,9 @@ public:
 	Game();
 	~Game();
 
+	void SetCamara();
+	void InitPhysics();
+	void UpdatePhysics();
 	void Run();
 	void ProcessEvents();
 	void Update();
@@ -18,12 +21,21 @@ public:
 private:
 
 	RenderWindow* mWindow;
+	Event* mEvent;
+	View* mCamara;
+	Clock* mClock;
+	Time* mInitTime;
+
 	Font* mFont;
 	Text* mTitle;
 	Text* mPlay;
 	Text* mExit;
-	Clock* mClock;
 
+	b2World* mWorld;
+	Ragdoll* mRagdoll;
+	
 	enum GameState { MENU, LEVEL1, LEVEL2, LEVEL3, EXIT };
 	GameState mState;
+
+	float mFps, mFrameTime, mActualTime;
 };
