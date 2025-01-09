@@ -8,7 +8,7 @@ public:
 	Game();
 	~Game();
 
-	void SetCamara();
+	void SetCamara(float mZoom);
 	void InitPhysics();
 	void UpdatePhysics();
 	void Run();

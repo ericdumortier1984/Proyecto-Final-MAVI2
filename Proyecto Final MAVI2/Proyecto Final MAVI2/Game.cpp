@@ -15,7 +15,6 @@ Game::Game() : mState(MENU)
 	mClock = new Clock();
 	mInitTime = new Time;
 
-	SetCamara();
 	InitPhysics();
 
 	mFont = new Font;
@@ -32,10 +31,10 @@ Game::Game() : mState(MENU)
 	mExit->setPosition(600, 400);
 }
 
-void Game::SetCamara()
+void Game::SetCamara(float mZoom)
 {
 
-	mCamara->setSize(mWindow->getSize().x, mWindow->getSize().y);
+	mCamara->setSize(mWindow->getSize().x * mZoom, mWindow->getSize().y * mZoom);
 	mCamara->setCenter(mWindow->getSize().x / 2, mWindow->getSize().y / 2);
 	mWindow->setView(*mCamara);
 }
@@ -139,7 +138,9 @@ void Game::Update()
 void Game::RunLevel(Color color)
 {
 
-	CircleShape player(50);
+	SetCamara(0.10f);
+	CircleShape player(1);
+	player.setPosition(mWindow->getSize().x / 2, mWindow->getSize().y / 2);
 	player.setFillColor(color);
 	mWindow->draw(player);
 
