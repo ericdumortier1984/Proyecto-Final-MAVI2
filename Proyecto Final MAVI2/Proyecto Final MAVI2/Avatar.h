@@ -22,8 +22,10 @@ public:
 private:
 
 	b2Body* mBodyAvatar;
-	RectangleShape* mRectangleShapeAvatar;
-	Sprite* mSpriteAvatar;
+	RectangleShape* mRectangleShapeAvatar = nullptr;
+	Sprite* mSpriteAvatar = nullptr;
 
 	b2Vec2 mPositionBodyAvatar;
+
+	void Initialize(b2Body* mBody);
 };

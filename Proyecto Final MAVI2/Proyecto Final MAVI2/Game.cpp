@@ -37,7 +37,8 @@ void Game::SetCamara(float mZoom)
 {
 
 	mCamara->setSize(mWindow->getSize().x * mZoom, mWindow->getSize().y * mZoom);
-	mCamara->setCenter(mWindow->getSize().x / 2, mWindow->getSize().y / 2);
+	//mCamara->setCenter(mWindow->getSize().x / 2, mWindow->getSize().y / 2);
+	mCamara->setCenter(20, 100);
 	mWindow->setView(*mCamara);
 }
 
@@ -46,27 +47,31 @@ void Game::SetImages()
 
 	mFloorTx = new Texture;
 	mBackLv1Tx = new Texture;
-	mBackLv2Tx = new Texture;
-	mBackLv3Tx = new Texture;
 
-	mFloorTx->loadFromFile("Assets/floor.png");
-	mBackLv1Tx->loadFromFile("Assets/blueBack.png");
-
+	if (!mFloorTx->loadFromFile("Assets/floor.png"))
+	{
+		cout << "Error al cargar la textura del piso" << endl;
+	}
+	
+	if (!mBackLv1Tx->loadFromFile("Assets/blueBack.png"))
+	{
+		cout << "Error al cargar la textura del fondo" << endl;
+	}
+	
 	mFloorSp = new Sprite;
 	mBackLv1Sp = new Sprite;
-	mBackLv2Sp = new Sprite;
-	mBackLv3Sp = new Sprite;
+
+	mBackLv1Sp->setTexture(*mBackLv1Tx);
+	mBackLv1Sp->setScale(260.f / mBackLv1Tx->getSize().x, 150.f / mBackLv1Tx->getSize().y);
+	mBackLv1Sp->setPosition({ -110.f, 25.f }); 
 
 	mFloorSp->setTexture(*mFloorTx);
-	mBackLv1Sp->setTexture(*mBackLv1Tx);
-
-	mBackLv1Sp->setScale(100.f / mBackLv1Tx->getSize().x, 100.f / mBackLv1Tx->getSize().y);
-
+    mFloorSp->setScale({1.f, 1.f});
+	
 	mCanonSFML = new RectangleShape;
 	mCanonSFML->setFillColor(Color::White);
 	mCanonSFML->setSize({5.0f, 10.0f});
-	mCanonSFML->setPosition({520.f, 420.f});
-
+	mCanonSFML->setPosition({ -100.f, 156.f });
 }
 
 void Game::InitPhysics() 
@@ -75,10 +80,10 @@ void Game::InitPhysics()
 	mWorld = new b2World({ 0.f, 9.8f });
 
 	mBodyDefFloor.type = b2_staticBody;
-	mBodyDefFloor.position = b2Vec2(20.f, 100.f);
+	mBodyDefFloor.position = b2Vec2(0.f, 170.f);
 	mBodyFloor = mWorld->CreateBody(&mBodyDefFloor);
 	b2PolygonShape mFloorShape;
-	mFloorShape.SetAsBox(90.f, 5.f);
+	mFloorShape.SetAsBox(190.f, 5.f);
 	mFixtureDefFloor.shape = &mFloorShape;
 	mFixtureDefFloor.density = 1.f;
 	mFixtureDefFloor.restitution = 0.3f;

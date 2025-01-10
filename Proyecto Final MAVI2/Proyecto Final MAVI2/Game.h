@@ -51,13 +51,9 @@ private:
 
 	Texture* mFloorTx;
 	Texture* mBackLv1Tx;
-	Texture* mBackLv2Tx;
-	Texture* mBackLv3Tx;
 
 	Sprite* mFloorSp;
 	Sprite* mBackLv1Sp;
-	Sprite* mBackLv2Sp;
-	Sprite* mBackLv3Sp;
 
 	//Avatar
 	Avatar* floorAvatar;
