@@ -1,43 +1,43 @@
 ﻿  Game.cpp
 C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(11,29): warning C4244: 'argumento': conversión de 'float' a 'unsigned int'; posible pérdida de datos
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(38,68): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(38,68): warning C4244:         with
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(38,68): warning C4244:         [
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(38,68): warning C4244:             T=unsigned int
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(38,68): warning C4244:         ]
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(38,42): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(38,42): warning C4244:         with
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(38,42): warning C4244:         [
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(38,42): warning C4244:             T=unsigned int
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(38,42): warning C4244:         ]
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(88,86): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(88,86): warning C4244:         with
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(88,86): warning C4244:         [
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(88,86): warning C4244:             T=float
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(88,86): warning C4244:         ]
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(88,63): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(88,63): warning C4244:         with
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(88,63): warning C4244:         [
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(88,63): warning C4244:             T=float
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(88,63): warning C4244:         ]
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(94,86): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(94,86): warning C4244:         with
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(94,86): warning C4244:         [
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(94,86): warning C4244:             T=float
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(94,86): warning C4244:         ]
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(94,63): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(94,63): warning C4244:         with
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(94,63): warning C4244:         [
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(94,63): warning C4244:             T=float
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(94,63): warning C4244:         ]
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(143,68): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(143,68): warning C4244:         with
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(143,68): warning C4244:         [
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(143,68): warning C4244:             T=unsigned int
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(143,68): warning C4244:         ]
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(143,42): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(143,42): warning C4244:         with
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(143,42): warning C4244:         [
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(143,42): warning C4244:             T=unsigned int
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(143,42): warning C4244:         ]
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(40,68): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(40,68): warning C4244:         with
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(40,68): warning C4244:         [
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(40,68): warning C4244:             T=unsigned int
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(40,68): warning C4244:         ]
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(40,42): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(40,42): warning C4244:         with
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(40,42): warning C4244:         [
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(40,42): warning C4244:             T=unsigned int
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(40,42): warning C4244:         ]
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(129,86): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(129,86): warning C4244:         with
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(129,86): warning C4244:         [
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(129,86): warning C4244:             T=float
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(129,86): warning C4244:         ]
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(129,63): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(129,63): warning C4244:         with
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(129,63): warning C4244:         [
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(129,63): warning C4244:             T=float
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(129,63): warning C4244:         ]
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(135,86): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(135,86): warning C4244:         with
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(135,86): warning C4244:         [
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(135,86): warning C4244:             T=float
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(135,86): warning C4244:         ]
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(135,63): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(135,63): warning C4244:         with
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(135,63): warning C4244:         [
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(135,63): warning C4244:             T=float
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(135,63): warning C4244:         ]
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(186,68): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(186,68): warning C4244:         with
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(186,68): warning C4244:         [
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(186,68): warning C4244:             T=unsigned int
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(186,68): warning C4244:         ]
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(186,42): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(186,42): warning C4244:         with
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(186,42): warning C4244:         [
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(186,42): warning C4244:             T=unsigned int
+C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Game.cpp(186,42): warning C4244:         ]
   Proyecto Final MAVI2.vcxproj -> C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\x64\Debug\Proyecto Final MAVI2.exe

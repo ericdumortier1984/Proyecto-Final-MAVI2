@@ -9,6 +9,7 @@ public:
 	~Game();
 
 	void SetCamara(float mZoom);
+	void SetImages();
 	void InitPhysics();
 	void UpdatePhysics();
 	void Run();
@@ -33,7 +34,34 @@ private:
 
 	b2World* mWorld;
 	Ragdoll* mRagdoll;
+
+	//Box2D
+	b2Body* mBodyCanon;
+	b2BodyDef mBodyDefCanon;
+	b2Fixture* mFixtureCanon;
+	b2FixtureDef mFixtureDefCanon;
+
+	b2Body* mBodyFloor;
+	b2BodyDef mBodyDefFloor;
+	b2Fixture* mFixtureFloor;
+	b2FixtureDef mFixtureDefFloor;
 	
+	//SFML
+	RectangleShape* mCanonSFML;
+
+	Texture* mFloorTx;
+	Texture* mBackLv1Tx;
+	Texture* mBackLv2Tx;
+	Texture* mBackLv3Tx;
+
+	Sprite* mFloorSp;
+	Sprite* mBackLv1Sp;
+	Sprite* mBackLv2Sp;
+	Sprite* mBackLv3Sp;
+
+	//Avatar
+	Avatar* floorAvatar;
+
 	enum GameState { MENU, LEVEL1, LEVEL2, LEVEL3, EXIT };
 	GameState mState;
 

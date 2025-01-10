@@ -15,8 +15,6 @@ Game::Game() : mState(MENU)
 	mClock = new Clock();
 	mInitTime = new Time;
 
-	InitPhysics();
-
 	mFont = new Font;
 	if (!mFont->loadFromFile("Fonts/Bodoni.ttf")) 
 	{
@@ -29,6 +27,10 @@ Game::Game() : mState(MENU)
 	mPlay->setPosition(600, 300); 
 	mExit = new Text("Exit", *mFont, 30); 
 	mExit->setPosition(600, 400);
+
+	SetImages();
+	InitPhysics();
+	floorAvatar = new Avatar(mBodyFloor, mFloorSp);
 }
 
 void Game::SetCamara(float mZoom)
@@ -39,10 +41,49 @@ void Game::SetCamara(float mZoom)
 	mWindow->setView(*mCamara);
 }
 
+void Game::SetImages()
+{
+
+	mFloorTx = new Texture;
+	mBackLv1Tx = new Texture;
+	mBackLv2Tx = new Texture;
+	mBackLv3Tx = new Texture;
+
+	mFloorTx->loadFromFile("Assets/floor.png");
+	mBackLv1Tx->loadFromFile("Assets/blueBack.png");
+
+	mFloorSp = new Sprite;
+	mBackLv1Sp = new Sprite;
+	mBackLv2Sp = new Sprite;
+	mBackLv3Sp = new Sprite;
+
+	mFloorSp->setTexture(*mFloorTx);
+	mBackLv1Sp->setTexture(*mBackLv1Tx);
+
+	mBackLv1Sp->setScale(100.f / mBackLv1Tx->getSize().x, 100.f / mBackLv1Tx->getSize().y);
+
+	mCanonSFML = new RectangleShape;
+	mCanonSFML->setFillColor(Color::White);
+	mCanonSFML->setSize({5.0f, 10.0f});
+	mCanonSFML->setPosition({520.f, 420.f});
+
+}
+
 void Game::InitPhysics() 
 {
 
 	mWorld = new b2World({ 0.f, 9.8f });
+
+	mBodyDefFloor.type = b2_staticBody;
+	mBodyDefFloor.position = b2Vec2(20.f, 100.f);
+	mBodyFloor = mWorld->CreateBody(&mBodyDefFloor);
+	b2PolygonShape mFloorShape;
+	mFloorShape.SetAsBox(90.f, 5.f);
+	mFixtureDefFloor.shape = &mFloorShape;
+	mFixtureDefFloor.density = 1.f;
+	mFixtureDefFloor.restitution = 0.3f;
+	mFixtureDefFloor.friction = 0.3f;
+	mFixtureFloor = mBodyFloor->CreateFixture(&mFixtureDefFloor);
 }
 
 void Game::UpdatePhysics() 
@@ -138,11 +179,17 @@ void Game::Update()
 void Game::RunLevel(Color color)
 {
 
-	SetCamara(0.10f);
+	SetCamara(0.20f);
+	SetImages();
+
 	CircleShape player(1);
 	player.setPosition(mWindow->getSize().x / 2, mWindow->getSize().y / 2);
 	player.setFillColor(color);
+
+	mWindow->draw(*mBackLv1Sp);
+	floorAvatar->Draw(*mWindow);
 	mWindow->draw(player);
+	mWindow->draw(*mCanonSFML);
 
 	if (mRagdoll != nullptr)
 	{
@@ -196,4 +243,8 @@ Game::~Game()
 	delete mInitTime;
 	delete mCamara;
 	delete mEvent;
+	delete mBackLv1Sp;
+	delete mFloorSp;
+
+	mWorld->DestroyBody(mBodyFloor);
 }

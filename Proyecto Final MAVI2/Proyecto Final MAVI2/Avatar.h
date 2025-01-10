@@ -11,6 +11,7 @@ class Avatar
 public:
 
 	Avatar(b2Body* mBody, RectangleShape* mRectangleShape);
+	Avatar(b2Body* mBody, Sprite* mSprite );
 	~Avatar();
 
 	void UpdateAvatar();
@@ -22,6 +23,7 @@ private:
 
 	b2Body* mBodyAvatar;
 	RectangleShape* mRectangleShapeAvatar;
+	Sprite* mSpriteAvatar;
 
 	b2Vec2 mPositionBodyAvatar;
 };
