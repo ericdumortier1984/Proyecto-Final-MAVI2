@@ -33,6 +33,7 @@ private:
 	Text* mExit;
 
 	b2World* mWorld;
+
 	Ragdoll* mRagdoll;
 
 	//Box2D
@@ -47,16 +48,17 @@ private:
 	b2FixtureDef mFixtureDefFloor;
 	
 	//SFML
-	RectangleShape* mCanonSFML;
-
-	Texture* mFloorTx;
 	Texture* mBackLv1Tx;
+	Texture* mFloorTx;
+	Texture* mCanonTx;
 
-	Sprite* mFloorSp;
 	Sprite* mBackLv1Sp;
-
+	Sprite* mFloorSp;
+	Sprite* mCanonSp;
+	
 	//Avatar
 	Avatar* floorAvatar;
+	Avatar* canonAvatar;
 
 	enum GameState { MENU, LEVEL1, LEVEL2, LEVEL3, EXIT };
 	GameState mState;

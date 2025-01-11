@@ -31,13 +31,13 @@ Game::Game() : mState(MENU)
 	SetImages();
 	InitPhysics();
 	floorAvatar = new Avatar(mBodyFloor, mFloorSp);
+	canonAvatar = new Avatar(mBodyCanon, mCanonSp);
 }
 
 void Game::SetCamara(float mZoom)
 {
 
 	mCamara->setSize(mWindow->getSize().x * mZoom, mWindow->getSize().y * mZoom);
-	//mCamara->setCenter(mWindow->getSize().x / 2, mWindow->getSize().y / 2);
 	mCamara->setCenter(20, 100);
 	mWindow->setView(*mCamara);
 }
@@ -45,33 +45,36 @@ void Game::SetCamara(float mZoom)
 void Game::SetImages()
 {
 
-	mFloorTx = new Texture;
 	mBackLv1Tx = new Texture;
-
-	if (!mFloorTx->loadFromFile("Assets/floor.png"))
-	{
-		cout << "Error al cargar la textura del piso" << endl;
-	}
+	mFloorTx = new Texture;
+	mCanonTx = new Texture;
 	
 	if (!mBackLv1Tx->loadFromFile("Assets/blueBack.png"))
 	{
 		cout << "Error al cargar la textura del fondo" << endl;
 	}
-	
-	mFloorSp = new Sprite;
+	if (!mFloorTx->loadFromFile("Assets/floor.png"))
+	{
+		cout << "Error al cargar la textura del piso" << endl;
+	}
+	if (!mCanonTx->loadFromFile("Assets/canon.png"))
+	{
+		cout << "Error al cargar la textura del canion" << endl;
+	}
+
 	mBackLv1Sp = new Sprite;
+	mFloorSp = new Sprite;
+	mCanonSp = new Sprite;
 
 	mBackLv1Sp->setTexture(*mBackLv1Tx);
 	mBackLv1Sp->setScale(260.f / mBackLv1Tx->getSize().x, 150.f / mBackLv1Tx->getSize().y);
 	mBackLv1Sp->setPosition({ -110.f, 25.f }); 
 
 	mFloorSp->setTexture(*mFloorTx);
-    mFloorSp->setScale({1.f, 1.f});
-	
-	mCanonSFML = new RectangleShape;
-	mCanonSFML->setFillColor(Color::White);
-	mCanonSFML->setSize({5.0f, 10.0f});
-	mCanonSFML->setPosition({ -100.f, 156.f });
+    mFloorSp->setScale({ 1.f, 1.f });
+
+	mCanonSp->setTexture(*mCanonTx);
+	mCanonSp->setScale({ 1.f, 1.f });
 }
 
 void Game::InitPhysics() 
@@ -79,6 +82,7 @@ void Game::InitPhysics()
 
 	mWorld = new b2World({ 0.f, 9.8f });
 
+	//floor
 	mBodyDefFloor.type = b2_staticBody;
 	mBodyDefFloor.position = b2Vec2(0.f, 170.f);
 	mBodyFloor = mWorld->CreateBody(&mBodyDefFloor);
@@ -89,6 +93,19 @@ void Game::InitPhysics()
 	mFixtureDefFloor.restitution = 0.3f;
 	mFixtureDefFloor.friction = 0.3f;
 	mFixtureFloor = mBodyFloor->CreateFixture(&mFixtureDefFloor);
+
+	//canon
+	mBodyDefCanon.type = b2_dynamicBody;
+	mBodyDefCanon.position = b2Vec2(-95.f, 160.f);
+	mBodyCanon = mWorld->CreateBody(&mBodyDefCanon);
+	b2PolygonShape mCanonShape;
+	mCanonShape.SetAsBox(5.f, 5.f);
+	mFixtureDefCanon.shape = &mCanonShape;
+	mFixtureDefCanon.density = 0.3f;
+	mFixtureDefCanon.restitution = 0.3f;
+	mFixtureDefCanon.friction = 0.3f;
+	mFixtureCanon = mBodyCanon->CreateFixture(&mFixtureDefCanon);
+
 }
 
 void Game::UpdatePhysics() 
@@ -148,12 +165,12 @@ void Game::ProcessEvents()
 				Vector2f mPositionMouse;
 				mPositionMouse = mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow));
 
-				//bodyCanion->SetTransform(bodyCanion->GetPosition(),
-					//atan2f(mPositionMouse.y - bodyCanion->GetPosition().y, mPositionMouse.x - bodyCanion->GetPosition().x));
+				mBodyCanon->SetTransform(mBodyCanon->GetPosition(),
+					atan2f(mPositionMouse.y - mBodyCanon->GetPosition().y, mPositionMouse.x - mBodyCanon->GetPosition().x));
 
 				mRagdoll = new Ragdoll({ mPositionMouse.x, mPositionMouse.y }, *mWorld);
-				//mRagdoll->ApplyForce(Vector2f(mPositionMouse.x - bodyCanion->GetPosition().x
-					//, mPositionMouse.y - bodyCanion->GetPosition().y));
+				mRagdoll->ApplyForce(Vector2f(mPositionMouse.x - mBodyCanon->GetPosition().x
+					, mPositionMouse.y - mBodyCanon->GetPosition().y));
 			}
 		} 
 	} 
@@ -193,8 +210,8 @@ void Game::RunLevel(Color color)
 
 	mWindow->draw(*mBackLv1Sp);
 	floorAvatar->Draw(*mWindow);
+	canonAvatar->Draw(*mWindow);
 	mWindow->draw(player);
-	mWindow->draw(*mCanonSFML);
 
 	if (mRagdoll != nullptr)
 	{
@@ -250,6 +267,7 @@ Game::~Game()
 	delete mEvent;
 	delete mBackLv1Sp;
 	delete mFloorSp;
+	delete mCanonSp;
 
 	mWorld->DestroyBody(mBodyFloor);
 }
