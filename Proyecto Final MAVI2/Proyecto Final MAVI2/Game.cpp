@@ -48,6 +48,7 @@ void Game::SetImages()
 	mBackLv1Tx = new Texture;
 	mFloorTx = new Texture;
 	mCanonTx = new Texture;
+	mCanonFootTx = new Texture;
 	
 	if (!mBackLv1Tx->loadFromFile("Assets/blueBack.png"))
 	{
@@ -57,24 +58,31 @@ void Game::SetImages()
 	{
 		cout << "Error al cargar la textura del piso" << endl;
 	}
-	if (!mCanonTx->loadFromFile("Assets/canon.png"))
+	if (!mCanonTx->loadFromFile("Assets/canonBody.png"))
 	{
 		cout << "Error al cargar la textura del canion" << endl;
+	}
+	if (!mCanonFootTx->loadFromFile("Assets/canonFoot.png"))
+	{
+		cout << "Error al cargar la textura del pie de canion" << endl;
 	}
 
 	mBackLv1Sp = new Sprite;
 	mFloorSp = new Sprite;
 	mCanonSp = new Sprite;
+	mCanonFootSp = new Sprite;
 
 	mBackLv1Sp->setTexture(*mBackLv1Tx);
 	mBackLv1Sp->setScale(260.f / mBackLv1Tx->getSize().x, 150.f / mBackLv1Tx->getSize().y);
 	mBackLv1Sp->setPosition({ -110.f, 25.f }); 
 
 	mFloorSp->setTexture(*mFloorTx);
-    mFloorSp->setScale({ 1.f, 1.f });
 
 	mCanonSp->setTexture(*mCanonTx);
-	mCanonSp->setScale({ 1.f, 1.f });
+
+	mCanonFootSp->setTexture(*mCanonFootTx);
+	mCanonFootSp->setScale(115.f / mCanonFootTx->getSize().x, 90.f / mCanonFootTx->getSize().y);
+	mCanonFootSp->setPosition({ -155.f, 107.f });
 }
 
 void Game::InitPhysics() 
@@ -96,10 +104,10 @@ void Game::InitPhysics()
 
 	//canon
 	mBodyDefCanon.type = b2_kinematicBody;
-	mBodyDefCanon.position = b2Vec2(-95.f, 160.f);
+	mBodyDefCanon.position = b2Vec2(-95.f, 154.f);
 	mBodyCanon = mWorld->CreateBody(&mBodyDefCanon);
 	b2PolygonShape mCanonShape;
-	mCanonShape.SetAsBox(5.f, 5.f);
+	mCanonShape.SetAsBox(25.f, 25.f);
 	mFixtureDefCanon.shape = &mCanonShape;
 	mFixtureDefCanon.density = 0.3f;
 	mFixtureDefCanon.restitution = 0.3f;
@@ -164,7 +172,7 @@ void Game::ProcessEvents()
 				{
 					Vector2f mPositionMouse;
 					mPositionMouse = mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow));
-					b2Vec2 mCanonTipPosition = mBodyCanon->GetWorldPoint(b2Vec2(5.f, 0.f)); // Ajusta 5.f según la longitud del cañón 
+					b2Vec2 mCanonTipPosition = mBodyCanon->GetWorldPoint(b2Vec2(25.f, 0.f)); // Ajusta 25.f según la longitud del cañón 
 					mRagdoll = new Ragdoll({ mCanonTipPosition.x, mCanonTipPosition.y }, *mWorld); 
 					mRagdoll->ApplyForce(Vector2f(mPositionMouse.x - mBodyCanon->GetPosition().x, mPositionMouse.y - mBodyCanon->GetPosition().y));
 				}
@@ -175,7 +183,7 @@ void Game::ProcessEvents()
 		{
 			Vector2f mPositionMouse;
 			mPositionMouse = mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow));
-			mBodyCanon->SetTransform(mBodyCanon->GetPosition(),atan2f(mPositionMouse.y - mBodyCanon->GetPosition().y, mPositionMouse.x - mBodyCanon->GetPosition().x));
+			mBodyCanon->SetTransform(mBodyCanon->GetPosition(), atan2f(mPositionMouse.y - mBodyCanon->GetPosition().y, mPositionMouse.x - mBodyCanon->GetPosition().x));
 		}
 	} 
 }
@@ -183,7 +191,7 @@ void Game::ProcessEvents()
 void Game::Update()
 { 
 
-	if (mState == LEVEL1 && mClock->getElapsedTime().asSeconds() >= 1000) 
+	if (mState == LEVEL1 && mClock->getElapsedTime().asSeconds() >= 50) 
 	{ 
 		mState = LEVEL2; 
 		cout << "level2" << endl; 
@@ -202,20 +210,16 @@ void Game::Update()
 	} 
 }
 
-void Game::RunLevel(Color color)
+void Game::RunLevel()
 {
 
 	SetCamara(0.20f);
 	SetImages();
 
-	CircleShape player(1);
-	player.setPosition(mWindow->getSize().x / 2, mWindow->getSize().y / 2);
-	player.setFillColor(color);
-
 	mWindow->draw(*mBackLv1Sp);
 	floorAvatar->Draw(*mWindow);
 	canonAvatar->Draw(*mWindow);
-	mWindow->draw(player);
+	mWindow->draw(*mCanonFootSp);
 
 	if (mRagdoll != nullptr)
 	{
@@ -241,13 +245,13 @@ void Game::Draw()
 	    DrawMenu();
 	    break; 
 	case LEVEL1: 
-	    RunLevel(Color::Cyan); 
+	    RunLevel(); 
 	    break; 
 	case LEVEL2: 
-	    RunLevel(Color::Magenta); 
+	    RunLevel(); 
 	    break; 
 	case LEVEL3: 
-	    RunLevel(Color::Yellow); 
+	    RunLevel(); 
 	    break; 
 	case EXIT:
 		mWindow->close(); 
@@ -272,6 +276,7 @@ Game::~Game()
 	delete mBackLv1Sp;
 	delete mFloorSp;
 	delete mCanonSp;
+	delete mCanonFootSp;
 
 	mWorld->DestroyBody(mBodyFloor);
 }

@@ -16,7 +16,7 @@ public:
 	void ProcessEvents();
 	void Update();
 	void DrawMenu();
-	void RunLevel(Color color);
+	void RunLevel();
 	void Draw();
 	
 private:
@@ -51,10 +51,12 @@ private:
 	Texture* mBackLv1Tx;
 	Texture* mFloorTx;
 	Texture* mCanonTx;
+	Texture* mCanonFootTx;
 
 	Sprite* mBackLv1Sp;
 	Sprite* mFloorSp;
 	Sprite* mCanonSp;
+	Sprite* mCanonFootSp;
 	
 	//Avatar
 	Avatar* floorAvatar;
