@@ -63,14 +63,14 @@ void Avatar::UpdateAvatar()
 	{
 		mRectangleShapeAvatar->setPosition(mPositionBodyAvatar.x, mPositionBodyAvatar.y);
 		mRectangleShapeAvatar->setRotation(Rad2Deg(mBodyAvatar->GetAngle()));
-		cout << "Rectangle Avatar Position: " << mPositionBodyAvatar.x << ", " << mPositionBodyAvatar.y << endl;
+		//cout << "Rectangle Avatar Position: " << mPositionBodyAvatar.x << ", " << mPositionBodyAvatar.y << endl;
 	}
 
 	if (mSpriteAvatar)
 	{
 		mSpriteAvatar->setPosition(mPositionBodyAvatar.x, mPositionBodyAvatar.y);
 		mSpriteAvatar->setRotation(Rad2Deg(mBodyAvatar->GetAngle()));
-		cout << "Sprite Avatar Position: " << mPositionBodyAvatar.x << ", " << mPositionBodyAvatar.y << endl;
+		//cout << "Sprite Avatar Position: " << mPositionBodyAvatar.x << ", " << mPositionBodyAvatar.y << endl;
 	}
 }
 

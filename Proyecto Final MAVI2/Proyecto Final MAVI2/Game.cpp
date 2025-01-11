@@ -95,7 +95,7 @@ void Game::InitPhysics()
 	mFixtureFloor = mBodyFloor->CreateFixture(&mFixtureDefFloor);
 
 	//canon
-	mBodyDefCanon.type = b2_dynamicBody;
+	mBodyDefCanon.type = b2_kinematicBody;
 	mBodyDefCanon.position = b2Vec2(-95.f, 160.f);
 	mBodyCanon = mWorld->CreateBody(&mBodyDefCanon);
 	b2PolygonShape mCanonShape;
@@ -142,6 +142,7 @@ void Game::ProcessEvents()
 		{ 
 			mWindow->close(); 
 		} 
+
 		if (mEvent->type == Event::MouseButtonPressed) 
 		{ 
 			if (mEvent->mouseButton.button == Mouse::Left)
@@ -154,32 +155,35 @@ void Game::ProcessEvents()
 						cout << "level1" << endl; 
 						mClock->restart(); 
 					} 
-					if (mExit->getGlobalBounds().contains(mEvent->mouseButton.x, mEvent->mouseButton.y)) 
+					else if (mExit->getGlobalBounds().contains(mEvent->mouseButton.x, mEvent->mouseButton.y)) 
 					{
 						mState = EXIT; 
 					}
 				} 
+				else
+				{
+					Vector2f mPositionMouse;
+					mPositionMouse = mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow));
+					b2Vec2 mCanonTipPosition = mBodyCanon->GetWorldPoint(b2Vec2(5.f, 0.f)); // Ajusta 5.f según la longitud del cañón 
+					mRagdoll = new Ragdoll({ mCanonTipPosition.x, mCanonTipPosition.y }, *mWorld); 
+					mRagdoll->ApplyForce(Vector2f(mPositionMouse.x - mBodyCanon->GetPosition().x, mPositionMouse.y - mBodyCanon->GetPosition().y));
+				}
 			} 
-			else if (mEvent->mouseButton.button == Mouse::Right)
-			{
-				Vector2f mPositionMouse;
-				mPositionMouse = mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow));
-
-				mBodyCanon->SetTransform(mBodyCanon->GetPosition(),
-					atan2f(mPositionMouse.y - mBodyCanon->GetPosition().y, mPositionMouse.x - mBodyCanon->GetPosition().x));
-
-				mRagdoll = new Ragdoll({ mPositionMouse.x, mPositionMouse.y }, *mWorld);
-				mRagdoll->ApplyForce(Vector2f(mPositionMouse.x - mBodyCanon->GetPosition().x
-					, mPositionMouse.y - mBodyCanon->GetPosition().y));
-			}
 		} 
+
+		if (mEvent->type == Event::MouseMoved)
+		{
+			Vector2f mPositionMouse;
+			mPositionMouse = mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow));
+			mBodyCanon->SetTransform(mBodyCanon->GetPosition(),atan2f(mPositionMouse.y - mBodyCanon->GetPosition().y, mPositionMouse.x - mBodyCanon->GetPosition().x));
+		}
 	} 
 }
 
 void Game::Update()
 { 
 
-	if (mState == LEVEL1 && mClock->getElapsedTime().asSeconds() >= 10) 
+	if (mState == LEVEL1 && mClock->getElapsedTime().asSeconds() >= 1000) 
 	{ 
 		mState = LEVEL2; 
 		cout << "level2" << endl; 
