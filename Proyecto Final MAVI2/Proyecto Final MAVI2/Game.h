@@ -8,17 +8,8 @@ public:
 	Game();
 	~Game();
 
-	void SetCamara(float mZoom);
-	void SetImages();
-	void InitPhysics();
-	void UpdatePhysics();
 	void Run();
-	void ProcessEvents();
-	void Update();
-	void DrawMenu();
-	void RunLevel();
-	void Draw();
-	
+
 private:
 
 	RenderWindow* mWindow;
@@ -31,6 +22,7 @@ private:
 	Text* mTitle;
 	Text* mPlay;
 	Text* mExit;
+	Text* mNextLevel;
 
 	b2World* mWorld;
 
@@ -48,22 +40,41 @@ private:
 	b2FixtureDef mFixtureDefFloor;
 	
 	//SFML
+	Texture* mCrosshairTx;
+	Texture* mBackMenuTx;
 	Texture* mBackLv1Tx;
 	Texture* mFloorTx;
 	Texture* mCanonTx;
-	Texture* mCanonFootTx;
+	Texture* mCanonBaseTx;
 
+	Sprite* mCrosshairSp;
+	Sprite* mBackMenuSp;
 	Sprite* mBackLv1Sp;
 	Sprite* mFloorSp;
 	Sprite* mCanonSp;
-	Sprite* mCanonFootSp;
+	Sprite* mCanonBaseSp;
 	
 	//Avatar
-	Avatar* floorAvatar;
-	Avatar* canonAvatar;
+	Avatar* mFloorAvatar;
+	Avatar* mCanonAvatar;
 
 	enum GameState { MENU, LEVEL1, LEVEL2, LEVEL3, EXIT };
 	GameState mState;
 
 	float mFps, mFrameTime, mActualTime;
+	bool nextLevel;
+
+
+	void SetCamara(float mZoom);
+	void SetImages();
+	void SetMenu();
+	void InitPhysics();
+	void UpdatePhysics();
+	void ProcessEvents();
+	void Update();
+	void DrawMenu();
+	void RunLevel();
+	void RunLevel2();
+	void RunLevel3();
+	void Draw();
 };

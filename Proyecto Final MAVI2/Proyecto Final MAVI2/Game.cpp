@@ -15,23 +15,15 @@ Game::Game() : mState(MENU)
 	mClock = new Clock();
 	mInitTime = new Time;
 
-	mFont = new Font;
-	if (!mFont->loadFromFile("Fonts/Bodoni.ttf")) 
-	{
-		std::cout << "Error al cargar la fuente" << std::endl; 
-	}
+	mNextLevel = new Text("siguiente nivel", *mFont, 40);
+	mNextLevel->setPosition(400, 300);
+	nextLevel = false;
 
-	mTitle = new Text("Menu Principal", *mFont, 50);
-	mTitle->setPosition(270, 150); 
-	mPlay = new Text("Play", *mFont, 30); 
-	mPlay->setPosition(600, 300); 
-	mExit = new Text("Exit", *mFont, 30); 
-	mExit->setPosition(600, 400);
-
+	SetMenu();
 	SetImages();
 	InitPhysics();
-	floorAvatar = new Avatar(mBodyFloor, mFloorSp);
-	canonAvatar = new Avatar(mBodyCanon, mCanonSp);
+	mFloorAvatar = new Avatar(mBodyFloor, mFloorSp);
+	mCanonAvatar = new Avatar(mBodyCanon, mCanonSp);
 }
 
 void Game::SetCamara(float mZoom)
@@ -42,35 +34,50 @@ void Game::SetCamara(float mZoom)
 	mWindow->setView(*mCamara);
 }
 
+void Game::SetMenu()
+{
+	mBackMenuTx = new Texture;
+	if (!mBackMenuTx->loadFromFile("Assets/yellowBack.png")) { cout << "Error al cargar imagen de fondo en menu" << endl; }
+	mBackMenuSp = new Sprite;
+	mBackMenuSp->setTexture(*mBackMenuTx);
+	mBackMenuSp->setScale(1280.f / mBackMenuTx->getSize().x, 720.f / mBackMenuTx->getSize().y);
+
+	mFont = new Font;
+	if (!mFont->loadFromFile("Fonts/Bodoni.ttf")) { cout << "Error al cargar la fuente" << endl; }
+
+	mTitle = new Text("Menu Principal", *mFont, 50);
+	mTitle->setPosition(270, 150);
+	mPlay = new Text("Play", *mFont, 40);
+	mPlay->setPosition(600, 300);
+	mExit = new Text("Exit", *mFont, 40);
+	mExit->setPosition(600, 400);
+}
+
 void Game::SetImages()
 {
 
+	mCrosshairTx = new Texture;
 	mBackLv1Tx = new Texture;
 	mFloorTx = new Texture;
 	mCanonTx = new Texture;
-	mCanonFootTx = new Texture;
+	mCanonBaseTx = new Texture;
 	
-	if (!mBackLv1Tx->loadFromFile("Assets/blueBack.png"))
-	{
-		cout << "Error al cargar la textura del fondo" << endl;
-	}
-	if (!mFloorTx->loadFromFile("Assets/floor.png"))
-	{
-		cout << "Error al cargar la textura del piso" << endl;
-	}
-	if (!mCanonTx->loadFromFile("Assets/canonBody.png"))
-	{
-		cout << "Error al cargar la textura del canion" << endl;
-	}
-	if (!mCanonFootTx->loadFromFile("Assets/canonFoot.png"))
-	{
-		cout << "Error al cargar la textura del pie de canion" << endl;
-	}
+	if (!mCrosshairTx->loadFromFile("Assets/crosshair.png")) { cout << "Error al cargar la textura de crosshair" << endl; }
+	if (!mBackLv1Tx->loadFromFile("Assets/blueBack.png")) { cout << "Error al cargar la textura del fondo" << endl; }
+	if (!mFloorTx->loadFromFile("Assets/floor.png")) { cout << "Error al cargar la textura del piso" << endl; }
+	if (!mCanonTx->loadFromFile("Assets/canonBody.png")) { cout << "Error al cargar la textura del canion" << endl; }
+	if (!mCanonBaseTx->loadFromFile("Assets/canonBase.png")) { cout << "Error al cargar la textura del pie de canion" << endl; }
 
+	mCrosshairSp = new Sprite;
 	mBackLv1Sp = new Sprite;
 	mFloorSp = new Sprite;
 	mCanonSp = new Sprite;
-	mCanonFootSp = new Sprite;
+	mCanonBaseSp = new Sprite;
+
+	mCrosshairSp->setTexture(*mCrosshairTx);
+	mCrosshairSp->setScale(0.10f, 0.10f);
+	mCrosshairSp->setOrigin(mCrosshairTx->getSize().x / 2, mCrosshairTx->getSize().y / 2);
+	mCrosshairSp->setPosition(mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow)));
 
 	mBackLv1Sp->setTexture(*mBackLv1Tx);
 	mBackLv1Sp->setScale(260.f / mBackLv1Tx->getSize().x, 150.f / mBackLv1Tx->getSize().y);
@@ -80,9 +87,9 @@ void Game::SetImages()
 
 	mCanonSp->setTexture(*mCanonTx);
 
-	mCanonFootSp->setTexture(*mCanonFootTx);
-	mCanonFootSp->setScale(115.f / mCanonFootTx->getSize().x, 90.f / mCanonFootTx->getSize().y);
-	mCanonFootSp->setPosition({ -155.f, 107.f });
+	mCanonBaseSp->setTexture(*mCanonBaseTx);
+	mCanonBaseSp->setScale(50.f / mCanonBaseTx->getSize().x, 50.f / mCanonBaseTx->getSize().y);
+	mCanonBaseSp->setPosition({ -121.5f, 135.f });
 }
 
 void Game::InitPhysics() 
@@ -107,13 +114,12 @@ void Game::InitPhysics()
 	mBodyDefCanon.position = b2Vec2(-95.f, 154.f);
 	mBodyCanon = mWorld->CreateBody(&mBodyDefCanon);
 	b2PolygonShape mCanonShape;
-	mCanonShape.SetAsBox(25.f, 25.f);
+	mCanonShape.SetAsBox(20.f, 20.f);
 	mFixtureDefCanon.shape = &mCanonShape;
 	mFixtureDefCanon.density = 0.3f;
 	mFixtureDefCanon.restitution = 0.3f;
 	mFixtureDefCanon.friction = 0.3f;
 	mFixtureCanon = mBodyCanon->CreateFixture(&mFixtureDefCanon);
-
 }
 
 void Game::UpdatePhysics() 
@@ -155,6 +161,12 @@ void Game::ProcessEvents()
 		{ 
 			if (mEvent->mouseButton.button == Mouse::Left)
 			{ 
+				if (nextLevel)
+				{
+					nextLevel = false;
+					mState = LEVEL2;
+				}
+
 				if (mState == MENU) 
 				{ 
 					if (mPlay->getGlobalBounds().contains(mEvent->mouseButton.x, mEvent->mouseButton.y)) 
@@ -172,7 +184,7 @@ void Game::ProcessEvents()
 				{
 					Vector2f mPositionMouse;
 					mPositionMouse = mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow));
-					b2Vec2 mCanonTipPosition = mBodyCanon->GetWorldPoint(b2Vec2(25.f, 0.f)); // Ajusta 25.f según la longitud del cañón 
+					b2Vec2 mCanonTipPosition = mBodyCanon->GetWorldPoint(b2Vec2(11.f, -5.f)); // Ajusta según la longitud del cañón 
 					mRagdoll = new Ragdoll({ mCanonTipPosition.x, mCanonTipPosition.y }, *mWorld); 
 					mRagdoll->ApplyForce(Vector2f(mPositionMouse.x - mBodyCanon->GetPosition().x, mPositionMouse.y - mBodyCanon->GetPosition().y));
 				}
@@ -191,10 +203,11 @@ void Game::ProcessEvents()
 void Game::Update()
 { 
 
-	if (mState == LEVEL1 && mClock->getElapsedTime().asSeconds() >= 50) 
+	if (mState == LEVEL1 && mClock->getElapsedTime().asSeconds() >= 5) 
 	{ 
 		mState = LEVEL2; 
 		cout << "level2" << endl; 
+		nextLevel = true;
 		mClock->restart(); 
 	} 
 	else if (mState == LEVEL2 && mClock->getElapsedTime().asSeconds() >= 10) 
@@ -216,10 +229,12 @@ void Game::RunLevel()
 	SetCamara(0.20f);
 	SetImages();
 
+	mWindow->setMouseCursorVisible(false);
 	mWindow->draw(*mBackLv1Sp);
-	floorAvatar->Draw(*mWindow);
-	canonAvatar->Draw(*mWindow);
-	mWindow->draw(*mCanonFootSp);
+	mWindow->draw(*mCrosshairSp);
+	mFloorAvatar->Draw(*mWindow);
+	mCanonAvatar->Draw(*mWindow);
+	mWindow->draw(*mCanonBaseSp);
 
 	if (mRagdoll != nullptr)
 	{
@@ -227,9 +242,13 @@ void Game::RunLevel()
 	}
 }
 
+void Game::RunLevel2() {}
+void Game::RunLevel3() {}
+
 void Game::DrawMenu() 
 { 
 
+	mWindow->draw(*mBackMenuSp);
 	mWindow->draw(*mTitle);
 	mWindow->draw(*mPlay); 
 	mWindow->draw(*mExit); 
@@ -246,12 +265,16 @@ void Game::Draw()
 	    break; 
 	case LEVEL1: 
 	    RunLevel(); 
+		if (nextLevel)
+		{
+			mWindow->draw(*mNextLevel);
+		}
 	    break; 
 	case LEVEL2: 
-	    RunLevel(); 
+	    RunLevel2(); 
 	    break; 
 	case LEVEL3: 
-	    RunLevel(); 
+	    RunLevel3(); 
 	    break; 
 	case EXIT:
 		mWindow->close(); 
@@ -269,6 +292,7 @@ Game::~Game()
 	delete mTitle;
 	delete mPlay;
 	delete mExit;
+	delete mNextLevel;
 	delete mClock;
 	delete mInitTime;
 	delete mCamara;
@@ -276,7 +300,9 @@ Game::~Game()
 	delete mBackLv1Sp;
 	delete mFloorSp;
 	delete mCanonSp;
-	delete mCanonFootSp;
+	delete mCanonBaseSp;
+	delete mCrosshairSp;
+	delete mBackMenuSp;
 
 	mWorld->DestroyBody(mBodyFloor);
 }
