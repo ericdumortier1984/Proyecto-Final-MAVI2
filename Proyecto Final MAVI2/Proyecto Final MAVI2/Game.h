@@ -1,5 +1,7 @@
 #include "Avatar.h"
 #include "Ragdoll.h"
+#include "Box.h"
+#include "ContactListener.h"
 
 class Game
 {
@@ -27,6 +29,9 @@ private:
 	b2World* mWorld;
 
 	Ragdoll* mRagdoll;
+	Box* mBox;
+
+	ContactListener* mContactListener;
 
 	//Box2D
 	b2Body* mBodyCanon;
@@ -38,7 +43,7 @@ private:
 	b2BodyDef mBodyDefFloor;
 	b2Fixture* mFixtureFloor;
 	b2FixtureDef mFixtureDefFloor;
-	
+
 	//SFML
 	Texture* mCrosshairTx;
 	Texture* mBackMenuTx;
@@ -64,10 +69,10 @@ private:
 	float mFps, mFrameTime, mActualTime;
 	bool nextLevel;
 
-
 	void SetCamara(float mZoom);
 	void SetImages();
 	void SetMenu();
+	void CheckCollisions();
 	void InitPhysics();
 	void UpdatePhysics();
 	void ProcessEvents();
@@ -78,3 +83,4 @@ private:
 	void RunLevel3();
 	void Draw();
 };
+

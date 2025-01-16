@@ -12,17 +12,15 @@ public:
 	friend class Avatar;
 
 	Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld);
+	~Ragdoll();
 
 	void ApplyForce(Vector2f mPositionMouse);
 	void Draw(RenderWindow& mWindow);
-
 	float Rad2Deg(float mRadians);
 
 private:
 
 	RectangleShape* mSfmlRagdoll[6];
-	//Sprite* mSfmlRagdoll[6];
-	//Texture* mRagdolTx[6];
 	Avatar* mAvatarRagdoll[6];
 
 	//Ragdoll

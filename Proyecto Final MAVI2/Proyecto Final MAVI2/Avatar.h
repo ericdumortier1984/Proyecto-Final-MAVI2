@@ -14,17 +14,16 @@ public:
 	Avatar(b2Body* mBody, Sprite* mSprite );
 	~Avatar();
 
+	float Rad2Deg(float mRadians);
+
 	void UpdateAvatar();
 	void Draw(RenderWindow& mWindow);
-
-	float Rad2Deg(float mRadians);
 
 private:
 
 	b2Body* mBodyAvatar;
 	RectangleShape* mRectangleShapeAvatar = nullptr;
 	Sprite* mSpriteAvatar = nullptr;
-
 	b2Vec2 mPositionBodyAvatar;
 
 	void Initialize(b2Body* mBody);

@@ -1,18 +1,16 @@
 #include "Game.h"
 
-Game::Game() : mState(MENU)
+Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), nextLevel(false)
 {
 
-	mFps = 60.f;
-	mFrameTime = 1 / mFps;
-	mActualTime = 0;
-
 	mWindow = new RenderWindow(VideoMode(1280, 720), "GAME SFML MENU + LEVELS");
-	mWindow->setFramerateLimit(mFps);
+	mWindow->setFramerateLimit(mFps);  
+
+	mContactListener = new ContactListener;
 
 	mEvent = new Event;
 	mCamara = new View;
-	mClock = new Clock();
+	mClock = new Clock;
 	mInitTime = new Time;
 
 	mNextLevel = new Text("siguiente nivel", *mFont, 40);
@@ -22,8 +20,10 @@ Game::Game() : mState(MENU)
 	SetMenu();
 	SetImages();
 	InitPhysics();
+	CheckCollisions();
 	mFloorAvatar = new Avatar(mBodyFloor, mFloorSp);
 	mCanonAvatar = new Avatar(mBodyCanon, mCanonSp);
+	mBox = new Box(*mWorld);
 }
 
 void Game::SetCamara(float mZoom)
@@ -74,19 +74,22 @@ void Game::SetImages()
 	mCanonSp = new Sprite;
 	mCanonBaseSp = new Sprite;
 
+	//Crosshair
 	mCrosshairSp->setTexture(*mCrosshairTx);
 	mCrosshairSp->setScale(0.10f, 0.10f);
 	mCrosshairSp->setOrigin(mCrosshairTx->getSize().x / 2, mCrosshairTx->getSize().y / 2);
 	mCrosshairSp->setPosition(mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow)));
 
+	//Background
 	mBackLv1Sp->setTexture(*mBackLv1Tx);
 	mBackLv1Sp->setScale(260.f / mBackLv1Tx->getSize().x, 150.f / mBackLv1Tx->getSize().y);
 	mBackLv1Sp->setPosition({ -110.f, 25.f }); 
 
+	//Piso
 	mFloorSp->setTexture(*mFloorTx);
 
+	//Canion y pie de canion
 	mCanonSp->setTexture(*mCanonTx);
-
 	mCanonBaseSp->setTexture(*mCanonBaseTx);
 	mCanonBaseSp->setScale(50.f / mCanonBaseTx->getSize().x, 50.f / mCanonBaseTx->getSize().y);
 	mCanonBaseSp->setPosition({ -121.5f, 135.f });
@@ -97,7 +100,7 @@ void Game::InitPhysics()
 
 	mWorld = new b2World({ 0.f, 9.8f });
 
-	//floor
+	//Piso
 	mBodyDefFloor.type = b2_staticBody;
 	mBodyDefFloor.position = b2Vec2(0.f, 170.f);
 	mBodyFloor = mWorld->CreateBody(&mBodyDefFloor);
@@ -108,8 +111,9 @@ void Game::InitPhysics()
 	mFixtureDefFloor.restitution = 0.3f;
 	mFixtureDefFloor.friction = 0.3f;
 	mFixtureFloor = mBodyFloor->CreateFixture(&mFixtureDefFloor);
+	mBodyFloor->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
 
-	//canon
+	//Canion
 	mBodyDefCanon.type = b2_kinematicBody;
 	mBodyDefCanon.position = b2Vec2(-95.f, 154.f);
 	mBodyCanon = mWorld->CreateBody(&mBodyDefCanon);
@@ -120,6 +124,13 @@ void Game::InitPhysics()
 	mFixtureDefCanon.restitution = 0.3f;
 	mFixtureDefCanon.friction = 0.3f;
 	mFixtureCanon = mBodyCanon->CreateFixture(&mFixtureDefCanon);
+	mBodyCanon->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
+}
+
+void Game::CheckCollisions()
+{
+
+	mWorld->SetContactListener(mContactListener);
 }
 
 void Game::UpdatePhysics() 
@@ -127,6 +138,12 @@ void Game::UpdatePhysics()
 
 	mWorld->Step(mFrameTime, 8, 8);
 	mWorld->ClearForces();
+
+	// Cambiar de nivel si nextLevel es verdadero
+	if (nextLevel)
+	{
+		mState = LEVEL2;
+	}
 }
 
 void Game::Run() 
@@ -203,7 +220,7 @@ void Game::ProcessEvents()
 void Game::Update()
 { 
 
-	if (mState == LEVEL1 && mClock->getElapsedTime().asSeconds() >= 5) 
+	if (mState == LEVEL1 && mClock->getElapsedTime().asSeconds() >= 500) 
 	{ 
 		mState = LEVEL2; 
 		cout << "level2" << endl; 
@@ -235,6 +252,7 @@ void Game::RunLevel()
 	mFloorAvatar->Draw(*mWindow);
 	mCanonAvatar->Draw(*mWindow);
 	mWindow->draw(*mCanonBaseSp);
+	mBox->Draw(*mWindow);
 
 	if (mRagdoll != nullptr)
 	{
@@ -305,4 +323,5 @@ Game::~Game()
 	delete mBackMenuSp;
 
 	mWorld->DestroyBody(mBodyFloor);
+	mWorld->DestroyBody(mBodyCanon);
 }
