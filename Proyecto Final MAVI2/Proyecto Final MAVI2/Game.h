@@ -1,6 +1,8 @@
 #include "Avatar.h"
+#include "Floor.h"
 #include "Ragdoll.h"
 #include "Box.h"
+#include "Canon.h"
 #include "ContactListener.h"
 
 class Game
@@ -28,40 +30,21 @@ private:
 
 	b2World* mWorld;
 
+	Floor* mFloor;
+	Canon* mCanon;
 	Ragdoll* mRagdoll;
 	Box* mBox;
 
 	ContactListener* mContactListener;
 
-	//Box2D
-	b2Body* mBodyCanon;
-	b2BodyDef mBodyDefCanon;
-	b2Fixture* mFixtureCanon;
-	b2FixtureDef mFixtureDefCanon;
-
-	b2Body* mBodyFloor;
-	b2BodyDef mBodyDefFloor;
-	b2Fixture* mFixtureFloor;
-	b2FixtureDef mFixtureDefFloor;
-
 	//SFML
 	Texture* mCrosshairTx;
 	Texture* mBackMenuTx;
 	Texture* mBackLv1Tx;
-	Texture* mFloorTx;
-	Texture* mCanonTx;
-	Texture* mCanonBaseTx;
 
 	Sprite* mCrosshairSp;
 	Sprite* mBackMenuSp;
 	Sprite* mBackLv1Sp;
-	Sprite* mFloorSp;
-	Sprite* mCanonSp;
-	Sprite* mCanonBaseSp;
-	
-	//Avatar
-	Avatar* mFloorAvatar;
-	Avatar* mCanonAvatar;
 
 	enum GameState { MENU, LEVEL1, LEVEL2, LEVEL3, EXIT };
 	GameState mState;

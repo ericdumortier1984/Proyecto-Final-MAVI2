@@ -21,8 +21,8 @@ Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f
 	SetImages();
 	InitPhysics();
 	CheckCollisions();
-	mFloorAvatar = new Avatar(mBodyFloor, mFloorSp);
-	mCanonAvatar = new Avatar(mBodyCanon, mCanonSp);
+	mFloor = new Floor(*mWorld);
+	mCanon = new Canon(*mWorld);
 	mBox = new Box(*mWorld);
 }
 
@@ -58,21 +58,12 @@ void Game::SetImages()
 
 	mCrosshairTx = new Texture;
 	mBackLv1Tx = new Texture;
-	mFloorTx = new Texture;
-	mCanonTx = new Texture;
-	mCanonBaseTx = new Texture;
 	
 	if (!mCrosshairTx->loadFromFile("Assets/crosshair.png")) { cout << "Error al cargar la textura de crosshair" << endl; }
 	if (!mBackLv1Tx->loadFromFile("Assets/blueBack.png")) { cout << "Error al cargar la textura del fondo" << endl; }
-	if (!mFloorTx->loadFromFile("Assets/floor.png")) { cout << "Error al cargar la textura del piso" << endl; }
-	if (!mCanonTx->loadFromFile("Assets/canonBody.png")) { cout << "Error al cargar la textura del canion" << endl; }
-	if (!mCanonBaseTx->loadFromFile("Assets/canonBase.png")) { cout << "Error al cargar la textura del pie de canion" << endl; }
 
 	mCrosshairSp = new Sprite;
 	mBackLv1Sp = new Sprite;
-	mFloorSp = new Sprite;
-	mCanonSp = new Sprite;
-	mCanonBaseSp = new Sprite;
 
 	//Crosshair
 	mCrosshairSp->setTexture(*mCrosshairTx);
@@ -84,47 +75,12 @@ void Game::SetImages()
 	mBackLv1Sp->setTexture(*mBackLv1Tx);
 	mBackLv1Sp->setScale(260.f / mBackLv1Tx->getSize().x, 150.f / mBackLv1Tx->getSize().y);
 	mBackLv1Sp->setPosition({ -110.f, 25.f }); 
-
-	//Piso
-	mFloorSp->setTexture(*mFloorTx);
-
-	//Canion y pie de canion
-	mCanonSp->setTexture(*mCanonTx);
-	mCanonBaseSp->setTexture(*mCanonBaseTx);
-	mCanonBaseSp->setScale(50.f / mCanonBaseTx->getSize().x, 50.f / mCanonBaseTx->getSize().y);
-	mCanonBaseSp->setPosition({ -121.5f, 135.f });
 }
 
 void Game::InitPhysics() 
 {
 
 	mWorld = new b2World({ 0.f, 9.8f });
-
-	//Piso
-	mBodyDefFloor.type = b2_staticBody;
-	mBodyDefFloor.position = b2Vec2(0.f, 170.f);
-	mBodyFloor = mWorld->CreateBody(&mBodyDefFloor);
-	b2PolygonShape mFloorShape;
-	mFloorShape.SetAsBox(190.f, 5.f);
-	mFixtureDefFloor.shape = &mFloorShape;
-	mFixtureDefFloor.density = 1.f;
-	mFixtureDefFloor.restitution = 0.3f;
-	mFixtureDefFloor.friction = 0.3f;
-	mFixtureFloor = mBodyFloor->CreateFixture(&mFixtureDefFloor);
-	mBodyFloor->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
-
-	//Canion
-	mBodyDefCanon.type = b2_kinematicBody;
-	mBodyDefCanon.position = b2Vec2(-95.f, 154.f);
-	mBodyCanon = mWorld->CreateBody(&mBodyDefCanon);
-	b2PolygonShape mCanonShape;
-	mCanonShape.SetAsBox(20.f, 20.f);
-	mFixtureDefCanon.shape = &mCanonShape;
-	mFixtureDefCanon.density = 0.3f;
-	mFixtureDefCanon.restitution = 0.3f;
-	mFixtureDefCanon.friction = 0.3f;
-	mFixtureCanon = mBodyCanon->CreateFixture(&mFixtureDefCanon);
-	mBodyCanon->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
 }
 
 void Game::CheckCollisions()
@@ -201,9 +157,8 @@ void Game::ProcessEvents()
 				{
 					Vector2f mPositionMouse;
 					mPositionMouse = mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow));
-					b2Vec2 mCanonTipPosition = mBodyCanon->GetWorldPoint(b2Vec2(11.f, -5.f)); // Ajusta según la longitud del cañón 
-					mRagdoll = new Ragdoll({ mCanonTipPosition.x, mCanonTipPosition.y }, *mWorld); 
-					mRagdoll->ApplyForce(Vector2f(mPositionMouse.x - mBodyCanon->GetPosition().x, mPositionMouse.y - mBodyCanon->GetPosition().y));
+					mCanon->Shoot(mWorld, mPositionMouse, *mWindow);
+					mRagdoll = mCanon->GetRagdoll();
 				}
 			} 
 		} 
@@ -212,7 +167,7 @@ void Game::ProcessEvents()
 		{
 			Vector2f mPositionMouse;
 			mPositionMouse = mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow));
-			mBodyCanon->SetTransform(mBodyCanon->GetPosition(), atan2f(mPositionMouse.y - mBodyCanon->GetPosition().y, mPositionMouse.x - mBodyCanon->GetPosition().x));
+			mCanon->Update(mPositionMouse);
 		}
 	} 
 }
@@ -249,9 +204,8 @@ void Game::RunLevel()
 	mWindow->setMouseCursorVisible(false);
 	mWindow->draw(*mBackLv1Sp);
 	mWindow->draw(*mCrosshairSp);
-	mFloorAvatar->Draw(*mWindow);
-	mCanonAvatar->Draw(*mWindow);
-	mWindow->draw(*mCanonBaseSp);
+	mFloor->Draw(*mWindow);
+	mCanon->Draw(*mWindow);
 	mBox->Draw(*mWindow);
 
 	if (mRagdoll != nullptr)
@@ -316,12 +270,7 @@ Game::~Game()
 	delete mCamara;
 	delete mEvent;
 	delete mBackLv1Sp;
-	delete mFloorSp;
-	delete mCanonSp;
-	delete mCanonBaseSp;
 	delete mCrosshairSp;
 	delete mBackMenuSp;
 
-	mWorld->DestroyBody(mBodyFloor);
-	mWorld->DestroyBody(mBodyCanon);
 }
