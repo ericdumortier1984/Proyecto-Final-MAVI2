@@ -127,6 +127,7 @@ void Game::Run()
 			ProcessEvents();
 			Update();
 			UpdatePhysics();
+			CheckCollisions();
 			Draw();
 		}
 	} 

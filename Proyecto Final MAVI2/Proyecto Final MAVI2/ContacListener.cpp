@@ -27,19 +27,27 @@ void ContactListener::CheckAABB(b2Fixture* mFixtureA, b2Fixture* mFixtureB)
 		switch (mID2)
 		{
 		case 0:
-			cout << "---------------Colision:  WIN OBJECT -> OTRA COLISION--------------\n";
+			//cout << "---------------Colision:  WIN OBJECT -> OTRA COLISION--------------\n";
 			break;
 
 		case 1:
-			cout << "---------------Colision:  RAGDOLL -> WIN OBJECT--------------\n";
+			//cout << "---------------Colision:  RAGDOLL -> WIN OBJECT--------------\n";
 			mBodyB->GetUserData().pointer = (uintptr_t)0;
 			break;
 		case 2:
-			cout << "---------------Colision:  OTRA COLISION -> WIN OBJECT--------------\n";
+			//cout << "---------------Colision:  OTRA COLISION -> WIN OBJECT--------------\n";
 			break;
 
 		default:
 			break;
 		}
 	}
+
+	// Añadir lógica específica para colisiones entre Box y Ragdoll
+	if ((mID1 == 2 && mID2 == 0) || (mID1 == 0 && mID2 == 2)) 
+	{ 
+		cout << "---------------Colision: BOX -> RAGDOLL--------------\n"; 
+		// Lógica adicional para la colisión Box -> Ragdoll 
+	}
+
 }
