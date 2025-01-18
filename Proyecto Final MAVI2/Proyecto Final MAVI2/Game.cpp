@@ -3,6 +3,8 @@
 Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), nextLevel(false)
 {
 
+	winLevel = false;
+
 	mWindow = new RenderWindow(VideoMode(1280, 720), "GAME SFML MENU + LEVELS");
 	mWindow->setFramerateLimit(mFps);  
 
@@ -87,6 +89,16 @@ void Game::CheckCollisions()
 {
 
 	mWorld->SetContactListener(mContactListener);
+}
+
+void Game::CheckWin()
+{
+
+	//if (mRagdoll->CheckCollision() && mBox->CheckCollision())
+	//{
+		//cout << "Nivel superado" << endl;
+		//winLevel = true;
+	//}
 }
 
 void Game::UpdatePhysics() 
@@ -212,6 +224,10 @@ void Game::RunLevel()
 	{
 		mRagdoll->Draw(*mWindow);
 	}
+
+	CheckWin();
+
+	//mRagdoll->VerWin();
 }
 
 void Game::RunLevel2() {}

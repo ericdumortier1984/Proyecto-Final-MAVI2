@@ -14,9 +14,11 @@ public:
 	Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld);
 	~Ragdoll();
 
+	float Rad2Deg(float mRadians);
+	bool CheckCollision();
+	int GetUserData();
 	void ApplyForce(Vector2f mPositionMouse);
 	void Draw(RenderWindow& mWindow);
-	float Rad2Deg(float mRadians);
 
 private:
 
@@ -32,4 +34,6 @@ private:
 	//Resortes
 	b2DistanceJoint* mJointRagdoll[5];
 	b2DistanceJointDef mJointDefRagdoll[5];
+
+	int mID;
 };

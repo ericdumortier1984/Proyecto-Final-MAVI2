@@ -15,6 +15,7 @@ public:
 	Box(b2World& mWorld);
 	~Box();
 
+	bool CheckCollision();
 	void Draw(RenderWindow& mWindow);
 
 private:
@@ -27,4 +28,7 @@ private:
 	b2BodyDef mBodyDefBox;
 	b2Fixture* mFixtureBox;
 	b2FixtureDef mFixtureDefBox;
+
+	//bool collision;
+	int mID;
 };

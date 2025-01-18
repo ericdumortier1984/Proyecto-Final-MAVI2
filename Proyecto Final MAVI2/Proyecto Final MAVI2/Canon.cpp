@@ -36,6 +36,10 @@ Canon::~Canon()
 
 	delete mCanonSp;
 	delete mCanonBaseSp;
+	delete mCanonTx; 
+	delete mCanonBaseTx; 
+	delete mCanonAvatar;
+	delete mRagdoll;
 }
 
 void Canon::Shoot(b2World* mWorld, Vector2f mPositionMouse, RenderWindow& mWindow)

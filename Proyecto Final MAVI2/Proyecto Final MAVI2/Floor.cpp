@@ -27,6 +27,8 @@ Floor::~Floor()
 {
 
 	delete mFloorSp;
+	delete mFloorTx; 
+	delete mFloorAvatar;
 }
 
 void Floor::Draw(RenderWindow& mWindow)

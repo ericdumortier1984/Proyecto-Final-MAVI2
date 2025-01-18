@@ -4,6 +4,9 @@
 Box::Box(b2World& mWorld)
 {
 
+	//this->collision = false;
+	mID = 2;
+
 	mBoxTx = new Texture;
 	if (!mBoxTx->loadFromFile("Assets/box.png")) { cout << "Error al cargar la textura de la caja" << endl; }
 	mBoxSp = new Sprite;
@@ -15,12 +18,12 @@ Box::Box(b2World& mWorld)
 	b2PolygonShape mBoxShape;
 	mBoxShape.SetAsBox(4.f, 4.f);
 	mFixtureDefBox.shape = &mBoxShape;
-	mFixtureDefBox.density = 0.05f;
-	mFixtureDefBox.restitution = 0.9f;
+	mFixtureDefBox.density = 0.1f;
+	mFixtureDefBox.restitution = 0.3f;
 	mFixtureDefBox.friction = 0.3f;
 	mFixtureBox = mBodyBox->CreateFixture(&mFixtureDefBox);
-	mBodyBox->GetUserData().pointer = reinterpret_cast<uintptr_t>(this);
 
+	mBodyBox->GetUserData().pointer = (uintptr_t)mID; //ID
 	mBoxAvatar = new Avatar(mBodyBox, mBoxSp);
 }
 
@@ -28,6 +31,14 @@ Box::~Box()
 {
 
 	delete mBoxSp;
+	delete mBoxTx;
+	delete mBoxAvatar;
+}
+
+bool Box::CheckCollision()
+{
+	
+	return false;
 }
 
 void Box::Draw(RenderWindow& mWindow)

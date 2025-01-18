@@ -5,7 +5,7 @@
 #include "Canon.h"
 #include "ContactListener.h"
 
-class Game
+class Game 
 {
 public:
 
@@ -50,12 +50,14 @@ private:
 	GameState mState;
 
 	float mFps, mFrameTime, mActualTime;
+	bool winLevel;
 	bool nextLevel;
 
 	void SetCamara(float mZoom);
 	void SetImages();
 	void SetMenu();
 	void CheckCollisions();
+	void CheckWin();
 	void InitPhysics();
 	void UpdatePhysics();
 	void ProcessEvents();

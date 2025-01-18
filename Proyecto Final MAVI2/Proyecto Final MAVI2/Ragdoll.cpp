@@ -3,6 +3,9 @@
 
 Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 {
+
+	mID = 0;
+
 	//Fisicas del ragdoll
 	for (int i = 0; i < 6; i++)
 	{
@@ -14,11 +17,12 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 	mBodyDefRagdoll[2].position = b2Vec2(mPositionRagdoll.x + 2.79f, mPositionRagdoll.y + 4.2f);  //Brazo izquierdo
 	mBodyDefRagdoll[3].position = b2Vec2(mPositionRagdoll.x - 2.41f, mPositionRagdoll.y + 4.2f);  //Brazo derecho
 	mBodyDefRagdoll[4].position = b2Vec2(mPositionRagdoll.x + 1.29f, mPositionRagdoll.y + 8.7f);  //Pierna izquierda 
-	mBodyDefRagdoll[5].position = b2Vec2(mPositionRagdoll.x - 0.21f, mPositionRagdoll.y + 8.7f);  //Pierna derecha*/
+	mBodyDefRagdoll[5].position = b2Vec2(mPositionRagdoll.x - 0.21f, mPositionRagdoll.y + 8.7f);  //Pierna derecha
 	
 	for (int i = 0; i < 6; i++)
 	{
 		mBodyRagdoll[i] = mWorld.CreateBody(&mBodyDefRagdoll[i]);
+		mBodyRagdoll[i]->GetUserData().pointer = (uintptr_t)0; // ID
 	}
 	
 	b2PolygonShape mShapeRagdoll[6];
@@ -37,33 +41,34 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 		mFixtureDefRagdoll[i].friction = 0.3f;
 
 		mFixtureRagdoll[i] = mBodyRagdoll[i]->CreateFixture(&mFixtureDefRagdoll[i]);
+		mBodyRagdoll[i]->GetUserData().pointer = (uintptr_t)mID;
 	}
-	
+
 	//resortes
 	//cabeza-pecho
-	mJointDefRagdoll[0].Initialize(mBodyRagdoll[0], mBodyRagdoll[1],                                    // primero y segundo
+	mJointDefRagdoll[0].Initialize(mBodyRagdoll[0], mBodyRagdoll[1],                                    //primero y segundo
 		b2Vec2(mBodyRagdoll[0]->GetPosition().x + 1.0f, mBodyRagdoll[0]->GetPosition().y + 0.3f),       //ancho primer cuerpo 
-		b2Vec2(mBodyRagdoll[1]->GetPosition().x + 0.9f, mBodyRagdoll[1]->GetPosition().y - 0.4f));      // ancho segundo cuerpo 
+		b2Vec2(mBodyRagdoll[1]->GetPosition().x + 0.9f, mBodyRagdoll[1]->GetPosition().y - 0.4f));      //ancho segundo cuerpo 
 
 	//pecho-brazo izquierdo
-	mJointDefRagdoll[1].Initialize(mBodyRagdoll[1], mBodyRagdoll[2],                                    // primero y segundo 
-		b2Vec2(mBodyRagdoll[1]->GetPosition().x + 3.5f, mBodyRagdoll[1]->GetPosition().y + 1.0f),       // ancho primer cuerpo 
+	mJointDefRagdoll[1].Initialize(mBodyRagdoll[1], mBodyRagdoll[2],                                    //primero y segundo 
+		b2Vec2(mBodyRagdoll[1]->GetPosition().x + 3.5f, mBodyRagdoll[1]->GetPosition().y + 1.0f),       //ancho primer cuerpo 
 		b2Vec2(mBodyRagdoll[2]->GetPosition().x - 0.3f, mBodyRagdoll[2]->GetPosition().y - 0.75f));     //ancho segundo cuerpo 
 
 	//pecho-brazo derecho
-	mJointDefRagdoll[2].Initialize(mBodyRagdoll[1], mBodyRagdoll[3],                                    // primero y segundo 
-		b2Vec2(mBodyRagdoll[1]->GetPosition().x - 1.0f, mBodyRagdoll[1]->GetPosition().y + 0.8f),       // ancho primer cuerpo 
+	mJointDefRagdoll[2].Initialize(mBodyRagdoll[1], mBodyRagdoll[3],                                    //primero y segundo 
+		b2Vec2(mBodyRagdoll[1]->GetPosition().x - 1.0f, mBodyRagdoll[1]->GetPosition().y + 0.8f),       //ancho primer cuerpo 
 		b2Vec2(mBodyRagdoll[3]->GetPosition().x + 2.0f, mBodyRagdoll[3]->GetPosition().y - 0.75f));     //ancho segundo cuerpo 
 
 	//pecho-pierna izquierda
-	mJointDefRagdoll[3].Initialize(mBodyRagdoll[1], mBodyRagdoll[4],                                    // primero y segundo 
-		b2Vec2(mBodyRagdoll[1]->GetPosition().x + 2.0f, mBodyRagdoll[1]->GetPosition().y + 6.5f),       // ancho primer cuerpo 
-		b2Vec2(mBodyRagdoll[4]->GetPosition().x + 0.2f, mBodyRagdoll[4]->GetPosition().y));             // ancho segundo cuerpo 
+	mJointDefRagdoll[3].Initialize(mBodyRagdoll[1], mBodyRagdoll[4],                                    //primero y segundo 
+		b2Vec2(mBodyRagdoll[1]->GetPosition().x + 2.0f, mBodyRagdoll[1]->GetPosition().y + 6.5f),       //ancho primer cuerpo 
+		b2Vec2(mBodyRagdoll[4]->GetPosition().x + 0.2f, mBodyRagdoll[4]->GetPosition().y));             //ancho segundo cuerpo 
 
 	//pecho-pierna derecha
-	mJointDefRagdoll[4].Initialize(mBodyRagdoll[1], mBodyRagdoll[5],                                    // primero y segundo 
-		b2Vec2(mBodyRagdoll[1]->GetPosition().x + 1.0f, mBodyRagdoll[1]->GetPosition().y + 6.5f),       // ancho primer cuerpo 
-		b2Vec2(mBodyRagdoll[5]->GetPosition().x + 0.7f, mBodyRagdoll[5]->GetPosition().y));             // ancho segundo cuerpo 
+	mJointDefRagdoll[4].Initialize(mBodyRagdoll[1], mBodyRagdoll[5],                                    //primero y segundo 
+		b2Vec2(mBodyRagdoll[1]->GetPosition().x + 1.0f, mBodyRagdoll[1]->GetPosition().y + 6.5f),       //ancho primer cuerpo 
+		b2Vec2(mBodyRagdoll[5]->GetPosition().x + 0.7f, mBodyRagdoll[5]->GetPosition().y));             //ancho segundo cuerpo 
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -97,8 +102,22 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 		case 5: mSfmlRagdoll[i]->setFillColor(Color::White);
         break; 
 		}
+		
 		mAvatarRagdoll[i] = new Avatar(mBodyRagdoll[i], mSfmlRagdoll[i]);
 	}
+}
+
+bool Ragdoll::CheckCollision()
+{
+	
+	return false;
+
+}
+
+int Ragdoll::GetUserData()
+{
+
+	return 0;
 }
 
 void Ragdoll::ApplyForce(Vector2f mPositionMouse)

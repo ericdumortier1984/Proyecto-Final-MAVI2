@@ -16,10 +16,10 @@ public:
 	Canon(b2World& mWorld);
 	~Canon();
 
-	void Draw(RenderWindow& mWindow);
+	Ragdoll* GetRagdoll();
 	void Shoot(b2World* mWorld, Vector2f mPositionMouse, RenderWindow& mWindow);
 	void Update(Vector2f mPositionMouse);
-	Ragdoll* GetRagdoll();
+	void Draw(RenderWindow& mWindow);
 
 private:
 
@@ -34,4 +34,5 @@ private:
 	b2BodyDef mBodyDefCanon;
 	b2Fixture* mFixtureCanon;
 	b2FixtureDef mFixtureDefCanon;
+
 };
