@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\ContacListener.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|solutionrelative:Proyecto Final MAVI2\\ContacListener.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\ContactListener.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|solutionrelative:Proyecto Final MAVI2\\ContactListener.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|solutionrelative:Proyecto Final MAVI2\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -19,8 +15,8 @@
       "RelativeMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|solutionrelative:Proyecto Final MAVI2\\Box.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|solutionrelative:Proyecto Final MAVI2\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Box.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|solutionrelative:Proyecto Final MAVI2\\Box.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Ragdoll.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -31,8 +27,12 @@
       "RelativeMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|solutionrelative:Proyecto Final MAVI2\\Ragdoll.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Box.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|solutionrelative:Proyecto Final MAVI2\\Box.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\ContacListener.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|solutionrelative:Proyecto Final MAVI2\\ContacListener.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\ContactListener.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|solutionrelative:Proyecto Final MAVI2\\ContactListener.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,62 +42,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "ContactListener.h",
               "DocumentMoniker": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\ContactListener.h",
               "RelativeDocumentMoniker": "Proyecto Final MAVI2\\ContactListener.h",
               "ToolTip": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\ContactListener.h",
               "RelativeToolTip": "Proyecto Final MAVI2\\ContactListener.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-01-16T18:42:47.928Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "ContacListener.cpp",
               "DocumentMoniker": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\ContacListener.cpp",
               "RelativeDocumentMoniker": "Proyecto Final MAVI2\\ContacListener.cpp",
               "ToolTip": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\ContacListener.cpp",
               "RelativeToolTip": "Proyecto Final MAVI2\\ContacListener.cpp",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAIwB0AAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-01-16T18:42:49.645Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Box.h",
               "DocumentMoniker": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Box.h",
               "RelativeDocumentMoniker": "Proyecto Final MAVI2\\Box.h",
               "ToolTip": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Box.h",
               "RelativeToolTip": "Proyecto Final MAVI2\\Box.h",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABoAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-01-17T10:28:37.171Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "Box.cpp",
               "DocumentMoniker": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Box.cpp",
               "RelativeDocumentMoniker": "Proyecto Final MAVI2\\Box.cpp",
               "ToolTip": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Box.cpp",
               "RelativeToolTip": "Proyecto Final MAVI2\\Box.cpp",
-              "ViewState": "AgIAABoAAAAAAAAAAAAAACgAAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-01-17T10:28:39.531Z"
+              "WhenOpened": "2025-01-17T10:28:39.531Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "Ragdoll.h",
               "DocumentMoniker": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Ragdoll.h",
               "RelativeDocumentMoniker": "Proyecto Final MAVI2\\Ragdoll.h",
@@ -105,11 +106,12 @@
               "RelativeToolTip": "Proyecto Final MAVI2\\Ragdoll.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-01-17T10:23:25.444Z"
+              "WhenOpened": "2025-01-17T10:23:25.444Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Ragdoll.cpp",
               "DocumentMoniker": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Ragdoll.cpp",
               "RelativeDocumentMoniker": "Proyecto Final MAVI2\\Ragdoll.cpp",
@@ -122,26 +124,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Game.h",
               "DocumentMoniker": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Game.h",
               "RelativeDocumentMoniker": "Proyecto Final MAVI2\\Game.h",
               "ToolTip": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Game.h",
               "RelativeToolTip": "Proyecto Final MAVI2\\Game.h",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAAADcAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAADMAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-01-17T09:52:57.397Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Game.cpp",
               "DocumentMoniker": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Game.cpp",
               "RelativeDocumentMoniker": "Proyecto Final MAVI2\\Game.cpp",
               "ToolTip": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Game.cpp",
               "RelativeToolTip": "Proyecto Final MAVI2\\Game.cpp",
-              "ViewState": "AgIAAG8AAAAAAAAAAAAAAIEAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAAAG8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-01-17T09:52:59.197Z",
               "EditorCaption": ""

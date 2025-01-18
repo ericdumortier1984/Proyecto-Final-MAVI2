@@ -4,7 +4,6 @@
 Box::Box(b2World& mWorld)
 {
 
-	//this->collision = false;
 	mID = 2;
 
 	mBoxTx = new Texture;

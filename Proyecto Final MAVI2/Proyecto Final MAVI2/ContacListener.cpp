@@ -1,4 +1,5 @@
 #include "ContactListener.h"
+#include "Game.h"
 
 //Resuelve las colisiones basadas en la identidad de cada objeto
 void ContactListener::BeginContact(b2Contact* mContact) 
@@ -46,8 +47,8 @@ void ContactListener::CheckAABB(b2Fixture* mFixtureA, b2Fixture* mFixtureB)
 	// Añadir lógica específica para colisiones entre Box y Ragdoll
 	if ((mID1 == 2 && mID2 == 0) || (mID1 == 0 && mID2 == 2)) 
 	{ 
-		cout << "---------------Colision: BOX -> RAGDOLL--------------\n"; 
+		cout << "[Colision: BOX -> RAGDOLL]" << endl; 
 		// Lógica adicional para la colisión Box -> Ragdoll 
+		mGame->NextLevel();
 	}
-
 }

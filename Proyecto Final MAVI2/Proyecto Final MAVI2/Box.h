@@ -29,6 +29,5 @@ private:
 	b2Fixture* mFixtureBox;
 	b2FixtureDef mFixtureDefBox;
 
-	//bool collision;
 	int mID;
 };

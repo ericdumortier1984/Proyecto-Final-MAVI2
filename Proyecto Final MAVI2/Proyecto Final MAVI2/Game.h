@@ -12,6 +12,7 @@ public:
 	Game();
 	~Game();
 
+	bool NextLevel();
 	void Run();
 
 private:
@@ -48,10 +49,13 @@ private:
 
 	enum GameState { MENU, LEVEL1, LEVEL2, LEVEL3, EXIT };
 	GameState mState;
+	enum TimeLimits { LEVEL1_TIME_LIMIT = 180, LEVEL2_TIME_LIMIT = 300, LEVEL3_TIME_LIMIT = 500 };
+	TimeLimits mTimeLimits;
 
 	float mFps, mFrameTime, mActualTime;
 	bool winLevel;
 	bool nextLevel;
+	bool lostLevel;
 
 	void SetCamara(float mZoom);
 	void SetImages();

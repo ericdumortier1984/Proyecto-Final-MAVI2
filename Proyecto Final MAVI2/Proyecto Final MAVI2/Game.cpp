@@ -1,14 +1,12 @@
 #include "Game.h"
 
-Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), nextLevel(false)
+Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), nextLevel(false), winLevel(false), lostLevel(false)
 {
-
-	winLevel = false;
 
 	mWindow = new RenderWindow(VideoMode(1280, 720), "GAME SFML MENU + LEVELS");
 	mWindow->setFramerateLimit(mFps);  
 
-	mContactListener = new ContactListener;
+	mContactListener = new ContactListener(this); // Pasamos la instancia del juego
 
 	mEvent = new Event;
 	mCamara = new View;
@@ -188,23 +186,27 @@ void Game::ProcessEvents()
 void Game::Update()
 { 
 
-	if (mState == LEVEL1 && mClock->getElapsedTime().asSeconds() >= 500) 
+	if (mState == LEVEL1 && mClock->getElapsedTime().asSeconds() >= LEVEL1_TIME_LIMIT) 
 	{ 
-		mState = LEVEL2; 
-		cout << "level2" << endl; 
-		nextLevel = true;
-		mClock->restart(); 
-	} 
-	else if (mState == LEVEL2 && mClock->getElapsedTime().asSeconds() >= 10) 
-	{
-		mState = LEVEL3; 
-		cout << "level3" << endl; 
-		mClock->restart();
-	} 
-	else if (mState == LEVEL3 && mClock->getElapsedTime().asSeconds() >= 10) 
-	{ 
+		cout << "Time up" << endl;
 		mState = EXIT;
-		cout << "finish" << endl; 
+		//mState = LEVEL2; 
+		//cout << "level2" << endl; 
+		//nextLevel = true;
+		//mClock->restart(); 
+	} 
+	else if (mState == LEVEL2 && mClock->getElapsedTime().asSeconds() >= LEVEL2_TIME_LIMIT) 
+	{
+		cout << "Time up" << endl;
+		mState = EXIT;
+		//mState = LEVEL3; 
+		//cout << "level3" << endl; 
+		//mClock->restart();
+	} 
+	else if (mState == LEVEL3 && mClock->getElapsedTime().asSeconds() >= LEVEL3_TIME_LIMIT) 
+	{ 
+		cout << "Time Up" << endl;
+		mState = EXIT; 
 	} 
 }
 
@@ -241,6 +243,12 @@ void Game::DrawMenu()
 	mWindow->draw(*mTitle);
 	mWindow->draw(*mPlay); 
 	mWindow->draw(*mExit); 
+}
+
+bool Game::NextLevel()
+{
+
+	return nextLevel = true;
 }
 
 void Game::Draw() 
