@@ -107,13 +107,6 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 	}
 }
 
-bool Ragdoll::CheckCollision()
-{
-	
-	return false;
-
-}
-
 int Ragdoll::GetUserData()
 {
 

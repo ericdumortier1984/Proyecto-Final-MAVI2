@@ -15,7 +15,6 @@ public:
 	Box(b2World& mWorld);
 	~Box();
 
-	bool CheckCollision();
 	void Draw(RenderWindow& mWindow);
 
 private:

@@ -1,10 +1,8 @@
 #include "Box.h"
 #include "Avatar.h"
 
-Box::Box(b2World& mWorld)
+Box::Box(b2World& mWorld) : mID(2)
 {
-
-	mID = 2;
 
 	mBoxTx = new Texture;
 	if (!mBoxTx->loadFromFile("Assets/box.png")) { cout << "Error al cargar la textura de la caja" << endl; }
@@ -12,7 +10,7 @@ Box::Box(b2World& mWorld)
 	mBoxSp->setTexture(*mBoxTx);
 
 	mBodyDefBox.type = b2_dynamicBody;
-	mBodyDefBox.position = b2Vec2(-90.f, 150.f);
+	mBodyDefBox.position = b2Vec2(50.f, 100.f);
 	mBodyBox = mWorld.CreateBody(&mBodyDefBox);
 	b2PolygonShape mBoxShape;
 	mBoxShape.SetAsBox(4.f, 4.f);
@@ -32,12 +30,6 @@ Box::~Box()
 	delete mBoxSp;
 	delete mBoxTx;
 	delete mBoxAvatar;
-}
-
-bool Box::CheckCollision()
-{
-	
-	return false;
 }
 
 void Box::Draw(RenderWindow& mWindow)

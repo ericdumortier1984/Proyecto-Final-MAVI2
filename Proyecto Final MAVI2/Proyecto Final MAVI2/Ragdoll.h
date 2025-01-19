@@ -15,7 +15,6 @@ public:
 	~Ragdoll();
 
 	float Rad2Deg(float mRadians);
-	bool CheckCollision();
 	int GetUserData();
 	void ApplyForce(Vector2f mPositionMouse);
 	void Draw(RenderWindow& mWindow);

@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), nextLevel(false), winLevel(false), lostLevel(false)
+Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), nextLevel(false), lostLevel(false)
 {
 
 	mWindow = new RenderWindow(VideoMode(1280, 720), "GAME SFML MENU + LEVELS");
@@ -87,16 +87,6 @@ void Game::CheckCollisions()
 {
 
 	mWorld->SetContactListener(mContactListener);
-}
-
-void Game::CheckWin()
-{
-
-	//if (mRagdoll->CheckCollision() && mBox->CheckCollision())
-	//{
-		//cout << "Nivel superado" << endl;
-		//winLevel = true;
-	//}
 }
 
 void Game::UpdatePhysics() 
@@ -213,6 +203,9 @@ void Game::Update()
 void Game::RunLevel()
 {
 
+	mCircleOfFire = new CircleOfFire(*mWorld);
+	//mBox = new Box(*mWorld);
+
 	SetCamara(0.20f);
 	SetImages();
 
@@ -221,20 +214,31 @@ void Game::RunLevel()
 	mWindow->draw(*mCrosshairSp);
 	mFloor->Draw(*mWindow);
 	mCanon->Draw(*mWindow);
+	mCircleOfFire->Draw(*mWindow);
 	mBox->Draw(*mWindow);
-
-	if (mRagdoll != nullptr)
-	{
-		mRagdoll->Draw(*mWindow);
-	}
-
-	CheckWin();
-
-	//mRagdoll->VerWin();
+	if (mRagdoll != nullptr){ mRagdoll->Draw(*mWindow); }
 }
 
-void Game::RunLevel2() {}
-void Game::RunLevel3() {}
+void Game::RunLevel2() 
+{
+	//mBox = new Box(*mWorld);
+
+	SetCamara(0.20f);
+	SetImages();
+
+	mWindow->setMouseCursorVisible(false);
+	mWindow->draw(*mBackLv1Sp);
+	mWindow->draw(*mCrosshairSp);
+	mFloor->Draw(*mWindow);
+	mCanon->Draw(*mWindow);
+	//mBox->Draw(*mWindow);
+	if (mRagdoll != nullptr) { mRagdoll->Draw(*mWindow); }
+}
+void Game::RunLevel3() 
+{
+
+
+}
 
 void Game::DrawMenu() 
 { 
@@ -268,7 +272,11 @@ void Game::Draw()
 		}
 	    break; 
 	case LEVEL2: 
-	    RunLevel2(); 
+	    RunLevel2();
+		if (nextLevel)
+		{
+			mWindow->draw(*mNextLevel);
+		}
 	    break; 
 	case LEVEL3: 
 	    RunLevel3(); 

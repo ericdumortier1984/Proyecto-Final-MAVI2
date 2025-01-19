@@ -13,14 +13,14 @@ Canon::Canon(b2World& mWorld)
 	mCanonBaseSp = new Sprite;
 	mCanonSp->setTexture(*mCanonTx);
 	mCanonBaseSp->setTexture(*mCanonBaseTx);
-	mCanonBaseSp->setScale(50.f / mCanonBaseTx->getSize().x, 50.f / mCanonBaseTx->getSize().y);
-	mCanonBaseSp->setPosition({ -121.5f, 135.f });
+	mCanonBaseSp->setScale(15.f / mCanonBaseTx->getSize().x, 15.f / mCanonBaseTx->getSize().y);
+	mCanonBaseSp->setPosition({ -105.5f, 152.5f });
 
 	mBodyDefCanon.type = b2_kinematicBody;
 	mBodyDefCanon.position = b2Vec2(-95.f, 154.f);
 	mBodyCanon = mWorld.CreateBody(&mBodyDefCanon);
 	b2PolygonShape mCanonShape;
-	mCanonShape.SetAsBox(20.f, 20.f);
+	mCanonShape.SetAsBox(10.f, 10.f);
 	mFixtureDefCanon.shape = &mCanonShape;
 	mFixtureDefCanon.density = 0.3f;
 	mFixtureDefCanon.restitution = 0.3f;

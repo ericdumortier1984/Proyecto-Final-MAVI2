@@ -133,6 +133,7 @@
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Canon.cpp" />
+    <ClCompile Include="CircleOfFire.cpp" />
     <ClCompile Include="ContacListener.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Canon.h" />
+    <ClInclude Include="CircleOfFire.h" />
     <ClInclude Include="ContactListener.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Game.h" />

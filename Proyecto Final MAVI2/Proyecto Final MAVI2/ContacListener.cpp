@@ -28,27 +28,35 @@ void ContactListener::CheckAABB(b2Fixture* mFixtureA, b2Fixture* mFixtureB)
 		switch (mID2)
 		{
 		case 0:
-			//cout << "---------------Colision:  WIN OBJECT -> OTRA COLISION--------------\n";
+			//cout << "Colision:  WIN OBJECT -> OTRA COLISION << endl;"
 			break;
 
 		case 1:
-			//cout << "---------------Colision:  RAGDOLL -> WIN OBJECT--------------\n";
+			//cout << "Colision:  RAGDOLL -> WIN OBJECT << endl;";
 			mBodyB->GetUserData().pointer = (uintptr_t)0;
 			break;
 		case 2:
-			//cout << "---------------Colision:  OTRA COLISION -> WIN OBJECT--------------\n";
+			//cout << "Colision:  OTRA COLISION -> WIN OBJECT << endl;"
 			break;
-
+		case 3:
+			//cout << "Colision: CIRCLE OF FIRE -> WIN OBJECT << endl;"
 		default:
 			break;
 		}
 	}
 
-	// Añadir lógica específica para colisiones entre Box y Ragdoll
+	// Logica para colisiones entre Box y Ragdoll
 	if ((mID1 == 2 && mID2 == 0) || (mID1 == 0 && mID2 == 2)) 
 	{ 
 		cout << "[Colision: BOX -> RAGDOLL]" << endl; 
-		// Lógica adicional para la colisión Box -> Ragdoll 
+		// Logica adicional para la colision Box -> Ragdoll 
+		mGame->NextLevel();
+	}
+	// logica para colisiones entre Circle of Fire y Ragdoll
+	else if ((mID1 == 3 && mID2 == 0) || (mID1 == 0 && mID2 == 3))
+	{
+		cout << "[Colision: CIRCULO DE FUEGO -> RAGDOLL]" << endl; 
+		// logica adicional para la colision CircleOfFire -> Ragdoll
 		mGame->NextLevel();
 	}
 }

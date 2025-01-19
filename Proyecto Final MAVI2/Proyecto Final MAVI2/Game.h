@@ -2,6 +2,7 @@
 #include "Floor.h"
 #include "Ragdoll.h"
 #include "Box.h"
+#include "CircleOfFire.h"
 #include "Canon.h"
 #include "ContactListener.h"
 
@@ -35,6 +36,7 @@ private:
 	Canon* mCanon;
 	Ragdoll* mRagdoll;
 	Box* mBox;
+	CircleOfFire* mCircleOfFire;
 
 	ContactListener* mContactListener;
 
@@ -53,7 +55,6 @@ private:
 	TimeLimits mTimeLimits;
 
 	float mFps, mFrameTime, mActualTime;
-	bool winLevel;
 	bool nextLevel;
 	bool lostLevel;
 
@@ -61,7 +62,6 @@ private:
 	void SetImages();
 	void SetMenu();
 	void CheckCollisions();
-	void CheckWin();
 	void InitPhysics();
 	void UpdatePhysics();
 	void ProcessEvents();
