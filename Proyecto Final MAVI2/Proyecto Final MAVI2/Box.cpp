@@ -35,5 +35,5 @@ Box::~Box()
 void Box::Draw(RenderWindow& mWindow)
 {
 
-	mBoxAvatar->Draw(mWindow);
+	//mBoxAvatar->Draw(mWindow);
 }

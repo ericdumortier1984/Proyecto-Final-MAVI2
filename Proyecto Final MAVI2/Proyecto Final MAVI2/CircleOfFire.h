@@ -19,14 +19,25 @@ public:
 
 private:
 
-	Texture* mCircleOfFireTx;
-	Sprite* mCircleOfFireSp;
-	Avatar* mCircleOfFireAvatar;
+	//Circulos
+	Texture* mCircleOfFireTx[3];
+	Sprite* mCircleOfFireSp[3];
+	Avatar* mCircleOfFireAvatar[3];
 
-	b2Body* mBodyCircleOfFire;
-	b2BodyDef mBodyDefCircleOfFire;
-	b2Fixture* mFixtureCircleOfFire;
-	b2FixtureDef mFixtureDefCircleOfFire;
+	b2Body* mBodyCircleOfFire[3];
+	b2BodyDef mBodyDefCircleOfFire[3];
+	b2Fixture* mFixtureCircleOfFire[3];
+	b2FixtureDef mFixtureDefCircleOfFire[3];
+
+	//bases
+	Texture* mBaseTx[3];
+	Sprite* mBaseSp[3];
+	Avatar* mBaseAvatar[3];
+
+	b2Body* mBodyBase[3];
+	b2BodyDef mBodyDefBase[3];
+	b2Fixture* mFixtureBase[3];
+	b2FixtureDef mFixtureDefBase[3];
 
 	int mID;
 };

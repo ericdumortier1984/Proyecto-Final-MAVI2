@@ -57,6 +57,6 @@ void ContactListener::CheckAABB(b2Fixture* mFixtureA, b2Fixture* mFixtureB)
 	{
 		cout << "[Colision: CIRCULO DE FUEGO -> RAGDOLL]" << endl; 
 		// logica adicional para la colision CircleOfFire -> Ragdoll
-		mGame->NextLevel();
+		mGame->CircleOfFireCollision();
 	}
 }

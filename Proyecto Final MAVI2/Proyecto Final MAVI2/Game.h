@@ -13,6 +13,7 @@ public:
 	Game();
 	~Game();
 
+	void CircleOfFireCollision();
 	bool NextLevel();
 	void Run();
 
@@ -54,6 +55,7 @@ private:
 	enum TimeLimits { LEVEL1_TIME_LIMIT = 180, LEVEL2_TIME_LIMIT = 300, LEVEL3_TIME_LIMIT = 500 };
 	TimeLimits mTimeLimits;
 
+	int circleOfFireCounter;
 	float mFps, mFrameTime, mActualTime;
 	bool nextLevel;
 	bool lostLevel;

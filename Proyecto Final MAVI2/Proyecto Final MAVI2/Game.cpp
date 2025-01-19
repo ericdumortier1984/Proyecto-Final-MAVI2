@@ -1,9 +1,11 @@
 #include "Game.h"
 
-Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), nextLevel(false), lostLevel(false)
+const int CIRCLE_OF_FIRES_REQUIERED = 3;
+
+Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), nextLevel(false), lostLevel(false), circleOfFireCounter(0)
 {
 
-	mWindow = new RenderWindow(VideoMode(1280, 720), "GAME SFML MENU + LEVELS");
+	mWindow = new RenderWindow(VideoMode(1280, 720), "PROYECTO FINAL BOX2D");
 	mWindow->setFramerateLimit(mFps);  
 
 	mContactListener = new ContactListener(this); // Pasamos la instancia del juego
@@ -23,7 +25,7 @@ Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f
 	CheckCollisions();
 	mFloor = new Floor(*mWorld);
 	mCanon = new Canon(*mWorld);
-	mBox = new Box(*mWorld);
+	//mBox = new Box(*mWorld);
 }
 
 void Game::SetCamara(float mZoom)
@@ -180,18 +182,11 @@ void Game::Update()
 	{ 
 		cout << "Time up" << endl;
 		mState = EXIT;
-		//mState = LEVEL2; 
-		//cout << "level2" << endl; 
-		//nextLevel = true;
-		//mClock->restart(); 
 	} 
 	else if (mState == LEVEL2 && mClock->getElapsedTime().asSeconds() >= LEVEL2_TIME_LIMIT) 
 	{
 		cout << "Time up" << endl;
 		mState = EXIT;
-		//mState = LEVEL3; 
-		//cout << "level3" << endl; 
-		//mClock->restart();
 	} 
 	else if (mState == LEVEL3 && mClock->getElapsedTime().asSeconds() >= LEVEL3_TIME_LIMIT) 
 	{ 
@@ -238,6 +233,13 @@ void Game::RunLevel3()
 {
 
 
+}
+
+void Game::CircleOfFireCollision()
+{
+
+	circleOfFireCounter++;
+	if (circleOfFireCounter >= CIRCLE_OF_FIRES_REQUIERED) { NextLevel(); }
 }
 
 void Game::DrawMenu() 
