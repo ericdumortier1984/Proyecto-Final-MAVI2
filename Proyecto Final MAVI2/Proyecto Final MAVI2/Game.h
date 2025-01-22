@@ -29,6 +29,8 @@ private:
 	Text* mPlay;
 	Text* mExit;
 	Text* mNextLevel;
+	Text* mCountdownTimer;
+	Text* mText;
 
 	b2World* mWorld;
 

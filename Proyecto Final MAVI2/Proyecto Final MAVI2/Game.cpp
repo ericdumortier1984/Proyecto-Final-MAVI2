@@ -13,8 +13,18 @@ Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f
 	mClock = new Clock;
 	mInitTime = new Time;
 
-	mNextLevel = new Text("Next Level : Click to Start", *mFont, 40);
-	mNextLevel->setPosition(400, 300);
+	mFont = new Font;
+	if (!mFont->loadFromFile("Fonts/Bodoni.ttf")) { cout << "Error al cargar la fuente" << endl; }
+
+	mCountdownTimer = new Text("", *mFont, 18);	
+	mCountdownTimer->setPosition(-10.f, 25.f);
+	mCountdownTimer->setFillColor(Color::Yellow);
+	mCountdownTimer->setOutlineThickness(2);
+	mCountdownTimer->setOutlineColor(Color::Black);
+	cout << "[CRONOMETRO]" << endl;
+
+	mNextLevel = new Text("NEXT LEVEL: CLICK TO START", *mFont, 40);
+	mNextLevel->setPosition(mWindow->getSize().x / 2.f, mWindow->getSize().y / 2.f);
 
 	SetMenu();
 	SetImages();
@@ -41,15 +51,12 @@ void Game::SetMenu()
 	mBackMenuSp->setTexture(*mBackMenuTx);
 	mBackMenuSp->setScale(1280.f / mBackMenuTx->getSize().x, 720.f / mBackMenuTx->getSize().y);
 
-	mFont = new Font;
-	if (!mFont->loadFromFile("Fonts/Bodoni.ttf")) { cout << "Error al cargar la fuente" << endl; }
-
 	mTitle = new Text("Menu Principal", *mFont, 50);
-	mTitle->setPosition(270, 150);
+	mTitle->setPosition(270.f, 150.f);
 	mPlay = new Text("Play", *mFont, 40);
-	mPlay->setPosition(600, 300);
+	mPlay->setPosition(600.f, 300.f);
 	mExit = new Text("Exit", *mFont, 40);
-	mExit->setPosition(600, 400);
+	mExit->setPosition(600.f, 400.f);
 }
 
 void Game::SetImages()
@@ -162,16 +169,27 @@ void Game::ProcessEvents()
 void Game::Update()
 { 
 
-	if (mState == LEVEL1 && mClock->getElapsedTime().asSeconds() >= LEVEL1_TIME_LIMIT) 
+	float timeRemaining = 0.f;
+
+	if (mState == LEVEL1)
 	{ 
-		cout << "[TIME UP LEVEL 1]" << endl;
-		mState = EXIT;
+		//&& mClock->getElapsedTime().asSeconds() >= LEVEL1_TIME_LIMIT) 
+		timeRemaining = LEVEL1_TIME_LIMIT - mClock->getElapsedTime().asSeconds();
+		if (timeRemaining <= 0)
+		{
+			cout << "[TIME UP LEVEL 1]" << endl;
+			mState = EXIT;
+		}
 	} 
 	else if (mState == LEVEL2 && mClock->getElapsedTime().asSeconds() >= LEVEL2_TIME_LIMIT) 
 	{
 		cout << "[TIME UP LEVEL 2]" << endl;
 		mState = EXIT;
 	} 
+
+	int seconds = static_cast<int>(timeRemaining) % 60;
+	mCountdownTimer->setString("TIME: " + to_string(seconds));
+
 	if (nextLevel) // Si se ha solicitado el próximo nivel
 	{
 		cout << "[CHANGE TO NEXT LEVEL]" << endl;
@@ -189,6 +207,7 @@ void Game::RunLevel1()
 
 	mWindow->setMouseCursorVisible(false);
 	mWindow->draw(*mBackLv1Sp);
+	mWindow->draw(*mCountdownTimer);
 	mWindow->draw(*mCrosshairSp);
 	mFloor->Draw(*mWindow);
 	mCanon->Draw(*mWindow);
@@ -292,4 +311,5 @@ Game::~Game()
 	delete mBackLv1Sp;
 	delete mCrosshairSp;
 	delete mBackMenuSp;
+	delete mCountdownTimer;
 }

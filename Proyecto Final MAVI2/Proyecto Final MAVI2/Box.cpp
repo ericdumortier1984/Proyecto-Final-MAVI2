@@ -15,7 +15,7 @@ Box::Box(b2World& mWorld, b2Vec2 mPosition) : mID(2)
 	b2PolygonShape mBoxShape;
 	mBoxShape.SetAsBox(6.f, 6.f);
 	mFixtureDefBox.shape = &mBoxShape;
-	mFixtureDefBox.density = 0.1f;
+	mFixtureDefBox.density = 0.025f;
 	mFixtureDefBox.restitution = 0.3f;
 	mFixtureDefBox.friction = 0.3f;
 	mFixtureBox = mBodyBox->CreateFixture(&mFixtureDefBox);
