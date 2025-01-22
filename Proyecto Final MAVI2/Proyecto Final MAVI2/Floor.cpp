@@ -4,7 +4,7 @@
 Floor::Floor(b2World& mWorld)
 {
 	mFloorTx = new Texture;
-	if (!mFloorTx->loadFromFile("Assets/floor.png")) { cout << "Error al cargar la textura del piso" << endl; }
+	if (!mFloorTx->loadFromFile("Assets/Objects/floor.png")) { cout << "Error al cargar la textura del piso" << endl; }
 	mFloorSp = new Sprite;
 	mFloorSp->setTexture(*mFloorTx);
 

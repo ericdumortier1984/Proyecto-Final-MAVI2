@@ -12,7 +12,7 @@ public:
 
 	friend class Avatar;
 
-	CircleOfFire(b2World& mWorld);
+	CircleOfFire(b2World& mWorld, b2Vec2 mPosition);
 	~CircleOfFire();
 
 	void Draw(RenderWindow& mWindow);
@@ -20,24 +20,24 @@ public:
 private:
 
 	//Circulos
-	Texture* mCircleOfFireTx[3];
-	Sprite* mCircleOfFireSp[3];
-	Avatar* mCircleOfFireAvatar[3];
+	Texture* mCircleOfFireTx;
+	Sprite* mCircleOfFireSp;
+	Avatar* mCircleOfFireAvatar;
 
-	b2Body* mBodyCircleOfFire[3];
-	b2BodyDef mBodyDefCircleOfFire[3];
-	b2Fixture* mFixtureCircleOfFire[3];
-	b2FixtureDef mFixtureDefCircleOfFire[3];
+	b2Body* mBodyCircleOfFire;
+	b2BodyDef mBodyDefCircleOfFire;
+	b2Fixture* mFixtureCircleOfFire;
+	b2FixtureDef mFixtureDefCircleOfFire;
 
 	//bases
-	Texture* mBaseTx[3];
-	Sprite* mBaseSp[3];
-	Avatar* mBaseAvatar[3];
+	Texture* mBaseTx;
+	Sprite* mBaseSp;
+	Avatar* mBaseAvatar;
 
-	b2Body* mBodyBase[3];
-	b2BodyDef mBodyDefBase[3];
-	b2Fixture* mFixtureBase[3];
-	b2FixtureDef mFixtureDefBase[3];
+	b2Body* mBodyBase;
+	b2BodyDef mBodyDefBase;
+	b2Fixture* mFixtureBase;
+	b2FixtureDef mFixtureDefBase;
 
 	int mID;
 };

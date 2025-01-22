@@ -1,8 +1,6 @@
 #include "Game.h"
 
-const int CIRCLE_OF_FIRES_REQUIERED = 3;
-
-Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), nextLevel(false), lostLevel(false), circleOfFireCounter(0)
+Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), nextLevel(false), lostLevel(false)
 {
 
 	mWindow = new RenderWindow(VideoMode(1280, 720), "PROYECTO FINAL BOX2D");
@@ -15,17 +13,16 @@ Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f
 	mClock = new Clock;
 	mInitTime = new Time;
 
-	mNextLevel = new Text("siguiente nivel", *mFont, 40);
+	mNextLevel = new Text("Next Level : Click to Start", *mFont, 40);
 	mNextLevel->setPosition(400, 300);
-	nextLevel = false;
 
 	SetMenu();
 	SetImages();
 	InitPhysics();
 	CheckCollisions();
-	mFloor = new Floor(*mWorld);
+
 	mCanon = new Canon(*mWorld);
-	//mBox = new Box(*mWorld);
+	mFloor = new Floor(*mWorld);
 }
 
 void Game::SetCamara(float mZoom)
@@ -39,7 +36,7 @@ void Game::SetCamara(float mZoom)
 void Game::SetMenu()
 {
 	mBackMenuTx = new Texture;
-	if (!mBackMenuTx->loadFromFile("Assets/yellowBack.png")) { cout << "Error al cargar imagen de fondo en menu" << endl; }
+	if (!mBackMenuTx->loadFromFile("Assets/Backgrounds/yellowBack.png")) { cout << "Error al cargar imagen de fondo en menu" << endl; }
 	mBackMenuSp = new Sprite;
 	mBackMenuSp->setTexture(*mBackMenuTx);
 	mBackMenuSp->setScale(1280.f / mBackMenuTx->getSize().x, 720.f / mBackMenuTx->getSize().y);
@@ -61,8 +58,8 @@ void Game::SetImages()
 	mCrosshairTx = new Texture;
 	mBackLv1Tx = new Texture;
 	
-	if (!mCrosshairTx->loadFromFile("Assets/crosshair.png")) { cout << "Error al cargar la textura de crosshair" << endl; }
-	if (!mBackLv1Tx->loadFromFile("Assets/blueBack.png")) { cout << "Error al cargar la textura del fondo" << endl; }
+	if (!mCrosshairTx->loadFromFile("Assets/Objects/crosshair.png")) { cout << "Error al cargar la textura de crosshair" << endl; }
+	if (!mBackLv1Tx->loadFromFile("Assets/Backgrounds/blueBack.png")) { cout << "Error al cargar la textura del fondo" << endl; }
 
 	mCrosshairSp = new Sprite;
 	mBackLv1Sp = new Sprite;
@@ -96,12 +93,6 @@ void Game::UpdatePhysics()
 
 	mWorld->Step(mFrameTime, 8, 8);
 	mWorld->ClearForces();
-
-	// Cambiar de nivel si nextLevel es verdadero
-	if (nextLevel)
-	{
-		mState = LEVEL2;
-	}
 }
 
 void Game::Run() 
@@ -125,37 +116,30 @@ void Game::Run()
 
 void Game::ProcessEvents() 
 { 
- 
-	while (mWindow->pollEvent(*mEvent)) 
-	{ 
-		if (mEvent->type == Event::Closed) 
-		{ 
-			mWindow->close(); 
-		} 
+	while (mWindow->pollEvent(*mEvent))
+	{
+		if (mEvent->type == Event::Closed)
+		{
+			mWindow->close();
+		}
 
-		if (mEvent->type == Event::MouseButtonPressed) 
-		{ 
+		if (mEvent->type == Event::MouseButtonPressed)
+		{
 			if (mEvent->mouseButton.button == Mouse::Left)
-			{ 
-				if (nextLevel)
+			{
+				if (mState == MENU)
 				{
-					nextLevel = false;
-					mState = LEVEL2;
-				}
-
-				if (mState == MENU) 
-				{ 
-					if (mPlay->getGlobalBounds().contains(mEvent->mouseButton.x, mEvent->mouseButton.y)) 
-					{ 
-						mState = LEVEL1; 
-						cout << "level1" << endl; 
-						mClock->restart(); 
-					} 
-					else if (mExit->getGlobalBounds().contains(mEvent->mouseButton.x, mEvent->mouseButton.y)) 
+					if (mPlay->getGlobalBounds().contains(mEvent->mouseButton.x, mEvent->mouseButton.y))
 					{
-						mState = EXIT; 
+						mState = LEVEL1;
+						cout << "[LEVEL 1]" << endl;
+						mClock->restart();
 					}
-				} 
+					else if (mExit->getGlobalBounds().contains(mEvent->mouseButton.x, mEvent->mouseButton.y))
+					{
+						mState = EXIT;
+					}
+				}
 				else
 				{
 					Vector2f mPositionMouse;
@@ -163,8 +147,8 @@ void Game::ProcessEvents()
 					mCanon->Shoot(mWorld, mPositionMouse, *mWindow);
 					mRagdoll = mCanon->GetRagdoll();
 				}
-			} 
-		} 
+			}
+		}
 
 		if (mEvent->type == Event::MouseMoved)
 		{
@@ -172,7 +156,7 @@ void Game::ProcessEvents()
 			mPositionMouse = mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow));
 			mCanon->Update(mPositionMouse);
 		}
-	} 
+	}
 }
 
 void Game::Update()
@@ -180,26 +164,25 @@ void Game::Update()
 
 	if (mState == LEVEL1 && mClock->getElapsedTime().asSeconds() >= LEVEL1_TIME_LIMIT) 
 	{ 
-		cout << "Time up" << endl;
+		cout << "[TIME UP LEVEL 1]" << endl;
 		mState = EXIT;
 	} 
 	else if (mState == LEVEL2 && mClock->getElapsedTime().asSeconds() >= LEVEL2_TIME_LIMIT) 
 	{
-		cout << "Time up" << endl;
+		cout << "[TIME UP LEVEL 2]" << endl;
 		mState = EXIT;
 	} 
-	else if (mState == LEVEL3 && mClock->getElapsedTime().asSeconds() >= LEVEL3_TIME_LIMIT) 
-	{ 
-		cout << "Time Up" << endl;
-		mState = EXIT; 
-	} 
+	if (nextLevel) // Si se ha solicitado el próximo nivel
+	{
+		cout << "[CHANGE TO NEXT LEVEL]" << endl;
+		NextLevel(); // Cambiar el estado del nivel.
+		nextLevel = false; // Reinicia la variable.
+		mClock->restart(); // Reiniciar el tiempo para el nuevo nivel.
+	}
 }
 
-void Game::RunLevel()
+void Game::RunLevel1()
 {
-
-	mCircleOfFire = new CircleOfFire(*mWorld);
-	//mBox = new Box(*mWorld);
 
 	SetCamara(0.20f);
 	SetImages();
@@ -209,14 +192,13 @@ void Game::RunLevel()
 	mWindow->draw(*mCrosshairSp);
 	mFloor->Draw(*mWindow);
 	mCanon->Draw(*mWindow);
-	mCircleOfFire->Draw(*mWindow);
-	mBox->Draw(*mWindow);
-	if (mRagdoll != nullptr){ mRagdoll->Draw(*mWindow); }
+	for (int i = 0; i < 5; ++i) { if (mBox[i] != nullptr) mBox[i]->Draw(*mWindow); }
+	if (mCircleOfFire != nullptr) { mCircleOfFire->Draw(*mWindow); }
+	if (mRagdoll != nullptr) { mRagdoll->Draw(*mWindow); }
 }
 
 void Game::RunLevel2() 
 {
-	//mBox = new Box(*mWorld);
 
 	SetCamara(0.20f);
 	SetImages();
@@ -226,20 +208,7 @@ void Game::RunLevel2()
 	mWindow->draw(*mCrosshairSp);
 	mFloor->Draw(*mWindow);
 	mCanon->Draw(*mWindow);
-	//mBox->Draw(*mWindow);
 	if (mRagdoll != nullptr) { mRagdoll->Draw(*mWindow); }
-}
-void Game::RunLevel3() 
-{
-
-
-}
-
-void Game::CircleOfFireCollision()
-{
-
-	circleOfFireCounter++;
-	if (circleOfFireCounter >= CIRCLE_OF_FIRES_REQUIERED) { NextLevel(); }
 }
 
 void Game::DrawMenu() 
@@ -249,12 +218,23 @@ void Game::DrawMenu()
 	mWindow->draw(*mTitle);
 	mWindow->draw(*mPlay); 
 	mWindow->draw(*mExit); 
+	//cout << "[MAIN MENU]" << endl;
 }
 
 bool Game::NextLevel()
 {
 
-	return nextLevel = true;
+	if (mState == LEVEL1)
+	{
+		mState = LEVEL2;
+	}
+	else if (mState == LEVEL2)
+	{
+		mState = EXIT;
+		cout << "[EXIT GAME]" << endl;
+	}
+
+	return nextLevel;
 }
 
 void Game::Draw() 
@@ -267,21 +247,26 @@ void Game::Draw()
 	    DrawMenu();
 	    break; 
 	case LEVEL1: 
-	    RunLevel(); 
+		// Posicionar varias cajas
+		if (mBox[0] == nullptr) mBox[0] = new Box(*mWorld, { 70.f, 100.5f });
+		if (mBox[1] == nullptr) mBox[1] = new Box(*mWorld, { 70.f, 110.5f });
+		if (mBox[2] == nullptr) mBox[2] = new Box(*mWorld, { 70.f, 120.5f });
+		if (mBox[3] == nullptr) mBox[3] = new Box(*mWorld, { 70.f, 130.5f });
+		if (mBox[4] == nullptr) mBox[4] = new Box(*mWorld, { 70.f, 140.5f });
+		if (mCircleOfFire == nullptr) mCircleOfFire = new CircleOfFire(*mWorld, { 120.f, 140.5f });
+	    RunLevel1(); 
 		if (nextLevel)
 		{
 			mWindow->draw(*mNextLevel);
 		}
 	    break; 
 	case LEVEL2: 
+		if (mBox == nullptr) mBox[0] = new Box(*mWorld, { 110.f, 140.5f });
 	    RunLevel2();
 		if (nextLevel)
 		{
 			mWindow->draw(*mNextLevel);
 		}
-	    break; 
-	case LEVEL3: 
-	    RunLevel3(); 
 	    break; 
 	case EXIT:
 		mWindow->close(); 
@@ -307,5 +292,4 @@ Game::~Game()
 	delete mBackLv1Sp;
 	delete mCrosshairSp;
 	delete mBackMenuSp;
-
 }

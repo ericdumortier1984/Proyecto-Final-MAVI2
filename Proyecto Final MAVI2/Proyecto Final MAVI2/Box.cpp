@@ -1,19 +1,19 @@
 #include "Box.h"
 #include "Avatar.h"
 
-Box::Box(b2World& mWorld) : mID(2)
+Box::Box(b2World& mWorld, b2Vec2 mPosition) : mID(2)
 {
 
 	mBoxTx = new Texture;
-	if (!mBoxTx->loadFromFile("Assets/box.png")) { cout << "Error al cargar la textura de la caja" << endl; }
+	if (!mBoxTx->loadFromFile("Assets/Objects/box.png")) { cout << "Error al cargar la textura de la caja" << endl; }
 	mBoxSp = new Sprite;
 	mBoxSp->setTexture(*mBoxTx);
 
 	mBodyDefBox.type = b2_dynamicBody;
-	mBodyDefBox.position = b2Vec2(50.f, 100.f);
+	mBodyDefBox.position = mPosition;
 	mBodyBox = mWorld.CreateBody(&mBodyDefBox);
 	b2PolygonShape mBoxShape;
-	mBoxShape.SetAsBox(4.f, 4.f);
+	mBoxShape.SetAsBox(6.f, 6.f);
 	mFixtureDefBox.shape = &mBoxShape;
 	mFixtureDefBox.density = 0.1f;
 	mFixtureDefBox.restitution = 0.3f;
@@ -35,5 +35,5 @@ Box::~Box()
 void Box::Draw(RenderWindow& mWindow)
 {
 
-	//mBoxAvatar->Draw(mWindow);
+	mBoxAvatar->Draw(mWindow);
 }

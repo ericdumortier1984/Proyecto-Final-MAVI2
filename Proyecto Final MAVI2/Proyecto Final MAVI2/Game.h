@@ -13,7 +13,6 @@ public:
 	Game();
 	~Game();
 
-	void CircleOfFireCollision();
 	bool NextLevel();
 	void Run();
 
@@ -36,7 +35,7 @@ private:
 	Floor* mFloor;
 	Canon* mCanon;
 	Ragdoll* mRagdoll;
-	Box* mBox;
+	Box* mBox[10];
 	CircleOfFire* mCircleOfFire;
 
 	ContactListener* mContactListener;
@@ -50,12 +49,11 @@ private:
 	Sprite* mBackMenuSp;
 	Sprite* mBackLv1Sp;
 
-	enum GameState { MENU, LEVEL1, LEVEL2, LEVEL3, EXIT };
+	enum GameState { MENU, LEVEL1, LEVEL2, EXIT };
 	GameState mState;
-	enum TimeLimits { LEVEL1_TIME_LIMIT = 180, LEVEL2_TIME_LIMIT = 300, LEVEL3_TIME_LIMIT = 500 };
+	enum TimeLimits { LEVEL1_TIME_LIMIT = 180, LEVEL2_TIME_LIMIT = 300 };
 	TimeLimits mTimeLimits;
 
-	int circleOfFireCounter;
 	float mFps, mFrameTime, mActualTime;
 	bool nextLevel;
 	bool lostLevel;
@@ -68,10 +66,9 @@ private:
 	void UpdatePhysics();
 	void ProcessEvents();
 	void Update();
-	void DrawMenu();
-	void RunLevel();
+	void RunLevel1();
 	void RunLevel2();
-	void RunLevel3();
+	void DrawMenu();
 	void Draw();
 };
 

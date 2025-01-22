@@ -12,7 +12,7 @@ public:
 
 	friend class Avatar;
 
-	Box(b2World& mWorld);
+	Box(b2World& mWorld, b2Vec2 mPosition);
 	~Box();
 
 	void Draw(RenderWindow& mWindow);

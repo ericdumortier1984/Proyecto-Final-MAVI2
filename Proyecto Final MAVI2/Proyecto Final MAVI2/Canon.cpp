@@ -7,8 +7,8 @@ Canon::Canon(b2World& mWorld)
 
 	mCanonTx = new Texture;
 	mCanonBaseTx = new Texture;
-	if (!mCanonTx->loadFromFile("Assets/canonBody.png")) { cout << "Error al cargar la textura del canion" << endl; }
-	if (!mCanonBaseTx->loadFromFile("Assets/canonBase.png")) { cout << "Error al cargar la textura del pie de canion" << endl; }
+	if (!mCanonTx->loadFromFile("Assets/Objects/canonBody.png")) { cout << "Error al cargar la textura del canion" << endl; }
+	if (!mCanonBaseTx->loadFromFile("Assets/Objects/canonBase.png")) { cout << "Error al cargar la textura del pie de canion" << endl; }
 	mCanonSp = new Sprite;
 	mCanonBaseSp = new Sprite;
 	mCanonSp->setTexture(*mCanonTx);
