@@ -25,12 +25,11 @@ private:
 	Time* mInitTime;
 
 	Font* mFont;
-	Text* mTitle;
-	Text* mPlay;
-	Text* mExit;
 	Text* mNextLevel;
 	Text* mCountdownTimer;
 	Text* mText;
+	Text* mPlayText;
+	Text* mExitText;
 
 	b2World* mWorld;
 
@@ -45,10 +44,16 @@ private:
 	//SFML
 	Texture* mCrosshairTx;
 	Texture* mBackMenuTx;
+	Texture* mTitleTx;
+	Texture* mButtonPlayTx;
+	Texture* mButtonExitTx;
 	Texture* mBackLv1Tx;
 
 	Sprite* mCrosshairSp;
 	Sprite* mBackMenuSp;
+	Sprite* mTitleSp;
+	Sprite* mButtonPlaySp;
+	Sprite* mButtonExitSp;
 	Sprite* mBackLv1Sp;
 
 	enum GameState { MENU, LEVEL1, LEVEL2, EXIT };

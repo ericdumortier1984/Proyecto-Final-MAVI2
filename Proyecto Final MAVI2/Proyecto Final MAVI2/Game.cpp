@@ -14,16 +14,16 @@ Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f
 	mInitTime = new Time;
 
 	mFont = new Font;
-	if (!mFont->loadFromFile("Fonts/Bodoni.ttf")) { cout << "Error al cargar la fuente" << endl; }
+	if (!mFont->loadFromFile("Fonts/ARLRDBD.ttf")) { cout << "Error al cargar la fuente" << endl; }
 
 	mCountdownTimer = new Text("", *mFont, 18);	
 	mCountdownTimer->setPosition(-10.f, 25.f);
 	mCountdownTimer->setFillColor(Color::Yellow);
 	mCountdownTimer->setOutlineThickness(2);
 	mCountdownTimer->setOutlineColor(Color::Black);
-	cout << "[CRONOMETRO]" << endl;
+	// cout << "[CRONOMETRO]" << endl; //Debug
 
-	mNextLevel = new Text("NEXT LEVEL: CLICK TO START", *mFont, 40);
+	mNextLevel = new Text("NEXT LEVEL: CLICK TO START", *mFont, 80);
 	mNextLevel->setPosition(mWindow->getSize().x / 2.f, mWindow->getSize().y / 2.f);
 
 	SetMenu();
@@ -46,17 +46,49 @@ void Game::SetCamara(float mZoom)
 void Game::SetMenu()
 {
 	mBackMenuTx = new Texture;
-	if (!mBackMenuTx->loadFromFile("Assets/Backgrounds/yellowBack.png")) { cout << "Error al cargar imagen de fondo en menu" << endl; }
+	if (!mBackMenuTx->loadFromFile("Assets/Backgrounds/backgroundMain2.jpg")) { cout << "Error al cargar imagen de fondo en menu" << endl; }
 	mBackMenuSp = new Sprite;
 	mBackMenuSp->setTexture(*mBackMenuTx);
 	mBackMenuSp->setScale(1280.f / mBackMenuTx->getSize().x, 720.f / mBackMenuTx->getSize().y);
 
-	mTitle = new Text("Menu Principal", *mFont, 50);
-	mTitle->setPosition(270.f, 150.f);
-	mPlay = new Text("Play", *mFont, 40);
-	mPlay->setPosition(600.f, 300.f);
-	mExit = new Text("Exit", *mFont, 40);
-	mExit->setPosition(600.f, 400.f);
+	mButtonPlayTx = new Texture;
+	if (!mButtonPlayTx->loadFromFile("Assets/Backgrounds/playButton.png")) { cout << "Error al cargar imagen de boton play" << endl; }
+	mButtonPlaySp = new Sprite;
+	mButtonPlaySp->setTexture(*mButtonPlayTx);
+	mButtonPlaySp->setScale(0.20f, 0.20f);
+	mButtonPlaySp->setPosition(580.f, 380.f);
+
+	mPlayText = new Text;
+	mPlayText->setFont(*mFont);
+	mPlayText->setFillColor(Color::White);
+	mPlayText->setOutlineColor(Color::Black);
+	mPlayText->setOutlineThickness(5.f);
+	mPlayText->setCharacterSize(40);
+	mPlayText->setPosition(260.f, 420.f);
+	mPlayText->setString("PLAY BUTTON --");
+
+	mButtonExitTx = new Texture;
+	if (!mButtonExitTx->loadFromFile("Assets/Backgrounds/exitButton.png")) { cout << "Error al cargar imagen de boton exit" << endl; }
+	mButtonExitSp = new Sprite;
+	mButtonExitSp->setTexture(*mButtonExitTx);
+	mButtonExitSp->setScale(0.25f, 0.25f);
+	mButtonExitSp->setPosition(580.f, 550.f);
+
+	mExitText = new Text;
+	mExitText->setFont(*mFont);
+	mExitText->setFillColor(Color::White);
+	mExitText->setOutlineColor(Color::Black);
+	mExitText->setOutlineThickness(5.f);
+	mExitText->setCharacterSize(40);
+	mExitText->setPosition(270.f, 580.f);
+	mExitText->setString("EXIT BUTTON --");
+
+	mTitleTx = new Texture;
+	if (!mTitleTx->loadFromFile("Assets/Backgrounds/title.png")) { cout << "Error al cargar imagen de titulo" << endl; }
+	mTitleSp = new Sprite;
+	mTitleSp->setTexture(*mTitleTx);
+	mTitleSp->setScale(1.25f, 0.75f);
+	mTitleSp->setPosition(200.f, 0.f);
 }
 
 void Game::SetImages()
@@ -136,13 +168,13 @@ void Game::ProcessEvents()
 			{
 				if (mState == MENU)
 				{
-					if (mPlay->getGlobalBounds().contains(mEvent->mouseButton.x, mEvent->mouseButton.y))
+					if (mButtonPlaySp->getGlobalBounds().contains(mEvent->mouseButton.x, mEvent->mouseButton.y))
 					{
 						mState = LEVEL1;
 						cout << "[LEVEL 1]" << endl;
 						mClock->restart();
 					}
-					else if (mExit->getGlobalBounds().contains(mEvent->mouseButton.x, mEvent->mouseButton.y))
+					else if (mButtonExitSp->getGlobalBounds().contains(mEvent->mouseButton.x, mEvent->mouseButton.y))
 					{
 						mState = EXIT;
 					}
@@ -173,11 +205,11 @@ void Game::Update()
 
 	if (mState == LEVEL1)
 	{ 
-		//&& mClock->getElapsedTime().asSeconds() >= LEVEL1_TIME_LIMIT) 
 		timeRemaining = LEVEL1_TIME_LIMIT - mClock->getElapsedTime().asSeconds();
+		//cout << "[TIME REMAINING: ]" << timeRemaining << endl; // Debug
 		if (timeRemaining <= 0)
 		{
-			cout << "[TIME UP LEVEL 1]" << endl;
+			// cout << "[TIME UP LEVEL 1]" << endl; // Debug
 			mState = EXIT;
 		}
 	} 
@@ -187,7 +219,7 @@ void Game::Update()
 		mState = EXIT;
 	} 
 
-	int seconds = static_cast<int>(timeRemaining) % 60;
+	int seconds = static_cast<int>(timeRemaining) % 180;
 	mCountdownTimer->setString("TIME: " + to_string(seconds));
 
 	if (nextLevel) // Si se ha solicitado el próximo nivel
@@ -234,10 +266,12 @@ void Game::DrawMenu()
 { 
 
 	mWindow->draw(*mBackMenuSp);
-	mWindow->draw(*mTitle);
-	mWindow->draw(*mPlay); 
-	mWindow->draw(*mExit); 
-	//cout << "[MAIN MENU]" << endl;
+	mWindow->draw(*mTitleSp);
+	mWindow->draw(*mButtonPlaySp);
+	mWindow->draw(*mButtonExitSp);
+	mWindow->draw(*mPlayText);
+	mWindow->draw(*mExitText);
+	//cout << "[MAIN MENU]" << endl; // Debug
 }
 
 bool Game::NextLevel()
@@ -266,7 +300,6 @@ void Game::Draw()
 	    DrawMenu();
 	    break; 
 	case LEVEL1: 
-		// Posicionar varias cajas
 		if (mBox[0] == nullptr) mBox[0] = new Box(*mWorld, { 70.f, 100.5f });
 		if (mBox[1] == nullptr) mBox[1] = new Box(*mWorld, { 70.f, 110.5f });
 		if (mBox[2] == nullptr) mBox[2] = new Box(*mWorld, { 70.f, 120.5f });
@@ -300,9 +333,14 @@ Game::~Game()
 
 	delete mWindow;
 	delete mFont;
-	delete mTitle;
-	delete mPlay;
-	delete mExit;
+	delete mTitleTx;
+	delete mTitleSp;
+	delete mButtonPlayTx;
+	delete mButtonPlaySp;
+	delete mButtonExitTx;
+	delete mButtonExitSp;
+	delete mPlayText;
+	delete mExitText;
 	delete mNextLevel;
 	delete mClock;
 	delete mInitTime;
