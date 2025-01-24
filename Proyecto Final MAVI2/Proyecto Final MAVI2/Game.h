@@ -5,6 +5,7 @@
 #include "CircleOfFire.h"
 #include "Canon.h"
 #include "ContactListener.h"
+#include "UI.h"
 
 class Game 
 {
@@ -25,14 +26,11 @@ private:
 	Time* mInitTime;
 
 	Font* mFont;
-	Text* mNextLevel;
 	Text* mCountdownTimer;
-	Text* mText;
-	Text* mPlayText;
-	Text* mExitText;
 
 	b2World* mWorld;
 
+	UI* mUI;
 	Floor* mFloor;
 	Canon* mCanon;
 	Ragdoll* mRagdoll;
@@ -40,34 +38,16 @@ private:
 	CircleOfFire* mCircleOfFire;
 
 	ContactListener* mContactListener;
-
-	//SFML
-	Texture* mCrosshairTx;
-	Texture* mBackMenuTx;
-	Texture* mTitleTx;
-	Texture* mButtonPlayTx;
-	Texture* mButtonExitTx;
-	Texture* mBackLv1Tx;
-
-	Sprite* mCrosshairSp;
-	Sprite* mBackMenuSp;
-	Sprite* mTitleSp;
-	Sprite* mButtonPlaySp;
-	Sprite* mButtonExitSp;
-	Sprite* mBackLv1Sp;
-
-	enum GameState { MENU, LEVEL1, LEVEL2, EXIT };
+	
+	enum GameState { MENU, LEVEL1, NEWMENU, LEVEL2, EXIT };
 	GameState mState;
-	enum TimeLimits { LEVEL1_TIME_LIMIT = 180, LEVEL2_TIME_LIMIT = 300 };
+	enum TimeLimits { LEVEL1_TIME_LIMIT = 34, LEVEL2_TIME_LIMIT = 34 };
 	TimeLimits mTimeLimits;
 
 	float mFps, mFrameTime, mActualTime;
 	bool nextLevel;
-	bool lostLevel;
 
 	void SetCamara(float mZoom);
-	void SetImages();
-	void SetMenu();
 	void CheckCollisions();
 	void InitPhysics();
 	void UpdatePhysics();
@@ -75,7 +55,6 @@ private:
 	void Update();
 	void RunLevel1();
 	void RunLevel2();
-	void DrawMenu();
 	void Draw();
 };
 

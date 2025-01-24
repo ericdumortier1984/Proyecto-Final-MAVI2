@@ -77,32 +77,51 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 		mJointDefRagdoll[i].collideConnected = true;
 		mJointRagdoll[i] = (b2DistanceJoint*)mWorld.CreateJoint(&mJointDefRagdoll[i]);
 	}
+
 	
-	//Inicializa Ragdoll
+	mTextureHead = new Texture;
+	mTextureTorso = new Texture;
+	mTextureArmLeft = new Texture;
+	mTextureArmRight = new Texture;
+	mTextureLegLeft = new Texture;
+	mTextureLegRight = new Texture;
+
+	if (!mTextureHead->loadFromFile("Assets/Ragdoll/headClown.png") ||
+		!mTextureTorso->loadFromFile("Assets/Ragdoll/bodyClown.png") ||
+		!mTextureArmLeft->loadFromFile("Assets/Ragdoll/lHandClown.png") ||
+		!mTextureArmRight->loadFromFile("Assets/Ragdoll/rHandClown.png") ||
+		!mTextureLegLeft->loadFromFile("Assets/Ragdoll/lLegClown.png") ||
+		!mTextureLegRight->loadFromFile("Assets/Ragdoll/rLegClown.png"))
+	{
+
+		cout << "Error cargando las texturas" << endl;
+	}
+
+	// Inicializar las formas de SFML con texturas
 	for (int i = 0; i < 6; i++)
 	{
-		mSfmlRagdoll[i] = new RectangleShape;
-		switch (i) 
-		{ 
-		case 0: 
-			mSfmlRagdoll[i]->setFillColor(Color::Yellow); 
-		break;
-		case 1: 
-			mSfmlRagdoll[i]->setFillColor(Color::Red);
-		break; 
-		case 2: 
-			mSfmlRagdoll[i]->setFillColor(Color::Blue);
-		break; 
-		case 3: 
-			mSfmlRagdoll[i]->setFillColor(Color::Blue); 
-		break; 
-		case 4: 
-			mSfmlRagdoll[i]->setFillColor(Color::White); 
-		break; 
-		case 5: mSfmlRagdoll[i]->setFillColor(Color::White);
-        break; 
+		mSfmlRagdoll[i] = new Sprite;
+		switch (i)
+		{
+		case 0:
+			mSfmlRagdoll[i]->setTexture(*mTextureHead);
+			break;
+		case 1:
+			mSfmlRagdoll[i]->setTexture(*mTextureTorso);
+			break;
+		case 2:
+			mSfmlRagdoll[i]->setTexture(*mTextureArmLeft);
+			break;
+		case 3:
+			mSfmlRagdoll[i]->setTexture(*mTextureArmRight);
+			break;
+		case 4:
+			mSfmlRagdoll[i]->setTexture(*mTextureLegLeft);
+			break;
+		case 5:
+			mSfmlRagdoll[i]->setTexture(*mTextureLegRight);
+			break;
 		}
-		
 		mAvatarRagdoll[i] = new Avatar(mBodyRagdoll[i], mSfmlRagdoll[i]);
 	}
 }
@@ -145,4 +164,11 @@ Ragdoll::~Ragdoll()
 		delete mSfmlRagdoll[i];
 		delete mAvatarRagdoll[i];
 	}
+
+	delete mTextureHead;
+	delete mTextureTorso;
+	delete mTextureArmLeft;
+	delete mTextureArmRight;
+	delete mTextureLegLeft;
+	delete mTextureLegRight;
 }

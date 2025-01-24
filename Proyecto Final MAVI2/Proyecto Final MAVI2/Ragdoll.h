@@ -21,7 +21,13 @@ public:
 
 private:
 
-	RectangleShape* mSfmlRagdoll[6];
+	Texture* mTextureHead;
+	Texture* mTextureTorso;
+	Texture* mTextureArmLeft;
+	Texture* mTextureArmRight;
+	Texture* mTextureLegLeft;
+	Texture* mTextureLegRight;
+	Sprite* mSfmlRagdoll[6];
 	Avatar* mAvatarRagdoll[6];
 
 	//Ragdoll

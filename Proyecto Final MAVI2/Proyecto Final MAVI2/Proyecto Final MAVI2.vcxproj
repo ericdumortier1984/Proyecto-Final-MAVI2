@@ -139,6 +139,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Ragdoll.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Avatar.h" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ragdoll.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

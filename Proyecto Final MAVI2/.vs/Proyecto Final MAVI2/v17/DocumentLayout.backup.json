@@ -7,8 +7,16 @@
       "RelativeMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|solutionrelative:Proyecto Final MAVI2\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\UI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|solutionrelative:Proyecto Final MAVI2\\UI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|solutionrelative:Proyecto Final MAVI2\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\UI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{79B844B2-9E4B-4FEC-9219-4C603F22E15E}|Proyecto Final MAVI2\\Proyecto Final MAVI2.vcxproj|solutionrelative:Proyecto Final MAVI2\\UI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,17 +26,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UI.h",
+              "DocumentMoniker": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\UI.h",
+              "RelativeDocumentMoniker": "Proyecto Final MAVI2\\UI.h",
+              "ToolTip": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\UI.h",
+              "RelativeToolTip": "Proyecto Final MAVI2\\UI.h",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACwAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-24T10:39:20.554Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "UI.cpp",
+              "DocumentMoniker": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\UI.cpp",
+              "RelativeDocumentMoniker": "Proyecto Final MAVI2\\UI.cpp",
+              "ToolTip": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\UI.cpp",
+              "RelativeToolTip": "Proyecto Final MAVI2\\UI.cpp",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAI8AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-24T10:48:54.294Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Game.h",
               "DocumentMoniker": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Game.h",
               "RelativeDocumentMoniker": "Proyecto Final MAVI2\\Game.h",
               "ToolTip": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Game.h",
               "RelativeToolTip": "Proyecto Final MAVI2\\Game.h",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAAB8AAAARAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAADgAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-01-17T09:52:57.397Z",
               "EditorCaption": ""
@@ -41,7 +75,7 @@
               "RelativeDocumentMoniker": "Proyecto Final MAVI2\\Game.cpp",
               "ToolTip": "C:\\Users\\NoxiePC\\Documents\\Proyecto-Final-MAVI2\\Proyecto Final MAVI2\\Proyecto Final MAVI2\\Game.cpp",
               "RelativeToolTip": "Proyecto Final MAVI2\\Game.cpp",
-              "ViewState": "AgIAADoAAAAAAAAAAAAAAD4AAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAPkAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-01-17T09:52:59.197Z",
               "EditorCaption": ""
