@@ -96,7 +96,7 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 
 		cout << "Error cargando las texturas" << endl;
 	}
-
+	
 	// Inicializar las formas de SFML con texturas
 	for (int i = 0; i < 6; i++)
 	{
@@ -124,6 +124,37 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 		}
 		mAvatarRagdoll[i] = new Avatar(mBodyRagdoll[i], mSfmlRagdoll[i]);
 	}
+
+	/*
+	// Inicializar las formas de SFML con RectangleShape y colores
+	for (int i = 0; i < 6; i++)
+	{
+		mSfmlRagdoll[i] = new RectangleShape;
+
+		switch (i)
+		{
+		case 0:
+			mSfmlRagdoll[i]->setFillColor(Color::Red);
+			break;
+		case 1:
+			mSfmlRagdoll[i]->setFillColor(Color::Green);
+			break;
+		case 2:
+			mSfmlRagdoll[i]->setFillColor(Color::Blue);
+			break;
+		case 3:
+			mSfmlRagdoll[i]->setFillColor(Color::Yellow);
+			break;
+		case 4:
+			mSfmlRagdoll[i]->setFillColor(Color::Cyan);
+			break;
+		case 5:
+			mSfmlRagdoll[i]->setFillColor(Color::Magenta);
+			break;
+		}
+
+		mAvatarRagdoll[i] = new Avatar(mBodyRagdoll[i], mSfmlRagdoll[i]);
+	}*/
 }
 
 int Ragdoll::GetUserData()

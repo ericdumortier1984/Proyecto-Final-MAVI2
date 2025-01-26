@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), nextLevel(false)
+Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), mNextLevel(false), mRagdollCount(0)
 {
 
 	mWindow = new RenderWindow(VideoMode(1280, 720), "PROYECTO FINAL BOX2D");
@@ -24,7 +24,14 @@ Game::Game() : mState(MENU), mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f
 	mCountdownTimer->setFillColor(Color::White);
 	mCountdownTimer->setOutlineThickness(1);
 	mCountdownTimer->setOutlineColor(Color::Black);
-	cout << "[CRONOMETRO]" << endl; //Debug
+
+	mRagdollCounter = new Text;
+	mRagdollCounter->setFont(*mFont);
+	mRagdollCounter->setCharacterSize(12);
+	mRagdollCounter->setPosition(-80.f, 28.f);
+	mRagdollCounter->setFillColor(Color::White);
+	mRagdollCounter->setOutlineThickness(1);
+	mRagdollCounter->setOutlineColor(Color::Black);
 
 	InitPhysics();
 	CheckCollisions();
@@ -58,6 +65,12 @@ void Game::UpdatePhysics()
 
 	mWorld->Step(mFrameTime, 8, 8);
 	mWorld->ClearForces();
+
+	for (b2Body* body : mBodiesToDestroy) //Destruir los cuerpos pendientes después del paso de simulación
+	{
+		mWorld->DestroyBody(body);
+	}
+	mBodiesToDestroy.clear();
 }
 
 void Game::Run() 
@@ -69,11 +82,9 @@ void Game::Run()
 
 		if (mActualTime + mFrameTime < mInitTime->asSeconds())
 		{
-			mActualTime = mInitTime->asSeconds();
 			ProcessEvents();
 			Update();
 			UpdatePhysics();
-			CheckCollisions();
 			Draw();
 		}
 	} 
@@ -97,7 +108,6 @@ void Game::ProcessEvents()
 					if (mUI->IsPlayButtonClicked(mEvent->mouseButton.x, mEvent->mouseButton.y))
 					{
 						mState = LEVEL1;
-						//mState = NEWMENU;
 						cout << "[LEVEL 1]" << endl;
 						mClock->restart();
 					}
@@ -106,21 +116,14 @@ void Game::ProcessEvents()
 						mState = EXIT;
 					}
 				}
-				if (mState == NEWMENU)
-				{
-					if (mUI->IsNextLevelButtonClicked(mEvent->mouseButton.x, mEvent->mouseButton.y))
-					{
-						mState = LEVEL2;
-						cout << "[LEVEL 2]" << endl;
-						mClock->restart();
-					}
-				}
 				else
 				{
 					Vector2f mPositionMouse;
 					mPositionMouse = mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow));
 					mCanon->Shoot(mWorld, mPositionMouse, *mWindow);
 					mRagdoll = mCanon->GetRagdoll();
+					mRagdollCount++;
+					mRagdollCounter->setString("Ragdolls: " + to_string(mRagdollCount));
 				}
 			}
 		}
@@ -141,108 +144,236 @@ void Game::Update()
 
 	if (mState == LEVEL1)
 	{ 
-		timeRemaining = LEVEL1_TIME_LIMIT - mClock->getElapsedTime().asSeconds();
+		timeRemaining = static_cast<int>(LEVEL1_TIME_LIMIT) - mClock->getElapsedTime().asSeconds();
+		//cout << "[CRONOMETRO LEVEL 1]" << endl; //Debug
 		//cout << "[TIME REMAINING: ]" << timeRemaining << endl; // Debug
 		if (timeRemaining <= 0)
 		{
+			if (mState == PAUSE) return;
 			cout << "[TIME UP LEVEL 1]" << endl; // Debug
 			mState = EXIT;
 		}
 	} 
-	else if (mState == LEVEL2 && mClock->getElapsedTime().asSeconds() >= LEVEL2_TIME_LIMIT) 
+	else if (mState == LEVEL2)
 	{
+		timeRemaining = static_cast<int>(LEVEL2_TIME_LIMIT) - mClock->getElapsedTime().asSeconds();
 		if (timeRemaining <= 0)
 		{
-			cout << "[TIME UP LEVEL 2]" << endl; // Debug
+			cout << "[TIME UP LEVEL 2]" << endl;
 			mState = EXIT;
 		}
-	} 
+	}
+	else if (mState == LEVEL3)
+	{
+		timeRemaining = static_cast<int>(LEVEL3_TIME_LIMIT) - mClock->getElapsedTime().asSeconds();
+		if (timeRemaining <= 0)
+		{
+			cout << "[TIME UP LEVEL 3]" << endl;
+			mState = EXIT;
+		}
+	}
 
 	int seconds = static_cast<int>(timeRemaining) % 34;
 	mCountdownTimer->setString("TIME: " + to_string(seconds));
 }
 
-void Game::RunLevel1()
+void Game::RunLevel(GameState mState)
 {
+	switch (mState)
+	{
+	case LEVEL1:
+		SetCamara(0.20f);
+		mWindow->setMouseCursorVisible(false);
+		mUI->SetImages(*mWindow);
 
-	SetCamara(0.20f);
-	mWindow->setMouseCursorVisible(false);
-	mUI->SetImages(*mWindow);
+		mUI->DrawImages(*mWindow);
+		mFloor->Draw(*mWindow);
+		mCanon->Draw(*mWindow);
+		for (int i = 0; i < 5; ++i) { if (mBox[i] != nullptr) mBox[i]->Draw(*mWindow); }
+		if (mCircleOfFire != nullptr) { mCircleOfFire->Draw(*mWindow); }
+		if (mRagdoll != nullptr) { mRagdoll->Draw(*mWindow); }
+		mWindow->draw(*mCountdownTimer);
+		mWindow->draw(*mRagdollCounter);
+		break;
 
-	mUI->DrawImages(*mWindow);
-	mWindow->draw(*mCountdownTimer);
-	mFloor->Draw(*mWindow);
-	mCanon->Draw(*mWindow);
-	for (int i = 0; i < 5; ++i) { if (mBox[i] != nullptr) mBox[i]->Draw(*mWindow); }
-	if (mCircleOfFire != nullptr) { mCircleOfFire->Draw(*mWindow); }
-	if (mRagdoll != nullptr) { mRagdoll->Draw(*mWindow); }
-}
+	case LEVEL2:
+		SetCamara(0.20f);
+		mWindow->setMouseCursorVisible(false);
+		mUI->SetImages(*mWindow);
 
-void Game::RunLevel2() 
-{
+		mUI->DrawImages(*mWindow);
+		mFloor->Draw(*mWindow);
+		mCanon->Draw(*mWindow);
 
-	SetCamara(0.20f);
-	mWindow->setMouseCursorVisible(false);
-	mUI->SetImages(*mWindow);
+		for (int i = 0; i < 5; ++i) { if (mBox[i] != nullptr) mBox[i]->Draw(*mWindow); }
+		if (mSaw != nullptr) { mSaw->Draw(*mWindow); }
+		if (mRagdoll != nullptr) { mRagdoll->Draw(*mWindow); }
+		mWindow->draw(*mCountdownTimer);
+		mWindow->draw(*mRagdollCounter);
+		break;
 
-	mUI->DrawImages(*mWindow);
-	mFloor->Draw(*mWindow);
-	mCanon->Draw(*mWindow);
-	if (mRagdoll != nullptr) { mRagdoll->Draw(*mWindow); }
+	case LEVEL3:
+		SetCamara(0.20f);
+		mWindow->setMouseCursorVisible(false);
+		mUI->SetImages(*mWindow);
+
+		mUI->DrawImages(*mWindow);
+		mFloor->Draw(*mWindow);
+		mCanon->Draw(*mWindow);
+		
+		for (int i = 0; i < 5; ++i) { if (mBox[i] != nullptr) mBox[i]->Draw(*mWindow); }
+		if (mNewBox != nullptr) { mNewBox->Draw(*mWindow); }
+		if (mRagdoll != nullptr) { mRagdoll->Draw(*mWindow); }
+		mWindow->draw(*mCountdownTimer);
+		mWindow->draw(*mRagdollCounter);
+		break;
+
+	default:
+		break;
+	}
 }
 
 bool Game::NextLevel()
 {
-
+	
 	if (mState = LEVEL1)
 	{
-		mState = NEWMENU;
-	}
-	else if (mState = NEWMENU)
-	{
+		ClearLevel(); 
 		mState = LEVEL2;
-	}
-	else if (mState = LEVEL2)
-	{
-		mState = MENU;
-	}
-	else if (mState = MENU)
-	{
-		mState = EXIT;
-		cout << "[EXIT GAME]" << endl;
+		cout << "[LEVEL 2]" << endl;
+		mRagdollCount = 0;
+		mClock->restart();
+
+		return mNextLevel = true;
 	}
 
-	return nextLevel;
+	return false;
+}
+
+bool Game::NextLevel2()
+{
+
+	if (mState = LEVEL2)
+	{
+		ClearLevel(); 
+		mState = LEVEL3;
+		cout << "[LEVEL 3]" << endl;
+		mRagdollCount = 0;
+		mClock->restart();
+
+		return true;
+	}
+
+	return false;
+}
+
+bool Game::NextLevel3()
+{
+
+	if (mState = LEVEL3)
+	{
+		ClearLevel(); 
+		mState = EXIT;
+		mRagdollCount = 0;
+		mClock->restart();
+		cout << "[EXIT GAME]" << endl;
+		return true;
+	}
+
+	return false;
+}
+
+void Game::ClearLevel()
+{
+	// Eliminar los Box
+	for (int i = 0; i < 10; ++i)
+	{
+		if (mBox[i] != nullptr)
+		{
+			mBodiesToDestroy.push_back(mBox[i]->GetBody());
+			delete mBox[i];
+			mBox[i] = nullptr;
+		}
+	}
+
+	// Eliminar el Ragdoll
+	if (mRagdoll != nullptr)
+	{
+		delete mRagdoll;
+		mRagdoll = nullptr;
+	}
+
+	// Eliminar el CircleOfFire
+	if (mCircleOfFire != nullptr)
+	{
+		mBodiesToDestroy.push_back(mCircleOfFire->GetBody());
+		delete mCircleOfFire;
+		mCircleOfFire = nullptr;
+	}
+
+	// Eliminar el newBox
+	if (mNewBox != nullptr)
+	{
+		mBodiesToDestroy.push_back(mNewBox->GetBody());
+		delete mNewBox;
+		mNewBox = nullptr;
+	}
+
+	// Eliminar el Saw
+	if (mSaw != nullptr)
+	{
+		mBodiesToDestroy.push_back(mSaw->GetBody());
+		delete mSaw;
+		mSaw = nullptr;
+	}
 }
 
 void Game::Draw() 
 { 
 	mWindow->clear(); 
 
-	switch (mState) 
-	{ 
-	case MENU: 
-	    mUI->DrawMenu(*mWindow);
-	    break; 
-	case LEVEL1: 
+	switch (mState)
+	{
+	case MENU:
+		mUI->DrawMenu(*mWindow);
+		break;
+
+	case LEVEL1:
+		mWindow->clear(Color(173, 216, 230)); //  LightBlue
 		if (mBox[0] == nullptr) mBox[0] = new Box(*mWorld, { 70.f, 100.5f });
 		if (mBox[1] == nullptr) mBox[1] = new Box(*mWorld, { 70.f, 110.5f });
 		if (mBox[2] == nullptr) mBox[2] = new Box(*mWorld, { 70.f, 120.5f });
 		if (mBox[3] == nullptr) mBox[3] = new Box(*mWorld, { 70.f, 130.5f });
 		if (mBox[4] == nullptr) mBox[4] = new Box(*mWorld, { 70.f, 140.5f });
 		if (mCircleOfFire == nullptr) mCircleOfFire = new CircleOfFire(*mWorld, { 120.f, 140.5f });
-	    RunLevel1(); 
-	    break; 
-	case NEWMENU:
-		mUI->DrawNewMenu(*mWindow);
+		RunLevel(LEVEL1);
 		break;
-	case LEVEL2: 
-		if (mBox == nullptr) mBox[0] = new Box(*mWorld, { 110.f, 140.5f });
-	    RunLevel2();
-	    break; 
+
+	case LEVEL2:
+		mWindow->clear(Color(255, 182, 193)); // LightPink
+		if (mBox[0] == nullptr) mBox[0] = new Box(*mWorld, { 50.f, 100.5f });
+		if (mBox[1] == nullptr) mBox[1] = new Box(*mWorld, { 50.f, 110.5f });
+		if (mBox[2] == nullptr) mBox[2] = new Box(*mWorld, { 50.f, 120.5f });
+		if (mBox[3] == nullptr) mBox[3] = new Box(*mWorld, { 50.f, 130.5f });
+		if (mBox[4] == nullptr) mBox[4] = new Box(*mWorld, { 50.f, 140.5f });
+		if (mSaw == nullptr) mSaw = new Saw(*mWorld, { -50.f, 90.5f });
+		RunLevel(LEVEL2);
+		break;
+
+	case LEVEL3:
+		mWindow->clear(Color(255, 218, 185)); // PeachPuff
+		if (mBox[0] == nullptr) mBox[0] = new Box(*mWorld, { 30.f, 100.5f });
+		if (mBox[1] == nullptr) mBox[1] = new Box(*mWorld, { 30.f, 110.5f });
+		if (mBox[2] == nullptr) mBox[2] = new Box(*mWorld, { 30.f, 120.5f });
+		if (mBox[3] == nullptr) mBox[3] = new Box(*mWorld, { 30.f, 130.5f });
+		if (mBox[4] == nullptr) mBox[4] = new Box(*mWorld, { 30.f, 140.5f });
+		if (mNewBox == nullptr) mNewBox = new NewBox(*mWorld, { 40.f, 100.5f });
+		RunLevel(LEVEL3);
+		break;
+
 	case EXIT:
-		mWindow->close(); 
-	    break; 
+		mWindow->close();
+		break;
 	}
 
 	mWindow->display();

@@ -40,14 +40,13 @@ CircleOfFire::CircleOfFire(b2World& mWorld, b2Vec2 mPosition) : mID(3)
 
 CircleOfFire::~CircleOfFire()
 {
-
+	
 	delete mCircleOfFireTx;
 	delete mCircleOfFireSp;
 	delete mCircleOfFireAvatar;
 	delete mBaseTx;
 	delete mBaseSp;
 	delete mBaseAvatar;
-
 }
 
 void CircleOfFire::Draw(RenderWindow& mWindow)

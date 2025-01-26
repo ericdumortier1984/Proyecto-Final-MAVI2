@@ -15,6 +15,7 @@ public:
 	CircleOfFire(b2World& mWorld, b2Vec2 mPosition);
 	~CircleOfFire();
 
+	b2Body* GetBody() const { return mBodyCircleOfFire; }
 	void Draw(RenderWindow& mWindow);
 
 private:

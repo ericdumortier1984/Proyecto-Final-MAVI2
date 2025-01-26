@@ -16,6 +16,7 @@ public:
 	~Box();
 
 	void Draw(RenderWindow& mWindow);
+	b2Body* GetBody() const { return mBodyBox; }
 
 private:
 
@@ -23,7 +24,7 @@ private:
 	Sprite* mBoxSp;
 	Avatar* mBoxAvatar;
 
-	b2Body* mBodyBox;
+	b2Body* mBodyBox = nullptr;
 	b2BodyDef mBodyDefBox;
 	b2Fixture* mFixtureBox;
 	b2FixtureDef mFixtureDefBox;

@@ -2,6 +2,8 @@
 #include "Floor.h"
 #include "Ragdoll.h"
 #include "Box.h"
+#include "NewBox.h"
+#include "Saw.h"
 #include "CircleOfFire.h"
 #include "Canon.h"
 #include "ContactListener.h"
@@ -15,6 +17,8 @@ public:
 	~Game();
 
 	bool NextLevel();
+	bool NextLevel2();
+	bool NextLevel3();
 	void Run();
 
 private:
@@ -27,6 +31,7 @@ private:
 
 	Font* mFont;
 	Text* mCountdownTimer;
+	Text* mRagdollCounter;
 
 	b2World* mWorld;
 
@@ -36,16 +41,20 @@ private:
 	Ragdoll* mRagdoll;
 	Box* mBox[10];
 	CircleOfFire* mCircleOfFire;
+	NewBox* mNewBox;
+	Saw* mSaw;
+
 
 	ContactListener* mContactListener;
 	
-	enum GameState { MENU, LEVEL1, NEWMENU, LEVEL2, EXIT };
+	enum GameState { MENU, INFORMATION, LEVEL1, LEVEL2, LEVEL3, PAUSE, EXIT };
 	GameState mState;
-	enum TimeLimits { LEVEL1_TIME_LIMIT = 34, LEVEL2_TIME_LIMIT = 34 };
+	enum TimeLimits { LEVEL1_TIME_LIMIT = 34, LEVEL2_TIME_LIMIT = 34, LEVEL3_TIME_LIMIT = 34};
 	TimeLimits mTimeLimits;
 
-	float mFps, mFrameTime, mActualTime;
-	bool nextLevel;
+	float mFps, mFrameTime, mActualTime, mElapsedTime;
+	bool  mNextLevel;
+	int   mRagdollCount;
 
 	void SetCamara(float mZoom);
 	void CheckCollisions();
@@ -53,8 +62,10 @@ private:
 	void UpdatePhysics();
 	void ProcessEvents();
 	void Update();
-	void RunLevel1();
-	void RunLevel2();
+	void RunLevel(GameState mState);
+	void ClearLevel();
 	void Draw();
+
+	vector<b2Body*> mBodiesToDestroy; // Copilot IA
 };
 

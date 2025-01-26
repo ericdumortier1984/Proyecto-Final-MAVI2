@@ -2,6 +2,8 @@
 #include <box2d/box2d.h>
 #include "Ragdoll.h"
 #include "Box.h"
+#include "NewBox.h"
+#include "Saw.h"
 #include "CircleOfFire.h"
 
 class ContactListener : public b2ContactListener

@@ -44,7 +44,13 @@ void ContactListener::CheckAABB(b2Fixture* mFixtureA, b2Fixture* mFixtureB)
 			break;
 		}
 	}
-
+	// logica para colisiones entre ... y Ragdoll
+	else if ((mID1 == 1 && mID2 == 0) || (mID1 == 0 && mID2 == 1))
+	{
+		cout << "[Colision: ... -> RAGDOLL]" << endl;
+		// logica adicional para la colision ... -> Ragdoll
+		mGame->NextLevel3();
+	}
 	// Logica para colisiones entre Box y Ragdoll
 	if ((mID1 == 2 && mID2 == 0) || (mID1 == 0 && mID2 == 2)) 
 	{ 
@@ -58,4 +64,12 @@ void ContactListener::CheckAABB(b2Fixture* mFixtureA, b2Fixture* mFixtureB)
 		// logica adicional para la colision CircleOfFire -> Ragdoll
 		mGame->NextLevel();
 	}
+	// logica para colisiones entre Circle of Fire y Ragdoll
+	else if ((mID1 == 4 && mID2 == 0) || (mID1 == 0 && mID2 == 4))
+	{
+		cout << "[Colision: SIERRA -> RAGDOLL]" << endl;
+		// logica adicional para la colision Sierra -> Ragdoll
+		mGame->NextLevel2();
+	}
+	
 }
