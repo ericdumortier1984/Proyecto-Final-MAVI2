@@ -12,7 +12,7 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 		mBodyDefRagdoll[i].type = b2_dynamicBody;
 	}
 
-	mBodyDefRagdoll[0].position = b2Vec2(mPositionRagdoll.x, mPositionRagdoll.y);                 //Cabeza
+	mBodyDefRagdoll[0].position = b2Vec2(mPositionRagdoll.x, mPositionRagdoll.y - 2.8f);          //Cabeza
 	mBodyDefRagdoll[1].position = b2Vec2(mPositionRagdoll.x - 0.6f, mPositionRagdoll.y + 2.7f);   //Torso
 	mBodyDefRagdoll[2].position = b2Vec2(mPositionRagdoll.x + 2.79f, mPositionRagdoll.y + 4.2f);  //Brazo izquierdo
 	mBodyDefRagdoll[3].position = b2Vec2(mPositionRagdoll.x - 2.41f, mPositionRagdoll.y + 4.2f);  //Brazo derecho
@@ -26,7 +26,7 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 	}
 	
 	b2PolygonShape mShapeRagdoll[6];
-	mShapeRagdoll[0].SetAsBox(0.7f, 0.7f);  //Cabeza
+	mShapeRagdoll[0].SetAsBox(2.0f, 2.0f);  //Cabeza
 	mShapeRagdoll[1].SetAsBox(1.5f, 3.5f);  //Torso
 	mShapeRagdoll[2].SetAsBox(0.5f, 2.2f);  //Brazo izquierdo
 	mShapeRagdoll[3].SetAsBox(0.5f, 2.2f);  //Brazo derecho
@@ -47,8 +47,8 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 	//resortes
 	//cabeza-pecho
 	mJointDefRagdoll[0].Initialize(mBodyRagdoll[0], mBodyRagdoll[1],                                    //primero y segundo
-		b2Vec2(mBodyRagdoll[0]->GetPosition().x + 1.0f, mBodyRagdoll[0]->GetPosition().y + 0.3f),       //ancho primer cuerpo 
-		b2Vec2(mBodyRagdoll[1]->GetPosition().x + 0.9f, mBodyRagdoll[1]->GetPosition().y - 0.4f));      //ancho segundo cuerpo 
+		b2Vec2(mBodyRagdoll[0]->GetPosition().x, mBodyRagdoll[0]->GetPosition().y),       //ancho primer cuerpo + 1.0 + 0.3
+		b2Vec2(mBodyRagdoll[1]->GetPosition().x, mBodyRagdoll[1]->GetPosition().y));      //ancho segundo cuerpo + 0.9 - 0.4
 
 	//pecho-brazo izquierdo
 	mJointDefRagdoll[1].Initialize(mBodyRagdoll[1], mBodyRagdoll[2],                                    //primero y segundo 
@@ -124,37 +124,6 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 		}
 		mAvatarRagdoll[i] = new Avatar(mBodyRagdoll[i], mSfmlRagdoll[i]);
 	}
-
-	/*
-	// Inicializar las formas de SFML con RectangleShape y colores
-	for (int i = 0; i < 6; i++)
-	{
-		mSfmlRagdoll[i] = new RectangleShape;
-
-		switch (i)
-		{
-		case 0:
-			mSfmlRagdoll[i]->setFillColor(Color::Red);
-			break;
-		case 1:
-			mSfmlRagdoll[i]->setFillColor(Color::Green);
-			break;
-		case 2:
-			mSfmlRagdoll[i]->setFillColor(Color::Blue);
-			break;
-		case 3:
-			mSfmlRagdoll[i]->setFillColor(Color::Yellow);
-			break;
-		case 4:
-			mSfmlRagdoll[i]->setFillColor(Color::Cyan);
-			break;
-		case 5:
-			mSfmlRagdoll[i]->setFillColor(Color::Magenta);
-			break;
-		}
-
-		mAvatarRagdoll[i] = new Avatar(mBodyRagdoll[i], mSfmlRagdoll[i]);
-	}*/
 }
 
 int Ragdoll::GetUserData()

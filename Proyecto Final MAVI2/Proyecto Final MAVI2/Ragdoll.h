@@ -27,7 +27,6 @@ private:
 	Texture* mTextureArmRight;
 	Texture* mTextureLegLeft;
 	Texture* mTextureLegRight;
-	//RectangleShape* mSfmlRagdoll[6];
 	Sprite* mSfmlRagdoll[6];
 	Avatar* mAvatarRagdoll[6];
 

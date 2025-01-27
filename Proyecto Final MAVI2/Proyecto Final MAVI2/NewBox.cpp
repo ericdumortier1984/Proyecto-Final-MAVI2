@@ -5,7 +5,7 @@ NewBox::NewBox(b2World& mWorld, b2Vec2 mPosition) : mID(1)
 {
 
 	mNewBoxTx = new Texture;
-	if (!mNewBoxTx->loadFromFile("Assets/Objects/idle.png")) { cout << "Error al cargar la textura de la caja" << endl; }
+	if (!mNewBoxTx->loadFromFile("Assets/Objects/baloons.png")) { cout << "Error al cargar la textura de la caja" << endl; }
 	mNewBoxSp = new Sprite;
 	mNewBoxSp->setTexture(*mNewBoxTx);
 

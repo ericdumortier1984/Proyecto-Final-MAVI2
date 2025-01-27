@@ -139,6 +139,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="NewBox.cpp" />
+    <ClCompile Include="Pendulum.cpp" />
     <ClCompile Include="Ragdoll.cpp" />
     <ClCompile Include="Saw.cpp" />
     <ClCompile Include="UI.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="NewBox.h" />
+    <ClInclude Include="Pendulum.h" />
     <ClInclude Include="Ragdoll.h" />
     <ClInclude Include="Saw.h" />
     <ClInclude Include="UI.h" />

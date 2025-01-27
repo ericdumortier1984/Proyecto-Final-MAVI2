@@ -64,12 +64,17 @@ void ContactListener::CheckAABB(b2Fixture* mFixtureA, b2Fixture* mFixtureB)
 		// logica adicional para la colision CircleOfFire -> Ragdoll
 		mGame->NextLevel();
 	}
-	// logica para colisiones entre Circle of Fire y Ragdoll
+	// logica para colisiones entre Saw y Ragdoll
 	else if ((mID1 == 4 && mID2 == 0) || (mID1 == 0 && mID2 == 4))
 	{
 		cout << "[Colision: SIERRA -> RAGDOLL]" << endl;
 		// logica adicional para la colision Sierra -> Ragdoll
 		mGame->NextLevel2();
 	}
-	
+	// logica para colisiones entre Pendulum y Ragdoll
+	else if ((mID1 == 5 && mID2 == 0) || (mID1 == 0 && mID2 == 5))
+	{
+		cout << "[Colision: Pendulum -> RAGDOLL]" << endl;
+		// logica adicional para la colision pendulum -> Ragdoll
+	}
 }

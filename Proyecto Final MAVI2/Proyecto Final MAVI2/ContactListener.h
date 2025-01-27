@@ -5,6 +5,7 @@
 #include "NewBox.h"
 #include "Saw.h"
 #include "CircleOfFire.h"
+#include "Pendulum.h"
 
 class ContactListener : public b2ContactListener
 {

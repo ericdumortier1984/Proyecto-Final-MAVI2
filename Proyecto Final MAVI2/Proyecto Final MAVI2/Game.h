@@ -5,6 +5,7 @@
 #include "NewBox.h"
 #include "Saw.h"
 #include "CircleOfFire.h"
+#include "Pendulum.h"
 #include "Canon.h"
 #include "ContactListener.h"
 #include "UI.h"
@@ -43,13 +44,14 @@ private:
 	CircleOfFire* mCircleOfFire;
 	NewBox* mNewBox;
 	Saw* mSaw;
+	Pendulum* mPendulum[3];
 
 
 	ContactListener* mContactListener;
 	
-	enum GameState { MENU, INFORMATION, LEVEL1, LEVEL2, LEVEL3, PAUSE, EXIT };
+	enum GameState { MENU, INFORMATION, LEVEL1, LEVEL2, LEVEL3, EXIT };
 	GameState mState;
-	enum TimeLimits { LEVEL1_TIME_LIMIT = 34, LEVEL2_TIME_LIMIT = 34, LEVEL3_TIME_LIMIT = 34};
+	enum TimeLimits { LEVEL1_TIME_LIMIT = 60, LEVEL2_TIME_LIMIT = 60, LEVEL3_TIME_LIMIT = 60};
 	TimeLimits mTimeLimits;
 
 	float mFps, mFrameTime, mActualTime, mElapsedTime;

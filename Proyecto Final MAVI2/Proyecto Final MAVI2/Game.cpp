@@ -149,7 +149,6 @@ void Game::Update()
 		//cout << "[TIME REMAINING: ]" << timeRemaining << endl; // Debug
 		if (timeRemaining <= 0)
 		{
-			if (mState == PAUSE) return;
 			cout << "[TIME UP LEVEL 1]" << endl; // Debug
 			mState = EXIT;
 		}
@@ -173,7 +172,7 @@ void Game::Update()
 		}
 	}
 
-	int seconds = static_cast<int>(timeRemaining) % 34;
+	int seconds = static_cast<int>(timeRemaining) % 60;
 	mCountdownTimer->setString("TIME: " + to_string(seconds));
 }
 
@@ -189,7 +188,8 @@ void Game::RunLevel(GameState mState)
 		mUI->DrawImages(*mWindow);
 		mFloor->Draw(*mWindow);
 		mCanon->Draw(*mWindow);
-		for (int i = 0; i < 5; ++i) { if (mBox[i] != nullptr) mBox[i]->Draw(*mWindow); }
+		for (int i = 0; i < 3; i++) { if (mPendulum[i] != nullptr) mPendulum[i]->Draw(*mWindow); }
+		for (int i = 0; i < 3; ++i) { if (mBox[i] != nullptr) mBox[i]->Draw(*mWindow); }
 		if (mCircleOfFire != nullptr) { mCircleOfFire->Draw(*mWindow); }
 		if (mRagdoll != nullptr) { mRagdoll->Draw(*mWindow); }
 		mWindow->draw(*mCountdownTimer);
@@ -326,6 +326,17 @@ void Game::ClearLevel()
 		delete mSaw;
 		mSaw = nullptr;
 	}
+
+	// Eliminar el Pendulum
+	for (int i = 0; i < 3; i++)
+	{
+		if (mPendulum[i] != nullptr)
+		{
+			mBodiesToDestroy.push_back(mPendulum[i]->GetBody());
+			delete mPendulum[i];
+			mPendulum[i] = nullptr;
+		}
+	}
 }
 
 void Game::Draw() 
@@ -340,11 +351,12 @@ void Game::Draw()
 
 	case LEVEL1:
 		mWindow->clear(Color(173, 216, 230)); //  LightBlue
-		if (mBox[0] == nullptr) mBox[0] = new Box(*mWorld, { 70.f, 100.5f });
-		if (mBox[1] == nullptr) mBox[1] = new Box(*mWorld, { 70.f, 110.5f });
-		if (mBox[2] == nullptr) mBox[2] = new Box(*mWorld, { 70.f, 120.5f });
-		if (mBox[3] == nullptr) mBox[3] = new Box(*mWorld, { 70.f, 130.5f });
-		if (mBox[4] == nullptr) mBox[4] = new Box(*mWorld, { 70.f, 140.5f });
+		if (mPendulum[0] == nullptr) mPendulum[0] = new Pendulum(*mWorld, {-10.f, 105.f});
+		if (mPendulum[1] == nullptr) mPendulum[1] = new Pendulum(*mWorld, {10.f, 95.f});
+		if (mPendulum[2] == nullptr) mPendulum[2] = new Pendulum(*mWorld, {30.f, 85.f});
+		if (mBox[0] == nullptr) mBox[0] = new Box(*mWorld, { 60.f, 120.5f });
+		if (mBox[1] == nullptr) mBox[1] = new Box(*mWorld, { 60.f, 130.5f });
+		if (mBox[2] == nullptr) mBox[2] = new Box(*mWorld, { 60.f, 140.5f });
 		if (mCircleOfFire == nullptr) mCircleOfFire = new CircleOfFire(*mWorld, { 120.f, 140.5f });
 		RunLevel(LEVEL1);
 		break;
@@ -390,4 +402,6 @@ Game::~Game()
 	delete mEvent;
 	delete mUI;
 	delete mCountdownTimer;
+	delete mRagdollCounter;
+	delete mContactListener;
 }
