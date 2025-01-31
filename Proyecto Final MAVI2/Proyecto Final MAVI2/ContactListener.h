@@ -1,19 +1,18 @@
 #pragma once
-#include <box2d/box2d.h>
+#include "mainHeader.h"
 #include "Ragdoll.h"
-#include "Box.h"
-#include "NewBox.h"
-#include "Saw.h"
-#include "CircleOfFire.h"
-#include "Pendulum.h"
 
 class ContactListener : public b2ContactListener
 {
 public:
 
-    friend class Game;
+    friend class Level1;
+    friend class Level2;
+    friend class Level3;
 
-    ContactListener(Game* game) : mGame(game) {};
+    ContactListener(Level1* level1) : mLevel1(level1) {};
+    ContactListener(Level2* level2) : mLevel2(level2) {};
+    ContactListener(Level3* level3) : mLevel3(level3) {};
 
     void BeginContact(b2Contact* mContact);
     void EndContact(b2Contact* mContact);
@@ -21,5 +20,7 @@ public:
 
 private:
 
-    Game* mGame;
+    Level1* mLevel1;
+    Level2* mLevel2;
+    Level3* mLevel3;
 };

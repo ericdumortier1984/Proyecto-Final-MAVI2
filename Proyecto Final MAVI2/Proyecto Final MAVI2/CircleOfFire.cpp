@@ -5,7 +5,7 @@ CircleOfFire::CircleOfFire(b2World& mWorld, b2Vec2 mPosition) : mID(3)
 {
 
 	mCircleOfFireTx = new Texture;
-	if (!mCircleOfFireTx->loadFromFile("Assets/Objects/circleOfFire.png")) { cout << "Error al cargar la textura del circulo de fuego" << endl; }
+	if (!mCircleOfFireTx->loadFromFile("Assets/Objects/fire.png")) { cout << "Error al cargar la textura del circulo de fuego" << endl; }
 	mCircleOfFireSp = new Sprite;
 	mCircleOfFireSp->setTexture(*mCircleOfFireTx);
 

@@ -13,11 +13,11 @@ Box::Box(b2World& mWorld, b2Vec2 mPosition) : mID(2)
 	mBodyDefBox.position = mPosition;
 	mBodyBox = mWorld.CreateBody(&mBodyDefBox);
 	b2PolygonShape mBoxShape;
-	mBoxShape.SetAsBox(6.f, 6.f);
+	mBoxShape.SetAsBox(4.f, 4.f);
 	mFixtureDefBox.shape = &mBoxShape;
-	mFixtureDefBox.density = 0.015f;
-	mFixtureDefBox.restitution = 0.5f;
-	mFixtureDefBox.friction = 0.3f;
+	mFixtureDefBox.density = 0.025f; // 0.275
+	mFixtureDefBox.restitution = 0.3f;
+	mFixtureDefBox.friction = 1.0f;
 	mFixtureBox = mBodyBox->CreateFixture(&mFixtureDefBox);
 
 	mBodyBox->GetUserData().pointer = (uintptr_t)mID; //ID

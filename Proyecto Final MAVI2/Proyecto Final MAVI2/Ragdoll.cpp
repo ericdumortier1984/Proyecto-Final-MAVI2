@@ -137,7 +137,7 @@ void Ragdoll::ApplyForce(Vector2f mPositionMouse)
 
 	for (int i = 0; i < 6; i++)
 	{
-		mBodyRagdoll[i]->ApplyForceToCenter(b2Vec2(mPositionMouse.x * 8, mPositionMouse.y * 8), false);
+		mBodyRagdoll[i]->ApplyForceToCenter(b2Vec2(mPositionMouse.x * 16, mPositionMouse.y * 16), true);
 	}
 }
 

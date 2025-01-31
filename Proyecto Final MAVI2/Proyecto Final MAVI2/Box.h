@@ -1,10 +1,5 @@
 #pragma once
-#include <iostream>
-#include <box2d/box2d.h>
-#include <SFML/Graphics.hpp>
-
-using namespace sf;
-using namespace std;
+#include "MainHeader.h"
 
 class Box
 {

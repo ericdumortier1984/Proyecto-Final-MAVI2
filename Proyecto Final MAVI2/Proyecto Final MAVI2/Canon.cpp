@@ -49,6 +49,7 @@ void Canon::Shoot(b2World* mWorld, Vector2f mPositionMouse, RenderWindow& mWindo
 	mMousePos = mWindow.mapPixelToCoords(Mouse::getPosition(mWindow));
 	b2Vec2 mCanonTipPosition = mBodyCanon->GetWorldPoint(b2Vec2(11.f, -5.f)); // Ajusta según la longitud del cañón 
 	mRagdoll = new Ragdoll({ mCanonTipPosition.x, mCanonTipPosition.y }, *mWorld);
+
 	mRagdoll->ApplyForce(Vector2f(mMousePos.x - mBodyCanon->GetPosition().x, mMousePos.y - mBodyCanon->GetPosition().y));
 }
 

@@ -1,18 +1,12 @@
 #pragma once
-#include <box2d/box2d.h>
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <iostream>
-
-using namespace std;
-using namespace sf;
+#include "mainHeader.h"
 
 class Avatar
 {
 public:
 
 	Avatar(b2Body* mBody, RectangleShape* mRectangleShape);
-	Avatar(b2Body* mBody, Sprite* mSprite );
+	Avatar(b2Body* mBody, Sprite* mSprite);
 	~Avatar();
 
 	float Rad2Deg(float mRadians);
