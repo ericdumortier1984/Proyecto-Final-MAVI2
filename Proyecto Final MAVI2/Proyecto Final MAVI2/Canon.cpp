@@ -70,3 +70,8 @@ Ragdoll* Canon::GetRagdoll()
 { 
 	return mRagdoll; 
 }
+
+Vector2f Canon::GetPosition() const
+{
+	return mCanonSp->getPosition(); // Devuelve la posición del sprite del cañón
+}

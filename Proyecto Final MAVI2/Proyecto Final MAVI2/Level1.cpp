@@ -51,8 +51,10 @@ void Level1::RunLevel()
 	for (int i = 0; i < 3; ++i) { if (mBox[i] != nullptr) mBox[i]->Draw(*mWindow); }
 	if (mCircleOfFire != nullptr) { mCircleOfFire->Draw(*mWindow); }
 	if (mRagdoll != nullptr) { mRagdoll->Draw(*mWindow); }
+	for (int i = 0; i < 3; i++) { mWindow->draw(*mUIsp[i]); }
 	mWindow->draw(*mCountdownTimer);
 	mWindow->draw(*mRagdollCounter);
+	mWindow->draw(*mCanonPower);
 	mWindow->draw(*mCrosshairSp);
 	mWindow->display();
 }

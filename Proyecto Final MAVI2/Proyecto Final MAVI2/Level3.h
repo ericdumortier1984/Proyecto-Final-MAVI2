@@ -1,5 +1,7 @@
 #pragma once
 #include "Level.h"
+#include "Wheel.h"
+#include "Box.h"
 
 class Level3 : public Level
 {
@@ -15,6 +17,9 @@ protected:
 	void RunLevel() override;
 
 private:
+
+	Wheel* mWheel;
+	Box* mBox;
 
 	ContactListener* mContactListener;
 

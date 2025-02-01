@@ -7,7 +7,7 @@ Pendulum::Pendulum(b2World& mWorld, b2Vec2 mPosition) : mID(5)
 	// Texturas
 	mPendulumTx = new Texture;
 	mCircleTx = new Texture;
-	if (!mPendulumTx->loadFromFile("Assets/Objects/star.png")) {cout << "Error al cargar la textura del pendulo" << endl; }
+	if (!mPendulumTx->loadFromFile("Assets/Objects/pendulum.png")) {cout << "Error al cargar la textura del pendulo" << endl; }
 	if (!mCircleTx->loadFromFile("Assets/Objects/wheel.png")) { cout << "Error al cargar la textura del circulo" << endl; }
 
 	// Sprites
@@ -27,7 +27,7 @@ Pendulum::Pendulum(b2World& mWorld, b2Vec2 mPosition) : mID(5)
 
 	// Formas y fixtures
 	b2PolygonShape mPendulumShape;
-	mPendulumShape.SetAsBox(5.0f, 25.f);
+	mPendulumShape.SetAsBox(2.5f, 20.f);
 	mFixtureDefPendulum.shape = &mPendulumShape;
 	mFixtureDefPendulum.density = 0.005f;
 	mFixtureDefPendulum.restitution = 0.5f;

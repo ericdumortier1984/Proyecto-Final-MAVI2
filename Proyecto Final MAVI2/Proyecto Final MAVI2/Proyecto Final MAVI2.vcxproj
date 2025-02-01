@@ -146,6 +146,7 @@
     <ClCompile Include="Pendulum.cpp" />
     <ClCompile Include="Pulley.cpp" />
     <ClCompile Include="Ragdoll.cpp" />
+    <ClCompile Include="Wheel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Avatar.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Pendulum.h" />
     <ClInclude Include="Pulley.h" />
     <ClInclude Include="Ragdoll.h" />
+    <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

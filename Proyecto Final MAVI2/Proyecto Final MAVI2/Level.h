@@ -27,10 +27,14 @@ protected:
     Font* mFont;
     Text* mCountdownTimer;
     Text* mRagdollCounter;
+    Text* mCanonPower;
     b2World* mWorld;
 
     Texture* mCrosshairTx;
     Sprite* mCrosshairSp;
+
+    Texture* mUItx[3];
+    Sprite* mUIsp[3];
 
     Floor* mFloor;
     Canon* mCanon;

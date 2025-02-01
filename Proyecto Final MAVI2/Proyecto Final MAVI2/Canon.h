@@ -12,6 +12,7 @@ public:
 	~Canon();
 
 	Ragdoll* GetRagdoll();
+	Vector2f GetPosition() const; // Método para obtener la posición del cañón
 	void Shoot(b2World* mWorld, Vector2f mPositionMouse, RenderWindow& mWindow);
 	void Update(Vector2f mPositionMouse);
 	void Draw(RenderWindow& mWindow);
