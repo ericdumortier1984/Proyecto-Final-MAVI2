@@ -1,13 +1,2 @@
-﻿  Level1.cpp
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Level1.cpp(7,29): warning C4244: 'argumento': conversión de 'float' a 'unsigned int'; posible pérdida de datos
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Level1.cpp(23,83): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Level1.cpp(23,83): warning C4244:         with
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Level1.cpp(23,83): warning C4244:         [
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Level1.cpp(23,83): warning C4244:             T=unsigned int
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Level1.cpp(23,83): warning C4244:         ]
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Level1.cpp(23,52): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Level1.cpp(23,52): warning C4244:         with
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Level1.cpp(23,52): warning C4244:         [
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Level1.cpp(23,52): warning C4244:             T=unsigned int
-C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\Proyecto Final MAVI2\Level1.cpp(23,52): warning C4244:         ]
+﻿  Level2.cpp
   Proyecto Final MAVI2.vcxproj -> C:\Users\NoxiePC\Documents\Proyecto-Final-MAVI2\Proyecto Final MAVI2\x64\Debug\Proyecto Final MAVI2.exe

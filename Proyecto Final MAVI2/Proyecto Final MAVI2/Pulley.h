@@ -11,7 +11,6 @@ public:
 	~Pulley();
 
 	void Draw(RenderWindow& mWindow);
-	b2Body* GetBody() const { return mBodyPulley; }
 
 private:
 

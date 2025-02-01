@@ -131,11 +131,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Avatar.cpp" />
+    <ClCompile Include="Balloons.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Canon.cpp" />
     <ClCompile Include="CircleOfFire.cpp" />
     <ClCompile Include="ContacListener.cpp" />
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Level2.cpp" />
     <ClCompile Include="Level3.cpp" />
@@ -147,11 +149,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Avatar.h" />
+    <ClInclude Include="Balloons.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Canon.h" />
     <ClInclude Include="CircleOfFire.h" />
     <ClInclude Include="ContactListener.h" />
     <ClInclude Include="Floor.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Level2.h" />
     <ClInclude Include="Level3.h" />

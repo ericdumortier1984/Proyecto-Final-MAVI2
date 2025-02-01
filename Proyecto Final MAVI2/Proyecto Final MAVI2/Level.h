@@ -1,0 +1,50 @@
+#pragma once
+#include "mainHeader.h"
+#include "ContactListener.h"
+#include "Avatar.h"
+#include "Floor.h"
+#include "Canon.h"
+#include "Ragdoll.h"
+
+class Level
+{
+public:
+
+    Level(int mWidth, int mHeight);
+    virtual ~Level();
+
+    virtual bool FinishLevel() = 0;
+    void Run();
+
+protected:
+
+    RenderWindow* mWindow;
+    Event* mEvent;
+    View* mCamara;
+    Clock* mClock;
+    Time* mInitTime;
+
+    Font* mFont;
+    Text* mCountdownTimer;
+    Text* mRagdollCounter;
+    b2World* mWorld;
+
+    Texture* mCrosshairTx;
+    Sprite* mCrosshairSp;
+
+    Floor* mFloor;
+    Canon* mCanon;
+    Ragdoll* mRagdoll;
+
+    float mFps, mFrameTime, mActualTime, mElapsedTime;
+    bool  mLevelFinish;
+    int   mRagdollCount;
+
+    void SetCamara(float mZoom);
+    void InitPhysics();
+    void UpdatePhysics();
+    void ProcessEvents();
+    void Update();
+    virtual void RunLevel() = 0;
+    void Draw();
+};

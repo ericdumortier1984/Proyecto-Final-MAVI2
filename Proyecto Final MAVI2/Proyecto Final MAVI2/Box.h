@@ -11,7 +11,6 @@ public:
 	~Box();
 
 	void Draw(RenderWindow& mWindow);
-	b2Body* GetBody() const { return mBodyBox; }
 
 private:
 

@@ -11,7 +11,6 @@ public:
 	~Pendulum();
 
 	void Draw(RenderWindow& mWindow);
-	b2Body* GetBody() const { return mBodyPendulum; }
 
 private:
 
