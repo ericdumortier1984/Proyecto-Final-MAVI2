@@ -47,7 +47,7 @@ void Level2::CheckCollisions()
 
 bool Level2::FinishLevel()
 {
-	mWindow->close();
+	ShowMsg("LEVEL WIN");
 	return true;
 }
 

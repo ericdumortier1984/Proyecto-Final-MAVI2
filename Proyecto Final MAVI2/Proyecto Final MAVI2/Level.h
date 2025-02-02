@@ -28,6 +28,7 @@ protected:
     Text* mCountdownTimer;
     Text* mRagdollCounter;
     Text* mCanonPower;
+    Text* mStateMsg;
     b2World* mWorld;
 
     Texture* mCrosshairTx;
@@ -50,5 +51,6 @@ protected:
     void ProcessEvents();
     void Update();
     virtual void RunLevel() = 0;
+    void ShowMsg(const string& mMessage);
     void Draw();
 };

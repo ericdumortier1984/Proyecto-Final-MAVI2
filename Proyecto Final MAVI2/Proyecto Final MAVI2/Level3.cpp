@@ -9,12 +9,14 @@ Level3::Level3(int mWidth, int mHeight) : Level(mWidth, mHeight)
 	CheckCollisions();
 
 	if (mWheel == nullptr) mWheel = new Wheel(*mWorld, { 50.f, 50.f });
+	if (mEmptyCans == nullptr) mEmptyCans = new EmptyCans(*mWorld, { 80.f, 40.f });
 	if (mBox == nullptr) mBox = new Box(*mWorld, { 50.f, 60.f });
 }
 
 Level3::~Level3()
 {
 	delete mWheel;
+	delete mEmptyCans;
 	delete mBox;
 }
 
@@ -26,7 +28,7 @@ void Level3::CheckCollisions()
 
 bool Level3::FinishLevel()
 {
-	mWindow->close();
+	ShowMsg("LEVEL WIN");
 	return true;
 }
 
@@ -40,6 +42,7 @@ void Level3::RunLevel()
 	mCanon->Draw(*mWindow);
 	if (mRagdoll != nullptr) { mRagdoll->Draw(*mWindow); }
 	if (mWheel != nullptr) { mWheel->Draw(*mWindow); }
+	if (mEmptyCans != nullptr) { mEmptyCans->Draw(*mWindow); }
 	if (mBox != nullptr) { mBox->Draw(*mWindow); }
 	for (int i = 0; i < 3; i++) { mWindow->draw(*mUIsp[i]); }
 	mWindow->draw(*mCountdownTimer);

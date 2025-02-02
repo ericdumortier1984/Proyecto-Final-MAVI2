@@ -1,6 +1,7 @@
 #pragma once
 #include "Level.h"
 #include "Wheel.h"
+#include "EmptyCans.h"
 #include "Box.h"
 
 class Level3 : public Level
@@ -19,6 +20,7 @@ protected:
 private:
 
 	Wheel* mWheel;
+	EmptyCans* mEmptyCans;
 	Box* mBox;
 
 	ContactListener* mContactListener;

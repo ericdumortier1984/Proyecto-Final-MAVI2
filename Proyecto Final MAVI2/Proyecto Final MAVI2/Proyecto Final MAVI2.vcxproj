@@ -136,6 +136,7 @@
     <ClCompile Include="Canon.cpp" />
     <ClCompile Include="CircleOfFire.cpp" />
     <ClCompile Include="ContacListener.cpp" />
+    <ClCompile Include="EmptyCans.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level1.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Canon.h" />
     <ClInclude Include="CircleOfFire.h" />
     <ClInclude Include="ContactListener.h" />
+    <ClInclude Include="EmptyCans.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Level1.h" />

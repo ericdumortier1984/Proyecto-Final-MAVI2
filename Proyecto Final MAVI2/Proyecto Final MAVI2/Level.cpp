@@ -1,6 +1,6 @@
 #include "Level.h"
 
-Level::Level(int mWidth, int mHeight) : mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), mLevelFinish(false), mRagdollCount(0)
+Level::Level(int mWidth, int mHeight) : mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), mLevelFinish(false), mRagdollCount(10)
 {
     mWindow = new RenderWindow(VideoMode(1280, 720), "LEVEL");
     mWindow->setFramerateLimit(mFps);
@@ -53,7 +53,7 @@ Level::Level(int mWidth, int mHeight) : mFps(60.f), mFrameTime(1.f / mFps), mAct
     mRagdollCounter->setFillColor(Color::Black);
     mRagdollCounter->setOutlineThickness(2);
     mRagdollCounter->setOutlineColor(Color::White);
-    mRagdollCounter->setString("RAGDOLL: 0");
+    mRagdollCounter->setString("RAGDOLL: 10");
 
     mCanonPower = new Text;
     mCanonPower->setFont(*mFont);
@@ -64,6 +64,15 @@ Level::Level(int mWidth, int mHeight) : mFps(60.f), mFrameTime(1.f / mFps), mAct
     mCanonPower->setOutlineThickness(2);
     mCanonPower->setOutlineColor(Color::White);
     mCanonPower->setString("POWER: 0");
+
+    mStateMsg = new Text;
+    mStateMsg->setFont(*mFont);
+    mStateMsg->setScale(0.5f, 0.5f);
+    mStateMsg->setCharacterSize(32);
+    mStateMsg->setPosition(-10.f, 55.f);
+    mStateMsg->setFillColor(Color::Red);
+    mStateMsg->setOutlineThickness(2);
+    mStateMsg->setOutlineColor(Color::White);
 
     InitPhysics();
 
@@ -82,6 +91,7 @@ Level::~Level()
     delete mEvent;
     delete mCountdownTimer;
     delete mRagdollCounter;
+    delete mStateMsg;
     delete mCrosshairSp;
     delete mCrosshairTx;
     for (int i = 0; i < 3; i++) {delete mUItx[i]; delete mUIsp[i];}
@@ -147,8 +157,14 @@ void Level::ProcessEvents()
             mPositionMouse = mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow));
             mCanon->Shoot(mWorld, mPositionMouse, *mWindow);
             mRagdoll = mCanon->GetRagdoll();
-            mRagdollCount++;
+            mRagdollCount--;
             mRagdollCounter->setString("RAGDOLL: " + to_string(mRagdollCount));
+
+            if (mRagdollCount < 0)
+            {
+                mStateMsg->setPosition(-60.f, 55.f);
+                ShowMsg("NO MORE RAGDOLLS");
+            }
         }
 
         if (mEvent->type == Event::MouseMoved)
@@ -176,10 +192,21 @@ void Level::Update()
     if (mTimeRemaining <= 0)
     {
         cout << "[TIME UP LEVEL]" << endl; // Debug
+        ShowMsg("TIME UP");
     }
 
     int seconds = static_cast<int>(mTimeRemaining) % 60;
     mCountdownTimer->setString("TIME: " + to_string(seconds));
+}
+
+void Level::ShowMsg(const string& mMessage)
+{
+
+    mStateMsg->setString(mMessage);
+    mWindow->draw(*mStateMsg);
+    mWindow->display();
+    sleep(seconds(3));
+    mWindow->close();
 }
 
 void Level::Draw()

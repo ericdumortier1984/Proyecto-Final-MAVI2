@@ -46,43 +46,49 @@ void ContactListener::CheckAABB(b2Fixture* mFixtureA, b2Fixture* mFixtureB)
 			break;
 		}
 	}
-	// logica para colisiones entre ... y Ragdoll
+	// logica para colisiones entre Wheel y Ragdoll
 	else if ((mID1 == 1 && mID2 == 0) || (mID1 == 0 && mID2 == 1))
 	{
-		cout << "[Colision: ... -> RAGDOLL]" << endl;
-		// logica adicional para la colision ... -> Ragdoll
-		//mGame->NextLevel3();
+		cout << "[COLISION: WHEEL -> RAGDOLL]" << endl;
+		// logica adicional para la colision Wheel -> Ragdoll
 	}
 	// Logica para colisiones entre Box y Ragdoll
 	if ((mID1 == 2 && mID2 == 0) || (mID1 == 0 && mID2 == 2))
 	{
-		cout << "[Colision: BOX -> RAGDOLL]" << endl;
+		cout << "[COLISION: BOX -> RAGDOLL]" << endl;
 		// Logica adicional para la colision Box -> Ragdoll 
 	}
 	// logica para colisiones entre Circle of Fire y Ragdoll
 	else if ((mID1 == 3 && mID2 == 0) || (mID1 == 0 && mID2 == 3))
 	{
-		cout << "[Colision: CIRCULO DE FUEGO -> RAGDOLL]" << endl;
+		cout << "[COLISION: CIRCULO DE FUEGO -> RAGDOLL]" << endl;
 		// logica adicional para la colision CircleOfFire -> Ragdoll
 		mLevel1->FinishLevel();
 	}
 	// logica para colisiones entre Saw y Ragdoll
 	else if ((mID1 == 4 && mID2 == 0) || (mID1 == 0 && mID2 == 4))
 	{
-		cout << "[Colision: BALLOONS -> RAGDOLL]" << endl;
+		cout << "[COLISION: BALLOONS -> RAGDOLL]" << endl;
 		// logica adicional para la colision Balloons -> Ragdoll
 		mLevel2->FinishLevel();
 	}
 	// logica para colisiones entre Pendulum y Ragdoll
 	else if ((mID1 == 5 && mID2 == 0) || (mID1 == 0 && mID2 == 5))
 	{
-		cout << "[Colision: Pendulum -> RAGDOLL]" << endl;
+		cout << "[COLISION: PENDULUM -> RAGDOLL]" << endl;
 		// logica adicional para la colision pendulum -> Ragdoll
 	}
 	// logica para colisiones entre Pulley y Ragdoll
 	else if ((mID1 == 6 && mID2 == 0) || (mID1 == 0 && mID2 == 6))
 	{
-		cout << "[Colision: Pulley -> RAGDOLL]" << endl;
+		cout << "[COLISION: PULLEY -> RAGDOLL]" << endl;
 		// logica adicional para la colision pulley -> Ragdoll
+	}
+	// logica para colisones entre Empty Cans y Ragdoll
+	else if ((mID1 == 7 && mID2 == 0) || (mID1 == 0 && mID2 == 7))
+	{
+		cout << "[COLISION: EMPTY CANS -> RAGDOLL]" << endl;
+		// logica adicional para colision Empty Cans y Ragdoll
+		mLevel3->FinishLevel();
 	}
 }
