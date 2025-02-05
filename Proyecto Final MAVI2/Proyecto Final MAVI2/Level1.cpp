@@ -1,7 +1,9 @@
 #include "Level1.h"
 
-Level1::Level1(int mWidth, int mHeight) : Level(mWidth, mHeight)
+Level1::Level1(int mWidth, int mHeight, bool mUnlocked) : Level(mWidth, mHeight, mUnlocked), mUnlocked(mUnlocked)
 {
+
+	cout << "[LEVEL 1]" << endl; // Debug
 
 	mContactListener = new ContactListener(this);
 
@@ -32,9 +34,21 @@ void Level1::CheckCollisions()
 	mWorld->SetContactListener(mContactListener);
 }
 
+bool Level1::UnlockedLevel() const
+{
+	return mUnlocked;
+}
+
 bool Level1::FinishLevel()
 {
-	ShowMsg("LEVEL WIN");
+	if (!mLevelFinish)
+	{
+		mLevelFinish = true;
+		mLevelMusic->stop();
+		mVictorySound->play();
+		mStateMsg->setPosition(-20.f, 55.f);
+		ShowMsg("LEVEL WIN");
+	}
 	return true;
 }
 

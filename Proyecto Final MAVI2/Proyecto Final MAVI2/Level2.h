@@ -8,10 +8,11 @@ class Level2 : public Level
 {
 public:
 
-	Level2(int mWidth, int mHeight);
+	Level2(int mWidth, int mHeight, bool mUnlocked);
 	~Level2();
 
 	bool FinishLevel() override;
+	bool UnlockedLevel() const override;
 
 protected:
 
@@ -26,5 +27,7 @@ private:
 	ContactListener* mContactListener;
 
 	void CheckCollisions();
+
+	bool mUnlocked;
 };
 

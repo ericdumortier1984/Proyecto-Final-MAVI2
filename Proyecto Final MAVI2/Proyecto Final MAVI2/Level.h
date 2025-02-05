@@ -1,5 +1,6 @@
 #pragma once
 #include "mainHeader.h"
+#include "MainMenu.h"
 #include "ContactListener.h"
 #include "Avatar.h"
 #include "Floor.h"
@@ -10,10 +11,12 @@ class Level
 {
 public:
 
-    Level(int mWidth, int mHeight);
+    Level(int mWidth, int mHeight, bool mUnlocked);
     virtual ~Level();
 
     virtual bool FinishLevel() = 0;
+    virtual bool UnlockedLevel() const = 0;
+
     void Run();
 
 protected:
@@ -40,9 +43,20 @@ protected:
     Floor* mFloor;
     Canon* mCanon;
     Ragdoll* mRagdoll;
+    MainMenu* mMainmenu;
+
+    // Audio
+    Music* mLevelMusic;
+    SoundBuffer* mShootBuffer;
+    SoundBuffer* mLoseBuffer;
+    SoundBuffer* mVictoryBuffer;
+    Sound* mShootSound;
+    Sound* mLoseSound;
+    Sound* mVictorySound;
+
 
     float mFps, mFrameTime, mActualTime, mElapsedTime;
-    bool  mLevelFinish;
+    bool  mLevelFinish, mLevelUnlocked;
     int   mRagdollCount;
 
     void SetCamara(float mZoom);

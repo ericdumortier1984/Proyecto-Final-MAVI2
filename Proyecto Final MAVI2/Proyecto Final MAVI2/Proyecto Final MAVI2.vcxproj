@@ -110,7 +110,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Program Files\SFML\SFML-2.6.2\lib;C:\Program Files\Box2d\box2d-2.4.1\build\bin\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>box2d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-main-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>box2d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-main-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,6 +138,7 @@
     <ClCompile Include="ContacListener.cpp" />
     <ClCompile Include="EmptyCans.cpp" />
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Level2.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="ContactListener.h" />
     <ClInclude Include="EmptyCans.h" />
     <ClInclude Include="Floor.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Level2.h" />

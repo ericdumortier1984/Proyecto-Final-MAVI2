@@ -1,7 +1,8 @@
 #include "Level.h"
 
-Level::Level(int mWidth, int mHeight) : mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), mLevelFinish(false), mRagdollCount(10)
+Level::Level(int mWidth, int mHeight, bool mUnlocked) : mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), mLevelFinish(false), mLevelUnlocked(false), mRagdollCount(10)
 {
+
     mWindow = new RenderWindow(VideoMode(1280, 720), "LEVEL");
     mWindow->setFramerateLimit(mFps);
 
@@ -9,6 +10,26 @@ Level::Level(int mWidth, int mHeight) : mFps(60.f), mFrameTime(1.f / mFps), mAct
     mCamara = new View;
     mClock = new Clock;
     mInitTime = new Time;
+
+    // Audio
+    mLevelMusic = new Music;
+    mShootSound = new Sound;
+    mLoseSound = new Sound;
+    mVictorySound = new Sound;
+    mShootBuffer = new SoundBuffer;
+    mLoseBuffer = new SoundBuffer;
+    mVictoryBuffer = new SoundBuffer;
+
+    if (!mLevelMusic->openFromFile("Sounds/musicCircusLevel.ogg")) { cout << "Error al cargar la musica del nivel" << endl; }
+    if (!mShootBuffer->loadFromFile("Sounds/canonShoot.ogg")) { cout << "Error al cargar el sonido del disparo" << endl; }
+    if (!mLoseBuffer->loadFromFile("Sounds/boohCircusSound.ogg")) { cout << "Error al cargar el sonido de derrota" << endl; }
+    if (!mVictoryBuffer->loadFromFile("Sounds/victoryCircusSound.ogg")) { cout << "Error al cargar sonido de victoria" << endl; }
+    mLevelMusic->setLoop(true);
+    mLevelMusic->play();
+    mShootSound->setBuffer(*mShootBuffer);
+    mShootSound->setVolume(25.0f);
+    mLoseSound->setBuffer(*mLoseBuffer);
+    mVictorySound->setBuffer(*mVictoryBuffer);
 
     //Crosshair
     mCrosshairTx = new Texture;
@@ -29,12 +50,12 @@ Level::Level(int mWidth, int mHeight) : mFps(60.f), mFrameTime(1.f / mFps), mAct
         mUIsp[i]->setTexture(*mUItx[i]);
         mUIsp[i]->setScale(0.4f, 0.4f);
     }
-    mUIsp[0]->setPosition(-105.f, 30.f);
-    mUIsp[1]->setPosition(-5.f, 30.f);
-    mUIsp[2]->setPosition(85.f, 30.f);
+    mUIsp[0]->setPosition(-104.f, 30.f);
+    mUIsp[1]->setPosition(-3.f, 30.f);
+    mUIsp[2]->setPosition(88.f, 30.f);
 
     mFont = new Font;
-    if (!mFont->loadFromFile("Fonts/ARLRDBD.ttf")) { cout << "Error al cargar la fuente" << endl; }
+    if (!mFont->loadFromFile("Fonts/COOPBL.ttf")) { cout << "Error al cargar la fuente" << endl; }
 
     mCountdownTimer = new Text;
     mCountdownTimer->setFont(*mFont);
@@ -89,6 +110,13 @@ Level::~Level()
     delete mInitTime;
     delete mCamara;
     delete mEvent;
+    delete mLevelMusic;
+    delete mShootSound;
+    delete mVictorySound;
+    delete mLoseSound;
+    delete mShootBuffer;
+    delete mLoseBuffer;
+    delete mVictoryBuffer;
     delete mCountdownTimer;
     delete mRagdollCounter;
     delete mStateMsg;
@@ -117,6 +145,13 @@ void Level::UpdatePhysics()
 
 void Level::Run()
 {
+
+    if (!UnlockedLevel()) 
+    {
+        cout << "LEVEL BLOQUED" << endl;
+        return;
+    }
+
     while (mWindow->isOpen())
     {
         *mInitTime = mClock->getElapsedTime();
@@ -146,6 +181,9 @@ void Level::ProcessEvents()
         {
             if (mEvent->key.code == Keyboard::Escape)
             {
+                mLevelMusic->stop();
+                mMainmenu = new MainMenu(1280.f, 720.f);
+                mMainmenu->PlayMusic();
                 mWindow->close();
             }
         }
@@ -160,10 +198,21 @@ void Level::ProcessEvents()
             mRagdollCount--;
             mRagdollCounter->setString("RAGDOLL: " + to_string(mRagdollCount));
 
+            // Sonido de disparo
+            mShootSound->play();
+
             if (mRagdollCount < 0)
             {
                 mStateMsg->setPosition(-60.f, 55.f);
+
+                // Sonido de derrota
+                mLevelMusic->stop();
+                mLoseSound->play();
+
                 ShowMsg("NO MORE RAGDOLLS");
+
+                mMainmenu = new MainMenu(1280.f, 720.f);
+                mMainmenu->PlayMusic();
             }
         }
 
@@ -192,7 +241,12 @@ void Level::Update()
     if (mTimeRemaining <= 0)
     {
         cout << "[TIME UP LEVEL]" << endl; // Debug
+        mLevelMusic->stop();
+        mLoseSound->play();
         ShowMsg("TIME UP");
+
+        mMainmenu = new MainMenu(1280.f, 720.f);
+        mMainmenu->PlayMusic();
     }
 
     int seconds = static_cast<int>(mTimeRemaining) % 60;
