@@ -6,9 +6,11 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 
 	cout << "[MENU]" << endl; // Debug
 
+	// Fuente
 	mFont = new Font;
 	mFont->loadFromFile("Fonts/COOPBL.ttf");
 
+	// Textura y sprite de fondo y titulo
 	mBackMenuTx = new Texture;
 	if (!mBackMenuTx->loadFromFile("Assets/Backgrounds/backgroundMain2.jpg")) { cout << "Error al cargar imagen de fondo en menu" << endl; }
 	mBackMenuSp = new Sprite;
@@ -29,6 +31,8 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 	mMenuMusic->setLoop(false);
 	mMenuMusic->play();
 
+	///////////////// Fuentes de los Botones ////////////////
+	
 	// START GAME
 	mMainMenu[0].setFont(*mFont);
 	mMainMenu[0].setCharacterSize(50);
@@ -62,32 +66,32 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 	mLevelSelect->setString("CHOOSE YOUR LEVEL");
 	mLevelSelect->setOutlineColor(Color::Black);
 	mLevelSelect->setOutlineThickness(0.5);
-	mLevelSelect->setPosition(400, 150);
+	mLevelSelect->setPosition(390, 140);
 
 	//LEVEL 1 
 	mLevelMenu[0].setFont(*mFont);
 	mLevelMenu[0].setCharacterSize(25);
 	mLevelMenu[0].setFillColor(Color(144, 292, 144));
-	mLevelMenu[0].setString("LEVEL 1 (EASY)");
+	mLevelMenu[0].setString("                  LEVEL 1 \n GET THE RING OF FIRE");
 	mLevelMenu[0].setOutlineColor(Color::Black);
 	mLevelMenu[0].setOutlineThickness(0.5);
-	mLevelMenu[0].setPosition(280, 285);
+	mLevelMenu[0].setPosition(160, 265);
 	//LEVEL 2
 	mLevelMenu[1].setFont(*mFont);
 	mLevelMenu[1].setCharacterSize(25);
 	mLevelMenu[1].setFillColor(Color(144, 292, 144));
-	mLevelMenu[1].setString("LEVEL 2 (NORMAL)");
+	mLevelMenu[1].setString("                LEVEL 2 \n    GET THE BALLONS");
 	mLevelMenu[1].setOutlineColor(Color::Black);
 	mLevelMenu[1].setOutlineThickness(0.5);
-	mLevelMenu[1].setPosition(540, 285);
+	mLevelMenu[1].setPosition(490, 265);
 	//LEVEL 3
 	mLevelMenu[2].setFont(*mFont);
 	mLevelMenu[2].setCharacterSize(25);
 	mLevelMenu[2].setFillColor(Color(144, 292, 144));
-	mLevelMenu[2].setString("LEVEL 3 (HARD)");
+	mLevelMenu[2].setString("                    LEVEL 3 \n GET THE STACK OF CANS");
 	mLevelMenu[2].setOutlineColor(Color::Black);
 	mLevelMenu[2].setOutlineThickness(0.5);
-	mLevelMenu[2].setPosition(830, 285);
+	mLevelMenu[2].setPosition(810, 265);
 	
 	// Cargar imagenes en miniatura
 	for (int i = 0; i < MAX_LEVEL_MENU; i++)
@@ -97,7 +101,7 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 		mMiniLevelSp[i] = new Sprite;
 		mMiniLevelSp[i]->setTexture(*mMiniLevelTx[i]);
 		mMiniLevelSp[i]->setScale(0.20f, 0.20f);
-		mMiniLevelSp[i]->setPosition(250 + i * 280, 330);
+		mMiniLevelSp[i]->setPosition(180 + i * 330, 330);
 	}
 
 	// Bordes de las miniaturas
@@ -108,17 +112,60 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 		mMiniLevelThickness[i]->setFillColor(Color::Transparent); 
 		mMiniLevelThickness[i]->setOutlineColor(Color::Black); 
 		mMiniLevelThickness[i]->setOutlineThickness(2); 
-		mMiniLevelThickness[i]->setPosition(250 + i * 280, 330); 
+		mMiniLevelThickness[i]->setPosition(180 + i * 330, 330); 
 	}
 
-	// Texto de información
+	// Menu INFO
 	mInfoText = new Text;
 	mInfoText->setFont(*mFont);
 	mInfoText->setCharacterSize(30);
-	mInfoText->setFillColor(Color::Yellow);
-	mInfoText->setString("Este es el menu de informacion.\nPresiona ESC para volver.");
-	mInfoText->setPosition(100, 100);
+	mInfoText->setFillColor(Color::Red);
+	mInfoText->setOutlineThickness(0.5);
+	mInfoText->setOutlineColor(Color::Black);
+	mInfoText->setString("PRESS ESC TO RETURN");
+	mInfoText->setPosition(100, 25);
 
+	mKeyboardTx = new Texture;
+	if (!mKeyboardTx->loadFromFile("Assets/Backgrounds/keyboard.jpg")) { cout << "Error al cargar imagen de teclado" << endl; }
+	mKeyboardSp = new Sprite;
+	mKeyboardSp->setTexture(*mKeyboardTx);
+	mKeyboardSp->setScale(0.025f, 0.025f);
+	mKeyboardSp->setPosition(100.f, 100.f);
+
+	mMouseTx = new Texture;
+	if (!mMouseTx->loadFromFile("Assets/Backgrounds/mouse.png")) { cout << "Error al cargar imagen de mouse" << endl; }
+	mMouseSp = new Sprite;
+	mMouseSp->setTexture(*mMouseTx);
+	mMouseSp->setScale(0.15f, 0.15f);
+	mMouseSp->setPosition(150.f, 200.f);
+
+	mLevelInfoTx = new Texture;
+	if (!mLevelInfoTx->loadFromFile("Assets/Backgrounds/levelInfo.png")) { cout << "Error al cargar imagen de info de nivel" << endl; }
+	mLevelInfoSp = new Sprite;
+	mLevelInfoSp->setTexture(*mLevelInfoTx);
+	mLevelInfoSp->setScale(0.55f, 0.55f);
+	mLevelInfoSp->setPosition(150.f, 350.f);
+
+	mKeyboardText = new Text;
+	mKeyboardText->setFont(*mFont);
+	mKeyboardText->setCharacterSize(20);
+	mKeyboardText->setFillColor(Color::Magenta);
+	mKeyboardText->setOutlineThickness(0.5);
+	mKeyboardText->setOutlineColor(Color::Black);
+	mKeyboardText->setString("USE KEY UP AND DOWN TO SELECT IN MAIN MENU");
+	mKeyboardText->setPosition(300.f, 125.f);
+
+	mMouseText = new Text;
+	mMouseText->setFont(*mFont);
+	mMouseText->setCharacterSize(20);
+	mMouseText->setFillColor(Color::Magenta);
+	mMouseText->setOutlineThickness(0.5);
+	mMouseText->setOutlineColor(Color::Black);
+	mMouseText->setString("USE MOUSE LEFT BUTTON TO SELECT LEVEL \nUSE MOUSE LEFT BUTTON TO SHOOT RAGDOLL\nMOVE MOUSE TO ROTATE DE CANON");
+	mMouseText->setPosition(300.f, 215.f);
+
+
+	// Variables que indican que inicialmente no hay nada seleccionado
 	mMainMenuSelected = -1;
 	mLevelMenuSelected = -1;
 }
@@ -133,6 +180,14 @@ MainMenu::~MainMenu()
 	delete mTitleSp;
 	delete mTitleTx;
 	delete mInfoText;
+	delete mKeyboardText;
+	delete mMouseText;
+	delete mKeyboardTx;
+	delete mKeyboardSp;
+	delete mMouseTx;
+	delete mMouseSp;
+	delete mLevelInfoTx;
+	delete mLevelInfoSp;
 	for (int i = 0; i < MAX_LEVEL_MENU; i++)
 	{
 		delete mMiniLevelTx[i];
@@ -225,6 +280,11 @@ void MainMenu::DrawInfo(RenderWindow& mWindow)
 {
 
 	mWindow.setMouseCursorVisible(false);
-	mWindow.clear();
+	mWindow.clear(Color(230, 230, 250));
 	mWindow.draw(*mInfoText);
+	mWindow.draw(*mKeyboardText);
+	mWindow.draw(*mMouseText);
+	mWindow.draw(*mKeyboardSp);
+	mWindow.draw(*mMouseSp);
+	mWindow.draw(*mLevelInfoSp);
 }

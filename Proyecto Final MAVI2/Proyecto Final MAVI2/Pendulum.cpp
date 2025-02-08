@@ -27,7 +27,7 @@ Pendulum::Pendulum(b2World& mWorld, b2Vec2 mPosition) : mID(5)
 
 	// Formas y fixtures
 	b2PolygonShape mPendulumShape;
-	mPendulumShape.SetAsBox(2.5f, 20.f);
+	mPendulumShape.SetAsBox(3.f, 10.f);
 	mFixtureDefPendulum.shape = &mPendulumShape;
 	mFixtureDefPendulum.density = 0.005f;
 	mFixtureDefPendulum.restitution = 0.5f;
@@ -35,7 +35,7 @@ Pendulum::Pendulum(b2World& mWorld, b2Vec2 mPosition) : mID(5)
 	mFixturePendulum = mBodyPendulum->CreateFixture(&mFixtureDefPendulum);
 
 	b2CircleShape mCircleShape;
-	mCircleShape.m_radius = 5.f;
+	mCircleShape.m_radius = 2.5f;
 	mFixtureDefCircle.shape = &mCircleShape;
 	mFixtureDefCircle.density = 0.1f;
 	mFixtureDefCircle.restitution = 0.3f;
@@ -45,7 +45,7 @@ Pendulum::Pendulum(b2World& mWorld, b2Vec2 mPosition) : mID(5)
 	b2RevoluteJointDef mRevoluteJointDef;
 	mRevoluteJointDef.bodyA = mBodyPendulum;
 	mRevoluteJointDef.bodyB = mBodyCircle;
-	mRevoluteJointDef.localAnchorA.Set(0.f, -25.f); // Anclas
+	mRevoluteJointDef.localAnchorA.Set(0.f, -15.f); // Anclas
 	mRevoluteJointDef.localAnchorB.Set(0.f, 0.f); // Anclas
 	mRevoluteJoint = (b2RevoluteJoint*)mWorld.CreateJoint(&mRevoluteJointDef);
 

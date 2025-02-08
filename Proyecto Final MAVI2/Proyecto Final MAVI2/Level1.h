@@ -3,6 +3,7 @@
 #include "CircleOfFire.h"
 #include "Pendulum.h"
 #include "Box.h"
+#include "StaticBox.h"
 
 class Level1 : public Level
 {
@@ -23,6 +24,7 @@ private:
 	CircleOfFire* mCircleOfFire;
 	Pendulum* mPendulum[10];
 	Box* mBox[10];
+	StaticBox* mStaticBox[10];
 
 	ContactListener* mContactListener;
 

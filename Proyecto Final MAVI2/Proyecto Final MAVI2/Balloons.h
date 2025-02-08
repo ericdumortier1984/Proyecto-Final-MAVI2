@@ -10,6 +10,7 @@ public:
 	Balloons(b2World& mWorld, b2Vec2 mPosition);
 	~Balloons();
 
+	void Update(float mDeltaTime);
 	void Draw(RenderWindow& mWindow);
 
 private:
@@ -23,5 +24,6 @@ private:
 	b2Fixture* mFixtureBalloon;
 	b2FixtureDef mFixtureDefBalloon;
 
+	float mSpeed; // Velocidad de ascenso
 	int mID;
 };

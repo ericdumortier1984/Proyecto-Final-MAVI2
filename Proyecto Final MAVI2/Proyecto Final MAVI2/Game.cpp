@@ -10,7 +10,6 @@ void Game::Run()
     while (mWindow.isOpen())
     {
         ProcessEvents();
-        Update();
         Render();
     }
 }
@@ -119,11 +118,6 @@ void Game::ProcessEvents()
             }
         }
     }
-}
-
-void Game::Update()
-{
-    // Aquí puedes agregar lógica de actualización si es necesario
 }
 
 void Game::Render()

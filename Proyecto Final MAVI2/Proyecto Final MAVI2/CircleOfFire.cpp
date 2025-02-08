@@ -30,7 +30,7 @@ CircleOfFire::CircleOfFire(b2World& mWorld, b2Vec2 mPosition) : mID(3)
 	mBodyDefBase.position = mPosition - b2Vec2(0.f, -17.f);
 	mBodyBase = mWorld.CreateBody(&mBodyDefBase);
 	b2PolygonShape mBaseShape;
-	mBaseShape.SetAsBox(8.f, 8.f);
+	mBaseShape.SetAsBox(6.f, 6.f);
 	mFixtureDefBase.shape = &mBaseShape;
 	mFixtureBase = mBodyBase->CreateFixture(&mFixtureDefBase);
 

@@ -13,7 +13,7 @@ Box::Box(b2World& mWorld, b2Vec2 mPosition) : mID(2)
 	mBodyDefBox.position = mPosition;
 	mBodyBox = mWorld.CreateBody(&mBodyDefBox);
 	b2PolygonShape mBoxShape;
-	mBoxShape.SetAsBox(4.f, 4.f);
+	mBoxShape.SetAsBox(3.5f, 3.5f);
 	mFixtureDefBox.shape = &mBoxShape;
 	mFixtureDefBox.density = 0.025f; // 0.275
 	mFixtureDefBox.restitution = 0.3f;

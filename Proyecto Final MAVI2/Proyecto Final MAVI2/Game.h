@@ -19,6 +19,5 @@ private:
     bool inInfoMenu;
 
     void ProcessEvents();
-    void Update();
     void Render();
 };

@@ -2,6 +2,8 @@
 #include "Level.h"
 #include "Pulley.h"
 #include "Box.h"
+#include "StaticBox.h"
+#include "DynamicPlatform.h"
 #include "Balloons.h"
 
 class Level2 : public Level
@@ -20,9 +22,11 @@ protected:
 
 private:
 
-	Box* mBox[10];
+	Box* mBox[20];
+	StaticBox* mStaticBox[10];
 	Pulley* mPulley[10];
 	Balloons* mBalloons;
+	DynamicPlatform* mDynamicPlatform[10];
 
 	ContactListener* mContactListener;
 

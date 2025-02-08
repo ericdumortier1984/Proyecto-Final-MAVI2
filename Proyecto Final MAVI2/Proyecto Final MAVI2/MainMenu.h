@@ -31,7 +31,7 @@ public:
 
 private:
 
-	// enteros seleccionados
+	// variables que son retornadas en metodo ...Pressed()
 	int mMainMenuSelected;
 	int mLevelMenuSelected;
 
@@ -44,15 +44,23 @@ private:
 	Text mLevelMenu[MAX_LEVEL_MENU];
 	Text* mLevelSelect;
 	Text* mInfoText;
+	Text* mKeyboardText;
+	Text* mMouseText;
 
 	// Texturas, sprites y shapes
 	Texture* mBackMenuTx;
 	Texture* mTitleTx;
 	Texture* mMiniLevelTx[MAX_LEVEL_MENU];
+	Texture* mKeyboardTx;
+	Texture* mMouseTx;
+	Texture* mLevelInfoTx;
 
 	Sprite* mBackMenuSp;
 	Sprite* mTitleSp;
 	Sprite* mMiniLevelSp[MAX_LEVEL_MENU];
+	Sprite* mKeyboardSp;
+	Sprite* mMouseSp;
+	Sprite* mLevelInfoSp;
 	
 	RectangleShape* mMiniLevelThickness[MAX_LEVEL_MENU];
 };

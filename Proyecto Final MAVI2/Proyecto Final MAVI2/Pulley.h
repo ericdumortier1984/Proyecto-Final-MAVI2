@@ -15,25 +15,25 @@ public:
 private:
 
 	Texture* mPulleyTx;
-	Texture* mCircleTx;
+	Texture* mLoadTx;
 	Sprite* mPulleySp;
-	Sprite* mCircleSp;
+	Sprite* mLoadSp;
 	Avatar* mPulleyAvatar;
-	Avatar* mCircleAvatarA;
-	Avatar* mCircleAvatarB;
+	Avatar* mLoadAvatarA;
+	Avatar* mLoadAvatarB;
 
 	b2Body* mBodyPulley = nullptr;
-	b2Body* mBodyCircleA = nullptr;
-	b2Body* mBodyCircleB = nullptr;
+	b2Body* mBodyLoadA = nullptr;
+	b2Body* mBodyLoadB = nullptr;
 	b2BodyDef mBodyDefPulley;
-	b2BodyDef mBodyDefCircleA;
-	b2BodyDef mBodyDefCircleB;
+	b2BodyDef mBodyDefLoadA;
+	b2BodyDef mBodyDefLoadB;
 	b2Fixture* mFixturePulley;
-	b2Fixture* mFixtureCircleA;
-	b2Fixture* mFixtureCircleB;
+	b2Fixture* mFixtureLoadA;
+	b2Fixture* mFixtureLoadB;
 	b2FixtureDef mFixtureDefPulley;
-	b2FixtureDef mFixtureDefCircleA;
-	b2FixtureDef mFixtureDefCircleB;
+	b2FixtureDef mFixtureDefLoadA;
+	b2FixtureDef mFixtureDefLoadB;
 	b2PulleyJoint* mPulleyJoint;
 
 	int mID;

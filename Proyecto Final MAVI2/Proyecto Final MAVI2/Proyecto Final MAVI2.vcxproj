@@ -136,6 +136,7 @@
     <ClCompile Include="Canon.cpp" />
     <ClCompile Include="CircleOfFire.cpp" />
     <ClCompile Include="ContacListener.cpp" />
+    <ClCompile Include="DynamicPlatform.cpp" />
     <ClCompile Include="EmptyCans.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -146,6 +147,8 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Pendulum.cpp" />
+    <ClCompile Include="StaticBox.cpp" />
+    <ClCompile Include="StaticPlatform.cpp" />
     <ClCompile Include="Pulley.cpp" />
     <ClCompile Include="Ragdoll.cpp" />
     <ClCompile Include="Wheel.cpp" />
@@ -157,6 +160,7 @@
     <ClInclude Include="Canon.h" />
     <ClInclude Include="CircleOfFire.h" />
     <ClInclude Include="ContactListener.h" />
+    <ClInclude Include="DynamicPlatform.h" />
     <ClInclude Include="EmptyCans.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Game.h" />
@@ -167,6 +171,8 @@
     <ClInclude Include="MainHeader.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Pendulum.h" />
+    <ClInclude Include="StaticBox.h" />
+    <ClInclude Include="StaticPlatform.h" />
     <ClInclude Include="Pulley.h" />
     <ClInclude Include="Ragdoll.h" />
     <ClInclude Include="Wheel.h" />
