@@ -1,10 +1,12 @@
 #include "Game.h"
 
+// Constructor
 Game::Game() :mWindow(VideoMode(1280, 720), "PROYECTO FINAL MAVI2"), mainMenu(mWindow.getSize().x, mWindow.getSize().y),inLevelMenu(false),inInfoMenu(false)
 {
 
 }
 
+// Metodo para ejecutar el juego
 void Game::Run()
 {
     while (mWindow.isOpen())
@@ -14,6 +16,7 @@ void Game::Run()
     }
 }
 
+// metodo para procesar eventos de la ventana
 void Game::ProcessEvents()
 {
     Event event;
@@ -120,6 +123,7 @@ void Game::ProcessEvents()
     }
 }
 
+// Metodo para renderizar el contenido de la ventana
 void Game::Render()
 {
     mWindow.clear();

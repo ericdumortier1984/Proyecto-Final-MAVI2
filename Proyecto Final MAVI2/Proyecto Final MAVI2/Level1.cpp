@@ -6,8 +6,10 @@ Level1::Level1(int mWidth, int mHeight, bool mUnlocked) : Level(mWidth, mHeight,
 
 	cout << "[LEVEL 1]" << endl; // Debug
 
+	// Inicializacion del listener de colisiones
 	mContactListener = new ContactListener(this);
 
+	// configuracion de colisiones
 	CheckCollisions();
 
 	// Inicializacion pendulos
@@ -35,7 +37,7 @@ Level1::Level1(int mWidth, int mHeight, bool mUnlocked) : Level(mWidth, mHeight,
 	if (mCircleOfFire == nullptr) mCircleOfFire = new CircleOfFire(*mWorld, { 120.f, 140.5f });
 }
 
-// Deconstructor
+// Destructor
 Level1::~Level1()
 {
 	for (int i = 0; i < 10; ++i)
@@ -47,17 +49,20 @@ Level1::~Level1()
 	delete mCircleOfFire;
 }
 
+// Metodo para configurar las colisiones
 void Level1::CheckCollisions()
 {
 
 	mWorld->SetContactListener(mContactListener);
 }
 
+// Metodo para verificar si el nivel esta desbloqueado
 bool Level1::UnlockedLevel() const
 {
 	return mUnlocked;
 }
 
+// metodo para finalizar el nivel
 bool Level1::FinishLevel()
 {
 	if (!mLevelFinish)
@@ -71,6 +76,7 @@ bool Level1::FinishLevel()
 	return true;
 }
 
+// Metodo para ejecutar el nivel
 void Level1::RunLevel()
 {
 

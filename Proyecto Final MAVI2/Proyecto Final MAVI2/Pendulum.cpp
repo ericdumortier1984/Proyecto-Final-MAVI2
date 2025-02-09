@@ -1,22 +1,23 @@
 #include "Pendulum.h"
 #include "Avatar.h"
 
+// Constructor
 Pendulum::Pendulum(b2World& mWorld, b2Vec2 mPosition) : mID(5)
 {
 
-	// Texturas
+	// Carga de las texturas
 	mPendulumTx = new Texture;
 	mCircleTx = new Texture;
 	if (!mPendulumTx->loadFromFile("Assets/Objects/pendulum.png")) {cout << "Error al cargar la textura del pendulo" << endl; }
 	if (!mCircleTx->loadFromFile("Assets/Objects/wheel.png")) { cout << "Error al cargar la textura del circulo" << endl; }
 
-	// Sprites
+	// Creacion de Sprites y asigancion de texturas
 	mPendulumSp = new Sprite;
 	mCircleSp = new Sprite;
 	mPendulumSp->setTexture(*mPendulumTx);
 	mCircleSp->setTexture(*mCircleTx);
 
-	// Cuerpos
+	// Definicion de cuerpos en Box2D
 	mBodyDefPendulum.type = b2_dynamicBody;
 	mBodyDefPendulum.position = mPosition;
 	mBodyPendulum = mWorld.CreateBody(&mBodyDefPendulum);
@@ -25,7 +26,7 @@ Pendulum::Pendulum(b2World& mWorld, b2Vec2 mPosition) : mID(5)
 	mBodyDefCircle.position = b2Vec2(mPosition.x, mPosition.y - 5);
 	mBodyCircle = mWorld.CreateBody(&mBodyDefCircle);
 
-	// Formas y fixtures
+	// Definicion de formas y fixtures
 	b2PolygonShape mPendulumShape;
 	mPendulumShape.SetAsBox(3.f, 10.f);
 	mFixtureDefPendulum.shape = &mPendulumShape;
@@ -41,7 +42,7 @@ Pendulum::Pendulum(b2World& mWorld, b2Vec2 mPosition) : mID(5)
 	mFixtureDefCircle.restitution = 0.3f;
 	mFixtureCircle = mBodyCircle->CreateFixture(&mFixtureDefCircle);
 
-	// Joint
+	// Definicion del joint
 	b2RevoluteJointDef mRevoluteJointDef;
 	mRevoluteJointDef.bodyA = mBodyPendulum;
 	mRevoluteJointDef.bodyB = mBodyCircle;
@@ -49,13 +50,15 @@ Pendulum::Pendulum(b2World& mWorld, b2Vec2 mPosition) : mID(5)
 	mRevoluteJointDef.localAnchorB.Set(0.f, 0.f); // Anclas
 	mRevoluteJoint = (b2RevoluteJoint*)mWorld.CreateJoint(&mRevoluteJointDef);
 
+	// Asignacion de identidad al cuerpo de el pendulo
 	mBodyPendulum->GetUserData().pointer = (uintptr_t)mID; //ID
 
-	// Avatares
+	// Creacion de avatares
 	mPendulumAvatar = new Avatar(mBodyPendulum, mPendulumSp);
 	mCircleAvatar = new Avatar(mBodyCircle, mCircleSp);
 }
 
+// Destructor
 Pendulum::~Pendulum()
 {
 
@@ -67,6 +70,7 @@ Pendulum::~Pendulum()
 	delete mCircleAvatar;
 }
 
+// Metodo para dibujar el pendulo en la ventana
 void Pendulum::Draw(RenderWindow& mWindow)
 {
 

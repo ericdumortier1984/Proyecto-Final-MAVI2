@@ -5,26 +5,24 @@
 Pulley::Pulley(b2World& mWorld, b2Vec2 mPosition) : mID(6)
 {
 
-	// Texturas
+	// Carga de texturas
 	mPulleyTx = new Texture;
 	mLoadTx = new Texture;
 	if (!mPulleyTx->loadFromFile("Assets/Objects/staticPlatform.png")) { cout << "Error al cargar la textura de la plataforma" << endl; }
 	if (!mLoadTx->loadFromFile("Assets/Objects/staticBox.png")) { cout << "Error al cargar la textura de la carga" << endl; }
 
-	// Sprites
+	// Creacion de Sprites y asignacion de texturas
 	mPulleySp = new Sprite;
 	mLoadSp = new Sprite;
 	mPulleySp->setTexture(*mPulleyTx);
 	mLoadSp->setTexture(*mLoadTx);
 
-	/////////////////     Cuerpos      ///////////////////
-	
-	// Cuerpo plataforma horizontal de las poleas
+	// Definicion del cuerpo de la plataforma horizontal de las poleas
 	mBodyDefPulley.type = b2_staticBody;
 	mBodyDefPulley.position = mPosition;
 	mBodyPulley = mWorld.CreateBody(&mBodyDefPulley);
 
-	// Cuerpos de las cargas o pesos de las poleas
+	// Definicion de los cuerpos de las cargas o pesos de las poleas
 	mBodyDefLoadA.type = b2_dynamicBody;
 	mBodyDefLoadA.position = b2Vec2(mPosition.x - 15, mPosition.y + 45);
 	mBodyDefLoadA.fixedRotation = true; // Evitar rotación
@@ -35,9 +33,7 @@ Pulley::Pulley(b2World& mWorld, b2Vec2 mPosition) : mID(6)
 	mBodyDefLoadB.fixedRotation = true; // Evitar rotación
 	mBodyLoadB = mWorld.CreateBody(&mBodyDefLoadB);
 
-	/////////// Formas y fixtures /////////////
-
-	//  Shape de la plataforma que sostiene las cargas
+	// Definicion de las formas y propiedades de la plataforma que sostiene las cargas
 	b2PolygonShape mPulleyShape;
 	mPulleyShape.SetAsBox(15.0f, 1.5f);
 	mFixtureDefPulley.shape = &mPulleyShape;
@@ -46,13 +42,13 @@ Pulley::Pulley(b2World& mWorld, b2Vec2 mPosition) : mID(6)
 	mFixtureDefPulley.friction = 0.3f;
 	mFixturePulley = mBodyPulley->CreateFixture(&mFixtureDefPulley);
 
-	// Shape de cargas lado izquierdo
+	// Definicion de la forma y propiedades de cargas lado izquierdo
 	b2PolygonShape mLoadShapeA;
 	mLoadShapeA.SetAsBox(4.5f, 4.5f);
 	mFixtureDefLoadA.shape = &mLoadShapeA;
 	mFixtureDefLoadA.density = 0.1f;
 	
-	// Shape de cargas lado derecho
+	// Definicion de forma y propiedades de cargas lado derecho
 	b2PolygonShape mLoadShapeB;
 	mLoadShapeB.SetAsBox(4.5f, 4.5f);
 	mFixtureDefLoadB.shape = &mLoadShapeB;
@@ -61,7 +57,7 @@ Pulley::Pulley(b2World& mWorld, b2Vec2 mPosition) : mID(6)
 	mFixtureLoadA = mBodyLoadA->CreateFixture(&mFixtureDefLoadA);
 	mFixtureLoadB = mBodyLoadB->CreateFixture(&mFixtureDefLoadB);
 
-	// Pulley Joint
+	// Definicion del Pulley Joint
 	b2PulleyJointDef mPulleyJointDef;
 	b2Vec2 mAnchorA(mPosition.x - 15.f, mPosition.y + 45);
 	b2Vec2 mAnchorB(mPosition.x + 15.f, mPosition.y + 25);
@@ -72,15 +68,16 @@ Pulley::Pulley(b2World& mWorld, b2Vec2 mPosition) : mID(6)
 	mPulleyJointDef.Initialize(mBodyLoadA, mBodyLoadB, mGroundAnchorA, mGroundAnchorB, mAnchorA, mAnchorB, mRatio);
 	mPulleyJoint = (b2PulleyJoint*)mWorld.CreateJoint(&mPulleyJointDef);
 
+	// Asigna una identidad al cuerpo de el sistema de poleas
 	mBodyPulley->GetUserData().pointer = (uintptr_t)mID; //ID
 
-	// Avatares
+	// Creacion de avatares 
 	mPulleyAvatar = new Avatar(mBodyPulley, mPulleySp);
 	mLoadAvatarA = new Avatar(mBodyLoadA, mLoadSp);
 	mLoadAvatarB = new Avatar(mBodyLoadB, mLoadSp);
 }
 
-// Liberamos memoria
+// Destructor
 Pulley::~Pulley()
 {
 
@@ -93,6 +90,7 @@ Pulley::~Pulley()
 	delete mLoadAvatarB;
 }
 
+// Metodo para dibujar el sistemas de poleas en la ventana
 void Pulley::Draw(RenderWindow& mWindow)
 {
 

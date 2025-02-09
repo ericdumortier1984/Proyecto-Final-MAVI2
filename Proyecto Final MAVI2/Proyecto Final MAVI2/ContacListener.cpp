@@ -7,45 +7,29 @@
 void ContactListener::BeginContact(b2Contact* mContact)
 {
 
-	CheckAABB(mContact->GetFixtureA(), mContact->GetFixtureB());
-	CheckAABB(mContact->GetFixtureB(), mContact->GetFixtureA());
+	// verificacion de las colisiones entre los fixtures A y B
+	CheckTypeOfCollision(mContact->GetFixtureA(), mContact->GetFixtureB());
+	CheckTypeOfCollision(mContact->GetFixtureB(), mContact->GetFixtureA());
 }
 
+// Metodo para manejar el fin del contacto
 void ContactListener::EndContact(b2Contact* mContact)
 {
 
 }
 
-void ContactListener::CheckAABB(b2Fixture* mFixtureA, b2Fixture* mFixtureB)
+// Metodo para verificar colisiones entre dos fixtures
+void ContactListener::CheckTypeOfCollision(b2Fixture* mFixtureA, b2Fixture* mFixtureB)
 {
-	b2Body* mBodyA = mFixtureA->GetBody();
 
+	// Obtencion de los cuerpos de los fixtures
+	b2Body* mBodyA = mFixtureA->GetBody();
 	b2Body* mBodyB = mFixtureB->GetBody();
 
+	// Ontencion de las identidades de los cuerpos
 	int mID1 = (int)mBodyA->GetUserData().pointer;
 	int mID2 = (int)mBodyB->GetUserData().pointer;
 
-	if (mID1 == 0)
-	{
-		switch (mID2)
-		{
-		case 0:
-			//cout << "Colision:  WIN OBJECT -> OTRA COLISION << endl;"
-			break;
-
-		case 1:
-			//cout << "Colision:  RAGDOLL -> WIN OBJECT << endl;";
-			mBodyB->GetUserData().pointer = (uintptr_t)0;
-			break;
-		case 2:
-			//cout << "Colision:  OTRA COLISION -> WIN OBJECT << endl;"
-			break;
-		case 3:
-			//cout << "Colision: CIRCLE OF FIRE -> WIN OBJECT << endl;"
-		default:
-			break;
-		}
-	}
 	// logica para colisiones entre Wheel y Ragdoll
 	if ((mID1 == 1 && mID2 == 0) || (mID1 == 0 && mID2 == 1))
 	{
@@ -56,7 +40,7 @@ void ContactListener::CheckAABB(b2Fixture* mFixtureA, b2Fixture* mFixtureB)
 	// Logica para colisiones entre Box y Ragdoll
 	else if ((mID1 == 2 && mID2 == 0) || (mID1 == 0 && mID2 == 2))
 	{
-		//cout << "[COLISION: BOX -> RAGDOLL]" << endl;
+		// cout << "[COLISION: BOX -> RAGDOLL]" << endl;
 		// Logica adicional para la colision Box -> Ragdoll 
 	}
 	// logica para colisiones entre Circle of Fire y Ragdoll
@@ -76,13 +60,13 @@ void ContactListener::CheckAABB(b2Fixture* mFixtureA, b2Fixture* mFixtureB)
 	// logica para colisiones entre Pendulum y Ragdoll
 	else if ((mID1 == 5 && mID2 == 0) || (mID1 == 0 && mID2 == 5))
 	{
-		//cout << "[COLISION: PENDULUM -> RAGDOLL]" << endl;
+		// cout << "[COLISION: PENDULUM -> RAGDOLL]" << endl;
 		// logica adicional para la colision pendulum -> Ragdoll
 	}
 	// logica para colisiones entre Pulley y Ragdoll
 	else if ((mID1 == 6 && mID2 == 0) || (mID1 == 0 && mID2 == 6))
 	{
-		//cout << "[COLISION: PULLEY -> RAGDOLL]" << endl;
+		// cout << "[COLISION: PULLEY -> RAGDOLL]" << endl;
 		// logica adicional para la colision pulley -> Ragdoll
 	}
 	// logica para colisones entre Empty Cans y Ragdoll
@@ -95,19 +79,19 @@ void ContactListener::CheckAABB(b2Fixture* mFixtureA, b2Fixture* mFixtureB)
 	// logica para colisones entre Static Platform y Ragdoll
 	else if ((mID1 == 8 && mID2 == 0) || (mID1 == 0 && mID2 == 8))
 	{
-		//cout << "[COLISION: STATIC PLATFORM -> RAGDOLL]" << endl;
+		// cout << "[COLISION: STATIC PLATFORM -> RAGDOLL]" << endl;
 		// logica adicional para colision Static Platform y Ragdoll
 	}
 	// logica para colisones entre Dynamic Platform y Ragdoll
 	else if ((mID1 == 9 && mID2 == 0) || (mID1 == 0 && mID2 == 9))
 	{
-		//cout << "[COLISION: DYNAMIC PLATFORM -> RAGDOLL]" << endl;
+		// cout << "[COLISION: DYNAMIC PLATFORM -> RAGDOLL]" << endl;
 		// logica adicional para colision Dynamic Platform y Ragdoll
 	}
 	// logica para colisones entre Static Box y Ragdoll
 	else if ((mID1 == 10 && mID2 == 0) || (mID1 == 0 && mID2 == 10))
 	{
-		//cout << "[COLISION: STATIC BOX -> RAGDOLL]" << endl;
+		// cout << "[COLISION: STATIC BOX -> RAGDOLL]" << endl;
 		// logica adicional para colision Static Box y Ragdoll
 	}
 }

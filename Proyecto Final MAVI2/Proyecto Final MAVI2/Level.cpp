@@ -1,17 +1,20 @@
 #include "Level.h"
 
+// Constructor
 Level::Level(int mWidth, int mHeight, bool mUnlocked) : mFps(60.f), mFrameTime(1.f / mFps), mActualTime(0.f), mLevelFinish(false), mLevelUnlocked(false), mRagdollCount(10)
 {
 
+    // Inicializacion de la ventana
     mWindow = new RenderWindow(VideoMode(1280, 720), "LEVEL");
     mWindow->setFramerateLimit(mFps);
 
+    // Inicializacion de eventos, camara, reloj y tiempo
     mEvent = new Event;
     mCamara = new View;
     mClock = new Clock;
     mInitTime = new Time;
 
-    // Audio
+    // Inicializacion de audio
     mLevelMusic = new Music;
     mShootSound = new Sound;
     mLoseSound = new Sound;
@@ -20,6 +23,7 @@ Level::Level(int mWidth, int mHeight, bool mUnlocked) : mFps(60.f), mFrameTime(1
     mLoseBuffer = new SoundBuffer;
     mVictoryBuffer = new SoundBuffer;
 
+    // carga la musica y los sonidos
     if (!mLevelMusic->openFromFile("Sounds/musicCircusLevel.ogg")) { cout << "Error al cargar la musica del nivel" << endl; }
     if (!mShootBuffer->loadFromFile("Sounds/canonShoot.ogg")) { cout << "Error al cargar el sonido del disparo" << endl; }
     if (!mLoseBuffer->loadFromFile("Sounds/boohCircusSound.ogg")) { cout << "Error al cargar el sonido de derrota" << endl; }
@@ -31,7 +35,7 @@ Level::Level(int mWidth, int mHeight, bool mUnlocked) : mFps(60.f), mFrameTime(1
     mLoseSound->setBuffer(*mLoseBuffer);
     mVictorySound->setBuffer(*mVictoryBuffer);
 
-    //Crosshair
+    // Inicializacion dl crosshair
     mCrosshairTx = new Texture;
     if (!mCrosshairTx->loadFromFile("Assets/Objects/crosshair.png")) { cout << "Error al cargar la textura de crosshair" << endl; }
     mCrosshairSp = new Sprite;
@@ -40,7 +44,7 @@ Level::Level(int mWidth, int mHeight, bool mUnlocked) : mFps(60.f), mFrameTime(1
     mCrosshairSp->setOrigin(mCrosshairTx->getSize().x / 2, mCrosshairTx->getSize().y / 2);
     mCrosshairSp->setPosition(mWindow->mapPixelToCoords(Mouse::getPosition(*mWindow)));
 
-    //UI
+    // Inicializacion de la interfaz de usuario
     for (int i = 0; i < 3; i ++) 
     {
         mUItx[i] = new Texture;
@@ -54,6 +58,7 @@ Level::Level(int mWidth, int mHeight, bool mUnlocked) : mFps(60.f), mFrameTime(1
     mUIsp[1]->setPosition(-3.f, 30.f);
     mUIsp[2]->setPosition(88.f, 30.f);
 
+    // Inicializacion de fuentes y textos
     mFont = new Font;
     if (!mFont->loadFromFile("Fonts/COOPBL.ttf")) { cout << "Error al cargar la fuente" << endl; }
 
@@ -95,13 +100,15 @@ Level::Level(int mWidth, int mHeight, bool mUnlocked) : mFps(60.f), mFrameTime(1
     mStateMsg->setOutlineThickness(2);
     mStateMsg->setOutlineColor(Color::White);
 
+    // Inicializacion de la fisica Box2D
     InitPhysics();
 
-    // Inicializacion de objetos
+    // Inicializacion de el canon y el piso
     mCanon = new Canon(*mWorld);
     mFloor = new Floor(*mWorld);
 }
 
+// Destructor
 Level::~Level()
 {
     delete mWindow;
@@ -125,6 +132,7 @@ Level::~Level()
     for (int i = 0; i < 3; i++) {delete mUItx[i]; delete mUIsp[i];}
 }
 
+// Metodo para configurar la camara
 void Level::SetCamara(float mZoom)
 {
     mCamara->setSize(mWindow->getSize().x * mZoom, mWindow->getSize().y * mZoom);
@@ -132,17 +140,20 @@ void Level::SetCamara(float mZoom)
     mWindow->setView(*mCamara);
 }
 
+// Metodo para inicializar la fisica 
 void Level::InitPhysics()
 {
     mWorld = new b2World({ 0.f, 9.8f });
 }
 
+// metodo para actualizar la fisica
 void Level::UpdatePhysics()
 {
     mWorld->Step(mFrameTime, 8, 8);
     mWorld->ClearForces();
 }
 
+// Metodo para ejecutar el nivel
 void Level::Run()
 {
 
@@ -166,6 +177,7 @@ void Level::Run()
     }
 }
 
+// Metodo para procesar los eventos de la ventana
 void Level::ProcessEvents()
 {
     while (mWindow->pollEvent(*mEvent))
@@ -232,6 +244,7 @@ void Level::ProcessEvents()
     }
 }
 
+// Metodo para actualizar el estado del nivel
 void Level::Update()
 {
     float mTimeRemaining = 0.f;
@@ -253,6 +266,7 @@ void Level::Update()
     mCountdownTimer->setString("TIME: " + to_string(seconds));
 }
 
+// Metodo para mostrar mensajes en pantalla
 void Level::ShowMsg(const string& mMessage)
 {
 
@@ -263,6 +277,7 @@ void Level::ShowMsg(const string& mMessage)
     mWindow->close();
 }
 
+// metodo para dibujar el contenido del nivel
 void Level::Draw()
 {
    

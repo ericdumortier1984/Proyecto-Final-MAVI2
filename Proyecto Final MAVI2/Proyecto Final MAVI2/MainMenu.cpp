@@ -6,11 +6,11 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 
 	cout << "[MENU]" << endl; // Debug
 
-	// Fuente
+	// Carga de la fuente
 	mFont = new Font;
 	mFont->loadFromFile("Fonts/COOPBL.ttf");
 
-	// Textura y sprite de fondo y titulo
+	// Carga de la textura y sprite de fondo y titulo
 	mBackMenuTx = new Texture;
 	if (!mBackMenuTx->loadFromFile("Assets/Backgrounds/backgroundMain2.jpg")) { cout << "Error al cargar imagen de fondo en menu" << endl; }
 	mBackMenuSp = new Sprite;
@@ -24,7 +24,7 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 	mTitleSp->setScale(1.f, 0.5f);
 	mTitleSp->setPosition(mWidth / 4, 0.f);
 
-	// Audio
+	// Carga de la musica del menu
 	mMenuMusic = new Music;
 	if (!mMenuMusic->openFromFile("Sounds/menuCircusMusic.ogg")) { cout << "Error al cargar musica de MENU" << endl; }
 	mMenuMusic->setVolume(15.f);
@@ -33,7 +33,7 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 
 	///////////////// Fuentes de los Botones ////////////////
 	
-	// START GAME
+	// boton START GAME
 	mMainMenu[0].setFont(*mFont);
 	mMainMenu[0].setCharacterSize(50);
 	mMainMenu[0].setFillColor(Color::Black);
@@ -41,7 +41,7 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 	mMainMenu[0].setOutlineColor(Color::Black);
 	mMainMenu[0].setOutlineThickness(2);
 	mMainMenu[0].setPosition(490, 380);
-	// INFO
+	// Boton INFO
 	mMainMenu[1].setFont(*mFont);
 	mMainMenu[1].setCharacterSize(50);
 	mMainMenu[1].setFillColor(Color::Black);
@@ -49,7 +49,7 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 	mMainMenu[1].setOutlineColor(Color::Black);
 	mMainMenu[1].setOutlineThickness(2);
 	mMainMenu[1].setPosition(580, 450);
-	// EXIT
+	// Boton EXIT
 	mMainMenu[2].setFont(*mFont);
 	mMainMenu[2].setCharacterSize(50);
 	mMainMenu[2].setFillColor(Color::Black);
@@ -58,7 +58,7 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 	mMainMenu[2].setOutlineThickness(2);
 	mMainMenu[2].setPosition(580, 520);
 
-	// SELECT LEVEL
+	// Texto SELECT LEVEL
 	mLevelSelect = new Text;
 	mLevelSelect->setFont(*mFont);
 	mLevelSelect->setCharacterSize(50);
@@ -68,7 +68,7 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 	mLevelSelect->setOutlineThickness(0.5);
 	mLevelSelect->setPosition(390, 140);
 
-	//LEVEL 1 
+	// Boton LEVEL 1 
 	mLevelMenu[0].setFont(*mFont);
 	mLevelMenu[0].setCharacterSize(25);
 	mLevelMenu[0].setFillColor(Color(144, 292, 144));
@@ -76,7 +76,7 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 	mLevelMenu[0].setOutlineColor(Color::Black);
 	mLevelMenu[0].setOutlineThickness(0.5);
 	mLevelMenu[0].setPosition(160, 265);
-	//LEVEL 2
+	// Boton LEVEL 2
 	mLevelMenu[1].setFont(*mFont);
 	mLevelMenu[1].setCharacterSize(25);
 	mLevelMenu[1].setFillColor(Color(144, 292, 144));
@@ -84,7 +84,7 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 	mLevelMenu[1].setOutlineColor(Color::Black);
 	mLevelMenu[1].setOutlineThickness(0.5);
 	mLevelMenu[1].setPosition(490, 265);
-	//LEVEL 3
+	// Boton LEVEL 3
 	mLevelMenu[2].setFont(*mFont);
 	mLevelMenu[2].setCharacterSize(25);
 	mLevelMenu[2].setFillColor(Color(144, 292, 144));
@@ -170,7 +170,7 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 	mLevelMenuSelected = -1;
 }
 
-// Deconstructor
+// Destructor
 MainMenu::~MainMenu()
 {
 	delete mFont;
@@ -196,7 +196,7 @@ MainMenu::~MainMenu()
 	}
 }
 
-// Seleccion de opciones a traves de teclado y mouse
+// Metodo para mover la seleccion de opciones hacia arriba
 void MainMenu::MoveUp()
 {
 	if (mMainMenuSelected - 1 >= 0)
@@ -207,6 +207,7 @@ void MainMenu::MoveUp()
 	}
 }
 
+// metodo para mover la seleccion de opciones hacia abajo
 void MainMenu::MoveDown()
 {
 	if (mMainMenuSelected + 1 < MAX_MAIN_MENU)
@@ -217,6 +218,7 @@ void MainMenu::MoveDown()
 	}
 }
 
+// Metodo para manejar el movimiento del mouse
 void MainMenu::MouseMove(Vector2f mousePos)
 {
 	for (int i = 0; i < MAX_LEVEL_MENU; i++)
@@ -229,20 +231,21 @@ void MainMenu::MouseMove(Vector2f mousePos)
 	}
 }
 
-// Audio
+// Metodo para reproducir la musica del menu
 void MainMenu::PlayMusic()
 {
 
 	mMenuMusic->play();
 }
 
+// metodo para detener la musica del menu
 void MainMenu::StopMusic()
 {
 
 	mMenuMusic->stop();
 }
 
-// Dibujamos menu principal
+// Metodo para dibujar el menu principal
 void MainMenu::Draw(RenderWindow& mWindow)
 {
 
@@ -257,7 +260,7 @@ void MainMenu::Draw(RenderWindow& mWindow)
 	}
 }
 
-// Dibujamos menu de niveles
+// Metodo para dibujar el menu de niveles
 void MainMenu::DrawLevelMenu(RenderWindow& mWindow)
 {
 
@@ -275,7 +278,7 @@ void MainMenu::DrawLevelMenu(RenderWindow& mWindow)
 	}
 }
 
-// Dibujamos menu de informacion
+// Metodo para dibujar el menu de informacion
 void MainMenu::DrawInfo(RenderWindow& mWindow)
 {
 

@@ -16,7 +16,7 @@ public:
 
     void BeginContact(b2Contact* mContact);
     void EndContact(b2Contact* mContact);
-    void CheckAABB(b2Fixture* mFixtureA, b2Fixture* mFixtureB);
+    void CheckTypeOfCollision(b2Fixture* mFixtureA, b2Fixture* mFixtureB);
 
 private:
 

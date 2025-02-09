@@ -5,8 +5,10 @@ Level3::Level3(int mWidth, int mHeight, bool mUnlocked) : Level(mWidth, mHeight,
 
 	cout << "[LEVEL 3]" << endl; // Debug
 
+	// Inicialiacion del listener de colisiones
 	mContactListener = new ContactListener(this);
 
+	// Configuracion de las colisiones
 	CheckCollisions();
 
 	// Inicializacion de ruedas
@@ -57,6 +59,7 @@ Level3::Level3(int mWidth, int mHeight, bool mUnlocked) : Level(mWidth, mHeight,
 	if (mEmptyCans == nullptr) mEmptyCans = new EmptyCans(*mWorld, { 130.f, 146.f }); 
 }
 
+// Destructor
 Level3::~Level3()
 {
 
@@ -75,17 +78,20 @@ Level3::~Level3()
 	
 }
 
+// Método para configurar las colisiones
 void Level3::CheckCollisions()
 {
 
 	mWorld->SetContactListener(mContactListener);
 }
 
+// Método para configurar las colisiones
 bool Level3::UnlockedLevel() const
 {
 	return mUnlocked;
 }
 
+// Método para mostrar el mensaje de derrota
 void Level3::ShowLoseMsg()
 {
 
@@ -96,6 +102,7 @@ void Level3::ShowLoseMsg()
 	ShowMsg("YOU HIT THE WHELL OF DEAD");
 }
 
+// Método para manejar el daño recibido
 bool Level3::GetHurt()
 {
 
@@ -104,6 +111,7 @@ bool Level3::GetHurt()
 	return true;
 }
 
+// Método para finalizar el nivel
 bool Level3::FinishLevel()
 {
 	if (!mLevelFinish)
@@ -116,6 +124,7 @@ bool Level3::FinishLevel()
 	return true;
 }
 
+// Método para ejecutar el nivel
 void Level3::RunLevel()
 {
 	// Limpiar

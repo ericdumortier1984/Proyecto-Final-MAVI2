@@ -6,8 +6,10 @@ Level2::Level2(int mWidth, int mHeight, bool mUnlocked) : Level(mWidth, mHeight,
 
 	cout << "[LEVEL 2]" << endl; // Debug
 
+	// Inicialización del listener de colisiones
 	mContactListener = new ContactListener(this);
 
+	// Configuración de colisiones
 	CheckCollisions();
 
 	// Poleas
@@ -49,7 +51,7 @@ Level2::Level2(int mWidth, int mHeight, bool mUnlocked) : Level(mWidth, mHeight,
 	if (mBalloons == nullptr) mBalloons = new Balloons(*mWorld, { 120.f, 150.f });
 }
 
-// Liberamos memoria
+// Destructor
 Level2::~Level2()
 {
 	for (int i = 0; i < 10; ++i)
@@ -62,17 +64,20 @@ Level2::~Level2()
 	delete mBalloons;
 }
 
+// Configuración de colisiones
 void Level2::CheckCollisions()
 {
 
 	mWorld->SetContactListener(mContactListener);
 }
 
+// Método para verificar si el nivel está desbloqueado
 bool Level2::UnlockedLevel() const
 {
 	return mUnlocked;
 }
 
+// Método para finalizar el nivel
 bool Level2::FinishLevel()
 {
 	if (!mLevelFinish)
@@ -85,6 +90,7 @@ bool Level2::FinishLevel()
 	return true;
 }
 
+// Método para ejecutar el nivel
 void Level2::RunLevel()
 {
 

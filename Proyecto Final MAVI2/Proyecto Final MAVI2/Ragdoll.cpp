@@ -1,17 +1,19 @@
 #include"Ragdoll.h"
 #include"Avatar.h"
 
+// Constructor
 Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 {
 
 	mID = 0;
 
-	//Fisicas del ragdoll
+	// Inicializacion de las definiciones de los cuerpos fisicos del ragdoll
 	for (int i = 0; i < 6; i++)
 	{
 		mBodyDefRagdoll[i].type = b2_dynamicBody;
 	}
 
+	// Posiciones iniciales de las partes del ragdoll
 	mBodyDefRagdoll[0].position = b2Vec2(mPositionRagdoll.x, mPositionRagdoll.y - 2.8f);          //Cabeza
 	mBodyDefRagdoll[1].position = b2Vec2(mPositionRagdoll.x - 0.6f, mPositionRagdoll.y + 2.7f);   //Torso
 	mBodyDefRagdoll[2].position = b2Vec2(mPositionRagdoll.x + 2.79f, mPositionRagdoll.y + 4.2f);  //Brazo izquierdo
@@ -19,12 +21,14 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 	mBodyDefRagdoll[4].position = b2Vec2(mPositionRagdoll.x + 1.29f, mPositionRagdoll.y + 8.7f);  //Pierna izquierda 
 	mBodyDefRagdoll[5].position = b2Vec2(mPositionRagdoll.x - 0.21f, mPositionRagdoll.y + 8.7f);  //Pierna derecha
 	
+	// Creacion de los cuerpos fisicos en Box2D
 	for (int i = 0; i < 6; i++)
 	{
 		mBodyRagdoll[i] = mWorld.CreateBody(&mBodyDefRagdoll[i]);
 		mBodyRagdoll[i]->GetUserData().pointer = (uintptr_t)0; // ID
 	}
 	
+	// Definicion de las formas de las partes del ragdoll
 	b2PolygonShape mShapeRagdoll[6];
 	mShapeRagdoll[0].SetAsBox(2.0f, 2.0f);  //Cabeza
 	mShapeRagdoll[1].SetAsBox(1.5f, 3.5f);  //Torso
@@ -33,6 +37,7 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 	mShapeRagdoll[4].SetAsBox(0.5f, 3.2f);  //Pierna izquierda
 	mShapeRagdoll[5].SetAsBox(0.5f, 3.2f);  //Pierna derecha
 
+	// Creacion de los fixtures o propiedades para las partes del ragdoll
 	for (int i = 0; i < 6; i++)
 	{
 		mFixtureDefRagdoll[i].shape = &mShapeRagdoll[i];
@@ -41,10 +46,12 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 		mFixtureDefRagdoll[i].friction = 0.3f;
 
 		mFixtureRagdoll[i] = mBodyRagdoll[i]->CreateFixture(&mFixtureDefRagdoll[i]);
+
+		// Asignacion de la identidad del cuerpo del ragdoll
 		mBodyRagdoll[i]->GetUserData().pointer = (uintptr_t)mID;
 	}
 
-	//resortes
+	//Definicion de las uniones entre las partes del ragdoll
 	//cabeza-pecho
 	mJointDefRagdoll[0].Initialize(mBodyRagdoll[0], mBodyRagdoll[1],                                    //primero y segundo
 		b2Vec2(mBodyRagdoll[0]->GetPosition().x, mBodyRagdoll[0]->GetPosition().y),       //ancho primer cuerpo + 1.0 + 0.3
@@ -70,6 +77,7 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 		b2Vec2(mBodyRagdoll[1]->GetPosition().x + 1.0f, mBodyRagdoll[1]->GetPosition().y + 6.5f),       //ancho primer cuerpo 
 		b2Vec2(mBodyRagdoll[5]->GetPosition().x + 0.7f, mBodyRagdoll[5]->GetPosition().y));             //ancho segundo cuerpo 
 
+	// Configuracion de las propiedades de las uniones y creacion de las mismas en Box2D
 	for (int i = 0; i < 5; i++)
 	{
 		mJointDefRagdoll[i].damping = 0.3f;
@@ -78,7 +86,7 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 		mJointRagdoll[i] = (b2DistanceJoint*)mWorld.CreateJoint(&mJointDefRagdoll[i]);
 	}
 
-	
+	// Carga de texturas para las partes del ragdoll
 	mTextureHead = new Texture;
 	mTextureTorso = new Texture;
 	mTextureArmLeft = new Texture;
@@ -122,16 +130,20 @@ Ragdoll::Ragdoll(Vector2f mPositionRagdoll, b2World& mWorld)
 			mSfmlRagdoll[i]->setTexture(*mTextureLegRight);
 			break;
 		}
+
+		// Creacion del avatar
 		mAvatarRagdoll[i] = new Avatar(mBodyRagdoll[i], mSfmlRagdoll[i]);
 	}
 }
 
+// metodo para obtener la identidad del ragdoll
 int Ragdoll::GetUserData()
 {
 
 	return 0;
 }
 
+// Metodo para aplicar fuerza al centro de cada parte del ragdoll
 void Ragdoll::ApplyForce(Vector2f mPositionMouse)
 {
 
@@ -141,12 +153,15 @@ void Ragdoll::ApplyForce(Vector2f mPositionMouse)
 	}
 }
 
+// Metodo para convertir radianes a grados
 float Ragdoll::Rad2Deg(float mRadians)
 {
 
 	return mRadians * 180 / 3.14;
 }
 
+
+// Metodo para dibujar el ragdoll en la ventana
 void Ragdoll::Draw(RenderWindow& mWindow)
 {
 
@@ -156,6 +171,7 @@ void Ragdoll::Draw(RenderWindow& mWindow)
 	}
 }
 
+// Destructor
 Ragdoll::~Ragdoll()
 {
 
