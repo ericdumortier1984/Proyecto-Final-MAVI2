@@ -20,7 +20,7 @@ public:
 
 private:
 
-    Level1* mLevel1;
-    Level2* mLevel2;
-    Level3* mLevel3;
+    Level1* mLevel1 = nullptr;
+    Level2* mLevel2 = nullptr;
+    Level3* mLevel3 = nullptr;
 };

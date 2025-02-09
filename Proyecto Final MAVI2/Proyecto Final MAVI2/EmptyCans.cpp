@@ -13,7 +13,7 @@ EmptyCans::EmptyCans(b2World& mWorld, b2Vec2 mPosition) : mID(7)
 	mBodyDefEmptyCans.position = mPosition;
 	mBodyEmptyCans = mWorld.CreateBody(&mBodyDefEmptyCans);
 	b2PolygonShape mEmptyCansShape;
-	mEmptyCansShape.SetAsBox(6.0f, 6.0f);
+	mEmptyCansShape.SetAsBox(8.0f, 8.0f);
 	mFixtureDefEmptyCans.shape = &mEmptyCansShape;
 	mFixtureDefEmptyCans.isSensor = true;
 	mFixtureEmptyCans = mBodyEmptyCans->CreateFixture(&mFixtureDefEmptyCans);

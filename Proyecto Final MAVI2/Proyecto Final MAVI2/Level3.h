@@ -3,6 +3,9 @@
 #include "Wheel.h"
 #include "EmptyCans.h"
 #include "Box.h"
+#include "StaticBox.h"
+#include "DynamicPlatform.h"
+#include "StaticPlatform.h"
 
 class Level3 : public Level
 {
@@ -13,6 +16,8 @@ public:
 
 	bool FinishLevel() override;
 	bool UnlockedLevel() const override;
+	bool GetHurt();
+	void ShowLoseMsg();
 
 protected:
 
@@ -20,14 +25,18 @@ protected:
 
 private:
 
-	Wheel* mWheel;
+	Wheel* mWheel[10];
 	EmptyCans* mEmptyCans;
-	Box* mBox;
+	Box* mBox[20];
+	StaticBox* mStaticBox[10];
+	DynamicPlatform* mDynamicPlatform[10];
+	StaticPlatform* mStaticPlatform[10];
 
 	ContactListener* mContactListener;
 
 	void CheckCollisions();
 
 	bool mUnlocked;
+	bool mGetHurt;
 };
 

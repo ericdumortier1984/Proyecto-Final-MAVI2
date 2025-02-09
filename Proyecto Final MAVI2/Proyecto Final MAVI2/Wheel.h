@@ -7,7 +7,7 @@ public:
 
 	friend class Avatar;
 
-	Wheel(b2World& mWorld, b2Vec2 mPosition);
+	Wheel(b2World& mWorld, b2Vec2 mPosition, float mRadius, float mMotorSpeed, float mMaxTorque);
 	~Wheel();
 
 	void Draw(RenderWindow& mWindow);

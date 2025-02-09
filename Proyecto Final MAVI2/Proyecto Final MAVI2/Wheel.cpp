@@ -1,11 +1,11 @@
 #include "Wheel.h"
 #include "Avatar.h"
 
-Wheel::Wheel(b2World& mWorld, b2Vec2 mPosition) : mID(1)
+Wheel::Wheel(b2World& mWorld, b2Vec2 mPosition, float mRadius, float mMotorSpeed, float mMaxTorque) : mID(1)
 {
 
 	mWheelTx = new Texture;
-	if (!mWheelTx->loadFromFile("Assets/Objects/wheel.png")) { cout << "Error al cargar la textura de la rueda" << endl; }
+	if (!mWheelTx->loadFromFile("Assets/Objects/spikedBall.png")) { cout << "Error al cargar la textura de la rueda" << endl; }
 	mWheelSp = new Sprite;
 	mWheelSp->setTexture(*mWheelTx);
 
@@ -13,7 +13,7 @@ Wheel::Wheel(b2World& mWorld, b2Vec2 mPosition) : mID(1)
 	mBodyDefWheel.position = mPosition;
 	mBodyWheel = mWorld.CreateBody(&mBodyDefWheel);
 	b2CircleShape mWheelShape;
-	mWheelShape.m_radius = 8.0f;
+	mWheelShape.m_radius = mRadius;
 	mFixtureDefWheel.shape = &mWheelShape;
 	mFixtureDefWheel.density = 0.01f;
 	mFixtureWheel = mBodyWheel->CreateFixture(&mFixtureDefWheel);
@@ -25,8 +25,8 @@ Wheel::Wheel(b2World& mWorld, b2Vec2 mPosition) : mID(1)
 
 	b2WheelJointDef mWheelJointDef;
 	mWheelJointDef.Initialize(mGroundBody, mBodyWheel, mBodyWheel->GetWorldCenter(), b2Vec2(0.0f, 1.0f));
-	mWheelJointDef.motorSpeed = 50.0f;
-	mWheelJointDef.maxMotorTorque = 100.0f;
+	mWheelJointDef.motorSpeed = mMotorSpeed;
+	mWheelJointDef.maxMotorTorque = mMaxTorque;
 	mWheelJointDef.enableMotor = true;
 
 	mWheelJoint = (b2WheelJoint*)mWorld.CreateJoint(&mWheelJointDef);
