@@ -70,7 +70,7 @@ bool Level1::FinishLevel()
 		mLevelFinish = true;
 		mLevelMusic->stop();
 		mVictorySound->play();
-		mStateMsg->setPosition(-20.f, 55.f);
+		mStateMsg->setPosition(3.f, 65.f);
 		ShowMsg("LEVEL WIN");
 	}
 	return true;

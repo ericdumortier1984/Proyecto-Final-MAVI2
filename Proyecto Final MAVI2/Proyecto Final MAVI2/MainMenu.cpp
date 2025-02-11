@@ -22,7 +22,7 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 	mTitleSp = new Sprite;
 	mTitleSp->setTexture(*mTitleTx);
 	mTitleSp->setScale(1.f, 0.5f);
-	mTitleSp->setPosition(mWidth / 4, 0.f);
+	mTitleSp->setPosition(290.f, 0.f);
 
 	// Carga de la musica del menu
 	mMenuMusic = new Music;
@@ -40,7 +40,7 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 	mMainMenu[0].setString("START GAME");
 	mMainMenu[0].setOutlineColor(Color::Black);
 	mMainMenu[0].setOutlineThickness(2);
-	mMainMenu[0].setPosition(490, 380);
+	mMainMenu[0].setPosition(490.f, 380.f);
 	// Boton INFO
 	mMainMenu[1].setFont(*mFont);
 	mMainMenu[1].setCharacterSize(50);
@@ -48,7 +48,7 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 	mMainMenu[1].setString("INFO");
 	mMainMenu[1].setOutlineColor(Color::Black);
 	mMainMenu[1].setOutlineThickness(2);
-	mMainMenu[1].setPosition(580, 450);
+	mMainMenu[1].setPosition(580.f, 450.f);
 	// Boton EXIT
 	mMainMenu[2].setFont(*mFont);
 	mMainMenu[2].setCharacterSize(50);
@@ -56,42 +56,42 @@ MainMenu::MainMenu(float mWidth, float mHeight)
 	mMainMenu[2].setString("EXIT");
 	mMainMenu[2].setOutlineColor(Color::Black);
 	mMainMenu[2].setOutlineThickness(2);
-	mMainMenu[2].setPosition(580, 520);
+	mMainMenu[2].setPosition(580.f, 520.f);
 
 	// Texto SELECT LEVEL
 	mLevelSelect = new Text;
 	mLevelSelect->setFont(*mFont);
 	mLevelSelect->setCharacterSize(50);
-	mLevelSelect->setFillColor(Color(144, 292, 144));
+	mLevelSelect->setFillColor(Color(255, 0, 144)); // 144,292, 144
 	mLevelSelect->setString("CHOOSE YOUR LEVEL");
 	mLevelSelect->setOutlineColor(Color::Black);
 	mLevelSelect->setOutlineThickness(0.5);
-	mLevelSelect->setPosition(390, 140);
+	mLevelSelect->setPosition(390.f, 140.f);
 
 	// Boton LEVEL 1 
 	mLevelMenu[0].setFont(*mFont);
 	mLevelMenu[0].setCharacterSize(25);
-	mLevelMenu[0].setFillColor(Color(144, 292, 144));
-	mLevelMenu[0].setString("                  LEVEL 1 \n GET THE RING OF FIRE");
+	mLevelMenu[0].setFillColor(Color(255, 0, 144));
+	mLevelMenu[0].setString("                  LEVEL 1\n\n\n\n\n\n\nGET THE RING OF FIRE");
 	mLevelMenu[0].setOutlineColor(Color::Black);
 	mLevelMenu[0].setOutlineThickness(0.5);
-	mLevelMenu[0].setPosition(160, 265);
+	mLevelMenu[0].setPosition(150.f, 285.f);
 	// Boton LEVEL 2
 	mLevelMenu[1].setFont(*mFont);
 	mLevelMenu[1].setCharacterSize(25);
-	mLevelMenu[1].setFillColor(Color(144, 292, 144));
-	mLevelMenu[1].setString("                LEVEL 2 \n    GET THE BALLONS");
+	mLevelMenu[1].setFillColor(Color(255, 0, 144));
+	mLevelMenu[1].setString("                LEVEL 2\n\n\n\n\n\n\n    GET THE BALLONS");
 	mLevelMenu[1].setOutlineColor(Color::Black);
 	mLevelMenu[1].setOutlineThickness(0.5);
-	mLevelMenu[1].setPosition(490, 265);
+	mLevelMenu[1].setPosition(490.f, 285.f);
 	// Boton LEVEL 3
 	mLevelMenu[2].setFont(*mFont);
 	mLevelMenu[2].setCharacterSize(25);
-	mLevelMenu[2].setFillColor(Color(144, 292, 144));
-	mLevelMenu[2].setString("                    LEVEL 3 \n GET THE STACK OF CANS");
+	mLevelMenu[2].setFillColor(Color(255, 0, 144));
+	mLevelMenu[2].setString("                 LEVEL 3\n\n\n\n\n\n\nGET THE STACK OF CANS\n   AND DO NOT TOUCH\n   THE SPIKED WHEELS");
 	mLevelMenu[2].setOutlineColor(Color::Black);
 	mLevelMenu[2].setOutlineThickness(0.5);
-	mLevelMenu[2].setPosition(810, 265);
+	mLevelMenu[2].setPosition(810, 285);
 	
 	// Cargar imagenes en miniatura
 	for (int i = 0; i < MAX_LEVEL_MENU; i++)

@@ -84,7 +84,7 @@ bool Level2::FinishLevel()
 	{
 		mLevelFinish = true;
 		mLevelMusic->stop();
-		mStateMsg->setPosition(-20.f, 55.f);
+		mStateMsg->setPosition(3.f, 65.f);
 		ShowMsg("LEVEL WIN");
 	}
 	return true;

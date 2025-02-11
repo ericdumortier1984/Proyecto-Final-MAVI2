@@ -13,20 +13,16 @@ Level3::Level3(int mWidth, int mHeight, bool mUnlocked) : Level(mWidth, mHeight,
 
 	// Inicializacion de ruedas
 	if (mWheel[0] == nullptr) mWheel[0] = new Wheel(*mWorld, { 100.f, 140.f }, 5.0f, 10.f, 20.f);
-	if (mWheel[1] == nullptr) mWheel[1] = new Wheel(*mWorld, { -35.f, 160.f }, 4.0f, 10.f, 20.f);
-	if (mWheel[2] == nullptr) mWheel[2] = new Wheel(*mWorld, { -25.f, 160.f }, 4.0f, 10.f, 20.f);
-	if (mWheel[3] == nullptr) mWheel[3] = new Wheel(*mWorld, { -15.f, 160.f }, 4.0f, 10.f, 20.f);
-	if (mWheel[4] == nullptr) mWheel[4] = new Wheel(*mWorld, {  -5.f, 150.f }, 4.0f, 10.f, 20.f);
-	if (mWheel[5] == nullptr) mWheel[5] = new Wheel(*mWorld, {   5.f, 150.f }, 4.0f, 10.f, 20.f);
-	if (mWheel[6] == nullptr) mWheel[6] = new Wheel(*mWorld, {   15.f, 150.f }, 4.0f, 10.f, 20.f);
-	if (mWheel[7] == nullptr) mWheel[7] = new Wheel(*mWorld, {   50.f, 130.f }, 3.0f, 10.f, 20.f);
-	if (mWheel[8] == nullptr) mWheel[8] = new Wheel(*mWorld, {   60.f, 130.f }, 3.0f, 10.f, 20.f);
-	if (mWheel[9] == nullptr) mWheel[9] = new Wheel(*mWorld, {   70.f, 130.f }, 3.0f, 10.f, 20.f);
+	if (mWheel[1] == nullptr) mWheel[1] = new Wheel(*mWorld, {  -5.f, 150.f }, 4.0f, 10.f, 20.f);
+	if (mWheel[2] == nullptr) mWheel[2] = new Wheel(*mWorld, {   5.f, 150.f }, 4.0f, 10.f, 20.f);
+	if (mWheel[3] == nullptr) mWheel[3] = new Wheel(*mWorld, {   15.f, 150.f }, 4.0f, 10.f, 20.f);
+	if (mWheel[4] == nullptr) mWheel[4] = new Wheel(*mWorld, {   50.f, 130.f }, 3.0f, 10.f, 20.f);
+	if (mWheel[5] == nullptr) mWheel[5] = new Wheel(*mWorld, {   60.f, 130.f }, 3.0f, 10.f, 20.f);
+	if (mWheel[6] == nullptr) mWheel[6] = new Wheel(*mWorld, {   70.f, 130.f }, 3.0f, 10.f, 20.f);
 
 	// Inicializacion de plataformas dinamicas
 	if (mDynamicPlatform[0] == nullptr) mDynamicPlatform[0] = new DynamicPlatform(*mWorld, {   5.f, 145.f }, { 25.f,  2.5f },  0.f);
-	if (mDynamicPlatform[1] == nullptr) mDynamicPlatform[1] = new DynamicPlatform(*mWorld, { -30.f, 150.f }, { 30.f,  2.5f },  0.f);
-	if (mDynamicPlatform[2] == nullptr) mDynamicPlatform[2] = new DynamicPlatform(*mWorld, {  60.f, 120.f }, { 25.f,  2.5f }, 0.f);
+	if (mDynamicPlatform[1] == nullptr) mDynamicPlatform[1] = new DynamicPlatform(*mWorld, {  60.f, 120.f }, { 25.f,  2.5f }, 0.f);
 	
 	// Inicializacion de plataformas estaticas
 	if (mStaticPlatform[0] == nullptr) mStaticPlatform[0] = new StaticPlatform(*mWorld, {  23.5f, 158.5f }, {  5.f,  9.5f }, b2_pi / 2);
@@ -97,8 +93,7 @@ void Level3::ShowLoseMsg()
 
 	mLevelFinish = true;
 	mLevelMusic->stop();
-	mStateMsg->setScale(0.25f, 0.25f);
-	mStateMsg->setPosition(-40.f, 55.f);
+	mStateMsg->setPosition(-35.f, 65.f);
 	ShowMsg("YOU HIT THE WHELL OF DEAD");
 }
 
@@ -118,7 +113,7 @@ bool Level3::FinishLevel()
 	{
 		mLevelFinish = true;
 		mLevelMusic->stop();
-		mStateMsg->setPosition(-20.f, 55.f);
+		mStateMsg->setPosition(3.f, 65.f);
 		ShowMsg("LEVEL WIN");
 	}
 	return true;

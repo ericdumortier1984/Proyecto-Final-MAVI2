@@ -93,9 +93,9 @@ Level::Level(int mWidth, int mHeight, bool mUnlocked) : mFps(60.f), mFrameTime(1
 
     mStateMsg = new Text;
     mStateMsg->setFont(*mFont);
-    mStateMsg->setScale(0.5f, 0.5f);
+    mStateMsg->setScale(0.25f, 0.25f);
     mStateMsg->setCharacterSize(32);
-    mStateMsg->setPosition(-10.f, 55.f);
+    mStateMsg->setPosition(7.f, 65.f);
     mStateMsg->setFillColor(Color::Red);
     mStateMsg->setOutlineThickness(2);
     mStateMsg->setOutlineColor(Color::White);
@@ -215,7 +215,7 @@ void Level::ProcessEvents()
 
             if (mRagdollCount < 0)
             {
-                mStateMsg->setPosition(-60.f, 55.f);
+                mStateMsg->setPosition(-17.f, 65.f);
 
                 // Sonido de derrota
                 mLevelMusic->stop();
