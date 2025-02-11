@@ -93,6 +93,7 @@ void Level3::ShowLoseMsg()
 
 	mLevelFinish = true;
 	mLevelMusic->stop();
+	mLoseSound->play();
 	mStateMsg->setPosition(-35.f, 65.f);
 	ShowMsg("YOU HIT THE WHELL OF DEAD");
 }
@@ -113,6 +114,7 @@ bool Level3::FinishLevel()
 	{
 		mLevelFinish = true;
 		mLevelMusic->stop();
+		mVictorySound->play();
 		mStateMsg->setPosition(3.f, 65.f);
 		ShowMsg("LEVEL WIN");
 	}

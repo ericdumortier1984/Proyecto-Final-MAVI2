@@ -84,6 +84,7 @@ bool Level2::FinishLevel()
 	{
 		mLevelFinish = true;
 		mLevelMusic->stop();
+		mVictorySound->play();
 		mStateMsg->setPosition(3.f, 65.f);
 		ShowMsg("LEVEL WIN");
 	}
